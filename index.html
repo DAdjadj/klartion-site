@@ -71,7 +71,10 @@
     <h1>Bank approved</h1>
     <p class="sub">Your bank has authorised access. Copy the URL below and paste it into Klartion to complete the connection.</p>
     <div class="url-box" id="url-display">Loading...</div>
-    <button class="btn" id="copy-btn" onclick="copyUrl()">Copy URL &amp; close tab</button>
+    <button class="btn" id="copy-btn" onclick="copyUrl()">Copy URL to clipboard</button>
+    <div id="close-hint" style="display:none; text-align:center; font-size:13px; color:#166534; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:10px 14px; margin-bottom:1rem;">
+      URL copied. You can now close this tab and go back to Klartion.
+    </div>
     <hr class="divider">
     <div class="step">
       <div class="num done">✓</div>
@@ -92,9 +95,9 @@
     function copyUrl() {
       navigator.clipboard.writeText(fullUrl).then(() => {
         const btn = document.getElementById('copy-btn');
-        btn.textContent = 'Copied! Closing...';
+        btn.textContent = 'Copied!';
         btn.classList.add('copied');
-        setTimeout(() => window.close(), 1200);
+        document.getElementById('close-hint').style.display = 'block';
       }).catch(() => {
         const range = document.createRange();
         range.selectNode(document.getElementById('url-display'));
