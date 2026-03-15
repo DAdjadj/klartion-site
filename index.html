@@ -71,7 +71,7 @@
     <h1>Bank approved</h1>
     <p class="sub">Your bank has authorised access. Copy the URL below and paste it into Klartion to complete the connection.</p>
     <div class="url-box" id="url-display">Loading...</div>
-    <button class="btn" id="copy-btn" onclick="copyUrl()">Copy URL to clipboard</button>
+    <button class="btn" id="copy-btn" onclick="copyUrl()">Copy URL &amp; close tab</button>
     <hr class="divider">
     <div class="step">
       <div class="num done">✓</div>
@@ -92,9 +92,9 @@
     function copyUrl() {
       navigator.clipboard.writeText(fullUrl).then(() => {
         const btn = document.getElementById('copy-btn');
-        btn.textContent = 'Copied!';
+        btn.textContent = 'Copied! Closing...';
         btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = 'Copy URL to clipboard'; btn.classList.remove('copied'); }, 3000);
+        setTimeout(() => window.close(), 1200);
       }).catch(() => {
         const range = document.createRange();
         range.selectNode(document.getElementById('url-display'));
