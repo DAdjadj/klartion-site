@@ -3,111 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Klartion — Bank approved</title>
+  <title>Klartion — Sync your bank to Notion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #ffffff; --surface: #f7f6f3; --border: #e5e4e0; --border2: #d1d0cc;
-      --text: #111; --muted: #6b7280; --hint: #9ca3af;
-      --success: #37996b; --sans: 'Inter', -apple-system, sans-serif;
-      --serif: 'Lora', Georgia, serif; --mono: 'Courier New', monospace;
-    }
-    body {
-      background: var(--bg); color: var(--text); font-family: var(--sans);
-      min-height: 100vh; display: flex; align-items: center;
-      justify-content: center; padding: 2rem;
-    }
-    .card { max-width: 460px; width: 100%; }
-    .logo { display: flex; align-items: center; gap: 9px; margin-bottom: 2.5rem; text-decoration: none; }
-    .logo-mark {
-      width: 30px; height: 30px; background: var(--text); border-radius: 5px;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-family: var(--serif); font-style: italic; font-size: 15px;
-    }
-    .logo-name { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--text); }
-    .check {
-      width: 48px; height: 48px; border: 1.5px solid #bbf7d0; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;
-      background: #f0fdf4;
-    }
-    h1 { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--text); margin: 0 0 0.5rem; letter-spacing: -0.4px; }
-    .sub { font-size: 14px; color: var(--muted); margin: 0 0 2rem; line-height: 1.6; }
-    .url-box {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
-      padding: 12px 14px; font-family: var(--mono); font-size: 11px; color: var(--muted);
-      word-break: break-all; margin-bottom: 0.75rem; line-height: 1.5; min-height: 44px;
-    }
-    .btn {
-      width: 100%; padding: 11px; border-radius: 6px; font-size: 14px; font-weight: 600;
-      cursor: pointer; border: none; background: var(--text); color: #fff;
-      font-family: var(--sans); transition: opacity 0.15s; margin-bottom: 1.5rem;
-    }
+    body { background: #fff; color: #111; font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
+    .logo { display: flex; align-items: center; gap: 9px; margin-bottom: 3rem; justify-content: center; }
+    .logo-mark { width: 32px; height: 32px; background: #111; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Lora', serif; font-style: italic; font-size: 16px; }
+    .logo-name { font-family: 'Lora', serif; font-size: 20px; font-weight: 700; color: #111; }
+    h1 { font-family: 'Lora', serif; font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 1rem; line-height: 1.2; max-width: 480px; }
+    p { font-size: 16px; color: #6b7280; line-height: 1.7; max-width: 400px; margin-bottom: 2.5rem; }
+    .btn { display: inline-block; background: #111; color: #fff; padding: 12px 28px; border-radius: 6px; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'Inter', sans-serif; }
     .btn:hover { opacity: 0.85; }
-    .btn.copied { background: var(--success); }
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 1.5rem; }
-    .step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 0.875rem; font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .num {
-      width: 20px; height: 20px; border: 1px solid var(--border2); border-radius: 50%;
-      font-size: 11px; color: var(--muted); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0; margin-top: 1px;
-    }
-    .num.done { background: var(--success); border-color: var(--success); color: #fff; font-size: 10px; }
-    strong { color: var(--text); font-weight: 600; }
+    .sub { margin-top: 1rem; font-size: 13px; color: #9ca3af; }
+    .sub a { color: #6b7280; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <a class="logo" href="#">
-      <div class="logo-mark">K</div>
-      <span class="logo-name">Klartion</span>
-    </a>
-    <div class="check">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <polyline points="4,10 8,14 16,6" stroke="#37996b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <h1>Bank approved</h1>
-    <p class="sub">Your bank has authorised access. Copy the URL below and paste it into Klartion to complete the connection.</p>
-    <div class="url-box" id="url-display">Loading...</div>
-    <button class="btn" id="copy-btn" onclick="copyUrl()">Copy URL to clipboard</button>
-    <div id="close-hint" style="display:none; text-align:center; font-size:13px; color:#166534; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:10px 14px; margin-bottom:1rem;">
-      URL copied. You can now close this tab and go back to Klartion.
-    </div>
-    <hr class="divider">
-    <div class="step">
-      <div class="num done">✓</div>
-      <div>You approved read-only access at your bank.</div>
-    </div>
-    <div class="step">
-      <div class="num done" id="step2">✓</div>
-      <div>URL copied to clipboard automatically.</div>
-    </div>
-    <div class="step">
-      <div class="num">3</div>
-      <div>Go back to your <strong>Klartion tab</strong>, paste the URL into the field and click <strong>Confirm connection</strong>.</div>
-    </div>
+  <div class="logo">
+    <div class="logo-mark">K</div>
+    <span class="logo-name">Klartion</span>
   </div>
-  <script>
-    const fullUrl = window.location.href;
-    document.getElementById('url-display').textContent = fullUrl;
-    function copyUrl() {
-      navigator.clipboard.writeText(fullUrl).then(() => {
-        const btn = document.getElementById('copy-btn');
-        btn.textContent = 'Copied!';
-        btn.classList.add('copied');
-        document.getElementById('close-hint').style.display = 'block';
-      }).catch(() => {
-        const range = document.createRange();
-        range.selectNode(document.getElementById('url-display'));
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
-      });
-    }
-    window.addEventListener('load', () => {
-      setTimeout(() => navigator.clipboard.writeText(fullUrl).catch(() => {}), 400);
-    });
-  </script>
+  <h1>Your bank transactions, inside Notion.</h1>
+  <p>Klartion connects to your EU bank via open banking and syncs transactions into a Notion database every day. Self-hosted. Your data stays on your machine.</p>
+  <a href="https://github.com/DAdjadj/klartion" class="btn">Get started →</a>
+  <p class="sub">€50 one-time · 2,500+ EU banks · <a href="https://github.com/DAdjadj/klartion">Open source</a></p>
 </body>
 </html>
