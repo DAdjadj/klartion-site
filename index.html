@@ -11,318 +11,104 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
-    body {
-      background: #fafaf8;
-      color: #1a1a1a;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.7;
-    }
+    body { background: #fafaf8; color: #1a1a1a; font-family: 'Inter', sans-serif; line-height: 1.7; }
 
-    nav {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 1.5rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .logo-mark {
-      width: 30px;
-      height: 30px;
-      background: #1a1a1a;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 15px;
-      flex-shrink: 0;
-    }
-    .logo-name {
-      font-family: 'Lora', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: #1a1a1a;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-    }
-    .nav-links a {
-      font-size: 14px;
-      color: #666;
-      text-decoration: none;
-    }
+    nav { max-width: 760px; margin: 0 auto; padding: 1.5rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 30px; height: 30px; background: #1a1a1a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Lora', serif; font-style: italic; font-size: 15px; flex-shrink: 0; }
+    .logo-name { font-family: 'Lora', serif; font-size: 18px; font-weight: 700; color: #1a1a1a; }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a { font-size: 14px; color: #666; text-decoration: none; }
     .nav-links a:hover { color: #1a1a1a; }
 
-    .hero {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
-    }
-    .badge {
-      display: inline-block;
-      background: #f0efe9;
-      border: 1px solid #e0ddd5;
-      border-radius: 100px;
-      padding: 0.3rem 0.875rem;
-      font-size: 12px;
-      color: #666;
-      margin-bottom: 1.75rem;
-      letter-spacing: 0.02em;
-    }
-    .hero h1 {
-      font-family: 'Lora', serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-      color: #1a1a1a;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: #444;
-    }
-    .hero p {
-      font-size: 17px;
-      color: #555;
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
-    }
-    .btn-primary {
-      display: inline-block;
-      background: #1a1a1a;
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      font-family: 'Inter', sans-serif;
-      transition: opacity 0.15s;
-    }
+    .hero { max-width: 760px; margin: 0 auto; padding: 5rem 1.5rem 4rem; text-align: center; }
+    .badge { display: inline-block; background: #f0efe9; border: 1px solid #e0ddd5; border-radius: 100px; padding: 0.3rem 0.875rem; font-size: 12px; color: #666; margin-bottom: 1.75rem; letter-spacing: 0.02em; }
+    .hero h1 { font-family: 'Lora', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.25rem; color: #1a1a1a; }
+    .hero h1 em { font-style: italic; color: #444; }
+    .hero p { font-size: 17px; color: #555; max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .btn-primary { display: inline-block; background: #1a1a1a; color: #fff; padding: 14px 32px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'Inter', sans-serif; transition: opacity 0.15s; }
     .btn-primary:hover { opacity: 0.85; }
-    .hero-sub {
-      margin-top: 1rem;
-      font-size: 13px;
-      color: #999;
-    }
+    .hero-sub { margin-top: 1rem; font-size: 13px; color: #999; }
     .hero-sub a { color: #777; }
 
-    .divider {
-      max-width: 760px;
-      margin: 0 auto;
-      border: none;
-      border-top: 1px solid #e8e6e0;
-    }
+    .divider { max-width: 760px; margin: 0 auto; border: none; border-top: 1px solid #e8e6e0; }
 
-    .section {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem;
-    }
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #999;
-      margin-bottom: 0.75rem;
-    }
-    .section h2 {
-      font-family: 'Lora', serif;
-      font-size: 1.625rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: 2.5rem;
-      color: #1a1a1a;
-    }
+    .section { max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #999; margin-bottom: 0.75rem; }
+    .section h2 { font-family: 'Lora', serif; font-size: 1.625rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 2.5rem; color: #1a1a1a; }
 
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    @media (max-width: 600px) { .steps { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .step-num { width: 28px; height: 28px; background: #2d7a4f; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; margin-bottom: 0.875rem; flex-shrink: 0; }
+    .step h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; color: #1a1a1a; }
+    .step p { font-size: 14px; color: #666; line-height: 1.65; }
+
+    .features { background: #f0efe9; border-radius: 12px; padding: 2.5rem; }
+    .features h2 { font-family: 'Lora', serif; font-size: 1.375rem; font-weight: 700; margin-bottom: 1.5rem; color: #1a1a1a; }
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature { display: flex; gap: 0.625rem; align-items: flex-start; }
+    .feature-dot { width: 6px; height: 6px; background: #2d7a4f; border-radius: 50%; margin-top: 0.5rem; flex-shrink: 0; }
+    .feature p { font-size: 14px; color: #444; line-height: 1.55; }
+    .feature strong { color: #1a1a1a; font-weight: 600; }
+
+    .pricing-box { border: 1.5px solid #1a1a1a; border-radius: 12px; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .price { font-family: 'Lora', serif; font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; color: #1a1a1a; line-height: 1; }
+    .price span { font-size: 1rem; font-weight: 400; color: #888; font-family: 'Inter', sans-serif; margin-left: 0.25rem; }
+    .price-label { font-size: 13px; color: #888; margin-top: 0.35rem; }
+    .pricing-features { flex: 1; min-width: 200px; }
+    .pricing-features li { font-size: 14px; color: #555; list-style: none; padding: 0.2rem 0; display: flex; align-items: center; gap: 0.5rem; }
+    .pricing-features li::before { content: '✓'; font-weight: 600; color: #2d7a4f; font-size: 13px; }
+
+    /* WAITLIST */
+    .waitlist-box {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+      color: #fff;
     }
-    @media (max-width: 600px) {
-      .steps { grid-template-columns: 1fr; gap: 1.5rem; }
-    }
-    .step-num {
-      width: 28px;
-      height: 28px;
+    .waitlist-box .wl-label {
+      display: inline-block;
       background: #2d7a4f;
       color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      margin-bottom: 0.875rem;
-      flex-shrink: 0;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
     }
-    .step h3 {
+    .waitlist-box h2 {
       font-family: 'Lora', serif;
-      font-size: 1rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 0.4rem;
-      color: #1a1a1a;
+      margin-bottom: 0.625rem;
+      color: #fff;
     }
-    .step p {
+    .waitlist-box p {
       font-size: 14px;
-      color: #666;
+      color: #aaa;
+      max-width: 400px;
+      margin: 0 auto 1.75rem;
       line-height: 1.65;
     }
 
-    .features {
-      background: #f0efe9;
-      border-radius: 12px;
-      padding: 2.5rem;
-    }
-    .features h2 {
-      font-family: 'Lora', serif;
-      font-size: 1.375rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: #1a1a1a;
-    }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem 2rem;
-    }
-    @media (max-width: 520px) {
-      .feature-grid { grid-template-columns: 1fr; }
-    }
-    .feature {
-      display: flex;
-      gap: 0.625rem;
-      align-items: flex-start;
-    }
-    .feature-dot {
-      width: 6px;
-      height: 6px;
-      background: #2d7a4f;
-      border-radius: 50%;
-      margin-top: 0.5rem;
-      flex-shrink: 0;
-    }
-    .feature p {
-      font-size: 14px;
-      color: #444;
-      line-height: 1.55;
-    }
-    .feature strong { color: #1a1a1a; font-weight: 600; }
 
-    .pricing-box {
-      border: 1.5px solid #1a1a1a;
-      border-radius: 12px;
-      padding: 2rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .price {
-      font-family: 'Lora', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: #1a1a1a;
-      line-height: 1;
-    }
-    .price span {
-      font-size: 1rem;
-      font-weight: 400;
-      color: #888;
-      font-family: 'Inter', sans-serif;
-      margin-left: 0.25rem;
-    }
-    .price-label {
-      font-size: 13px;
-      color: #888;
-      margin-top: 0.35rem;
-    }
-    .pricing-features {
-      flex: 1;
-      min-width: 200px;
-    }
-    .pricing-features li {
-      font-size: 14px;
-      color: #555;
-      list-style: none;
-      padding: 0.2rem 0;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .pricing-features li::before {
-      content: '✓';
-      font-weight: 600;
-      color: #2d7a4f;
-      font-size: 13px;
-    }
-
-    .faq { display: flex; flex-direction: column; }
-    .faq-item {
-      border-bottom: 1px solid #e8e6e0;
-      padding: 1.25rem 0;
-    }
-    .faq-item:first-child { border-top: 1px solid #e8e6e0; }
-    .faq-q {
-      font-size: 15px;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-bottom: 0;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      user-select: none;
-    }
-    .faq-q::after {
-      content: '+';
-      font-size: 20px;
-      font-weight: 300;
-      color: #999;
-      flex-shrink: 0;
-      transition: transform 0.2s;
-    }
+    /* FAQ 2 columns */
+    .faq { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
+    @media (max-width: 600px) { .faq { grid-template-columns: 1fr; } }
+    .faq-item { border-bottom: 1px solid #e8e6e0; padding: 1.25rem 0; align-self: start; }
+    .faq-q { font-size: 14px; font-weight: 600; color: #1a1a1a; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; user-select: none; line-height: 1.4; }
+    .faq-q::after { content: '+'; font-size: 18px; font-weight: 300; color: #999; flex-shrink: 0; transition: transform 0.2s; margin-top: -1px; }
     .faq-item.open .faq-q::after { transform: rotate(45deg); }
     .faq-item.open .faq-q { margin-bottom: 0.5rem; }
-    .faq-a {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.7;
-      display: none;
-    }
+    .faq-a { font-size: 13px; color: #555; line-height: 1.7; display: none; }
     .faq-item.open .faq-a { display: block; }
     .faq-a a { color: #1a1a1a; }
 
-    footer {
-      border-top: 1px solid #e8e6e0;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+    footer { border-top: 1px solid #e8e6e0; max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-left { font-size: 13px; color: #999; }
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
@@ -347,10 +133,8 @@
     <div class="badge">Self-hosted · One-time payment · 2,500+ EU banks</div>
     <h1>Your bank transactions,<br><em>inside Notion.</em></h1>
     <p>Klartion connects to your EU bank and syncs your transactions into a Notion database every day. Automatic, private, yours.</p>
-    <a href="https://david-alves.lemonsqueezy.com/checkout/buy/f24a36ac-3c66-4aaf-b272-9cce226a0ebf" class="btn-primary lemonsqueezy-button">Get Klartion for €39 →</a>
-    <div class="hero-sub">
-      One-time payment · Lifetime updates · <a href="https://github.com/DAdjadj/klartion" target="_blank">Open source</a>
-    </div>
+    <a href="https://david-alves.lemonsqueezy.com/checkout/buy/f24a36ac-3c66-4aaf-b272-9cce226a0ebf?embed=1" class="btn-primary lemonsqueezy-button">Get Klartion for €39 →</a>
+    <div class="hero-sub">One-time payment · Lifetime updates · <a href="https://github.com/DAdjadj/klartion" target="_blank">Open source</a></div>
   </section>
 
   <hr class="divider">
@@ -372,7 +156,7 @@
       <div class="step">
         <div class="step-num">3</div>
         <h3>Connect your bank</h3>
-        <p>Approve read-only access to your bank. Klartion handles everything from there — automatically, every day.</p>
+        <p>Approve read-only access to your bank. Klartion syncs your transactions once a day, at a time you choose.</p>
       </div>
     </div>
   </section>
@@ -385,7 +169,7 @@
       <div class="feature-grid">
         <div class="feature">
           <div class="feature-dot"></div>
-          <p><strong>Daily automatic sync</strong> — transactions appear in Notion every morning at a time you choose.</p>
+          <p><strong>Daily automatic sync</strong> — once a day, at a time you choose.</p>
         </div>
         <div class="feature">
           <div class="feature-dot"></div>
@@ -427,7 +211,19 @@
         <li>All future updates included</li>
         <li>Email support</li>
       </ul>
-      <a href="https://david-alves.lemonsqueezy.com/checkout/buy/f24a36ac-3c66-4aaf-b272-9cce226a0ebf" class="btn-primary lemonsqueezy-button">Buy now →</a>
+      <a href="https://david-alves.lemonsqueezy.com/checkout/buy/f24a36ac-3c66-4aaf-b272-9cce226a0ebf?embed=1" class="btn-primary lemonsqueezy-button">Buy now →</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- WAITLIST -->
+  <section class="section">
+    <div class="waitlist-box">
+      <div class="wl-label">Coming soon</div>
+      <h2>Klartion without the setup.</h2>
+      <p>A fully hosted version is in the works — no Docker, no server, just connect your bank and Notion and you're done. Join the waitlist to be first in line.</p>
+      <a href="https://david-alves.lemonsqueezy.com/checkout/buy/2f4abcb5-88ba-48e2-b872-5d4b465243ff?embed=1" class="btn-primary lemonsqueezy-button" style="background:#2d7a4f;">Join the waitlist →</a>
     </div>
   </section>
 
@@ -447,7 +243,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">Is my bank data safe?</div>
-        <div class="faq-a">Yes. Klartion uses read-only access via Enable Banking's regulated open banking API — it cannot move money or make changes to your account. Your data goes directly to your machine and is written to your own Notion database. It never passes through our servers.</div>
+        <div class="faq-a">Yes. Klartion uses read-only access via Enable Banking's regulated open banking API — it cannot move money or make any changes to your account. Your data goes directly to your machine and never passes through our servers.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">What do I need to run Klartion?</div>
@@ -455,11 +251,11 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">Can I use it on more than one machine?</div>
-        <div class="faq-a">Each licence key can be activated on up to 2 machines. If you move to a new machine, you can deactivate your current installation from within the app and reactivate on the new one.</div>
+        <div class="faq-a">Each licence key can be activated on up to 2 machines. If you move to a new machine, deactivate your current installation from within the app and reactivate on the new one.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggle(this)">What if I need help?</div>
-        <div class="faq-a">Email us at <a href="mailto:support@david-alves.com">support@david-alves.com</a>. We aim to respond within 2 business days.</div>
+        <div class="faq-q" onclick="toggle(this)">Is there a hosted version?</div>
+        <div class="faq-a">Not yet, but it's coming. Join the waitlist above to be notified when it launches.</div>
       </div>
     </div>
   </section>
@@ -477,6 +273,22 @@
   <script>
     function toggle(el) {
       el.parentElement.classList.toggle('open');
+    }
+
+    // waitlist handled by Lemon Squeezy
+      const email = document.getElementById('wl-email').value.trim();
+      if (!email || !email.includes('@')) {
+        document.getElementById('wl-email').focus();
+        return;
+      }
+      // Send to your support email via a simple mailto fallback
+      // Replace with a form backend (Formspree, etc.) when ready
+      document.querySelector('.waitlist-form').style.display = 'none';
+      document.getElementById('wl-success').style.display = 'block';
+      // Store in localStorage as a simple fallback
+      const existing = JSON.parse(localStorage.getItem('wl') || '[]');
+      existing.push({ email, ts: new Date().toISOString() });
+      localStorage.setItem('wl', JSON.stringify(existing));
     }
   </script>
 
