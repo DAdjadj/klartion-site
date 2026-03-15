@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klartion — Bank Connected</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f12;
+      --surface: #14171c;
+      --border: #1f2329;
+      --accent: #7c6dfa;
+      --accent2: #4fd1c5;
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --success: #4ade80;
+      --sans: 'Syne', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,109,250,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,109,250,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2rem;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: #fff;
+    }
+    .logo-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .icon {
+      width: 56px; height: 56px;
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 24px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.3px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .url-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      word-break: break-all;
+      text-align: left;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+      min-height: 48px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      transition: opacity 0.2s;
+      margin-bottom: 0.75rem;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn:active { transform: scale(0.98); }
+    .btn.copied {
+      background: var(--success);
+      color: #14171c;
+    }
+
+    .instructions {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .instructions strong { color: var(--text); }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+      margin-bottom: 0.75rem;
+    }
+    .step-num {
+      width: 20px; height: 20px;
+      background: var(--border);
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-num.done { background: var(--success); color: #14171c; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <a class="logo" href="#">
+      <div class="logo-mark">K</div>
+      <span class="logo-name">Klartion</span>
+    </a>
+
+    <div class="icon">✓</div>
+
+    <h1>Bank approved</h1>
+    <p class="sub">Your bank has authorised access. Now complete the connection in Klartion.</p>
+
+    <div class="url-box" id="url-display">Loading URL...</div>
+
+    <button class="btn" id="copy-btn" onclick="copyUrl()">
+      Copy URL to clipboard
+    </button>
+
+    <div class="instructions">
+      <div class="step">
+        <div class="step-num done">✓</div>
+        <div>You approved access at your bank.</div>
+      </div>
+      <div class="step">
+        <div class="step-num" id="step2num">2</div>
+        <div>Copy the URL above and <strong>go back to the Klartion tab</strong> at <strong>http://192.168.1.104:3001</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>Paste the URL into the field and click <strong>Confirm connection</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fullUrl = window.location.href;
+    document.getElementById('url-display').textContent = fullUrl;
+
+    function copyUrl() {
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        document.getElementById('step2num').classList.add('done');
+        document.getElementById('step2num').textContent = '✓';
+        setTimeout(() => {
+          btn.textContent = 'Copy URL to clipboard';
+          btn.classList.remove('copied');
+        }, 3000);
+      }).catch(() => {
+        // Fallback: select the text in the box
+        const box = document.getElementById('url-display');
+        const range = document.createRange();
+        range.selectNode(box);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+      });
+    }
+
+    // Auto-copy on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        navigator.clipboard.writeText(fullUrl).catch(() => {});
+      }, 500);
+    });
+  </script>
+</body>
+</html>
