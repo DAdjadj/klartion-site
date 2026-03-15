@@ -8,7 +8,7 @@
     .wrap { text-align: center; }
     .spinner { width: 32px; height: 32px; border: 2px solid #e5e4e0; border-top-color: #111; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    p { font-size: 14px; color: #6b7280; }
+    p { font-size: 14px; color: #6b7280; margin: 0; }
   </style>
 </head>
 <body>
@@ -17,12 +17,18 @@
     <p>Completing bank connection...</p>
   </div>
   <script>
-    const params = window.location.search;
-    if (params.includes('code=')) {
-      window.location.href = 'http://plex-server:3001/callback' + params;
+    const params = new URLSearchParams(window.location.search);
+    const code  = params.get('code');
+    const state = params.get('state');
+
+    if (code && state) {
+      // Extract KLARTION_URL from state: format is "klartion-auth|http://host:port"
+      const parts = state.split('|');
+      const klartion_url = parts.length > 1 ? parts[1] : 'http://localhost:3001';
+      window.location.href = klartion_url + '/callback?' + window.location.search.slice(1);
     } else {
-      document.querySelector('p').textContent = 'Something went wrong. Please go back to Klartion and try again.';
       document.querySelector('.spinner').style.display = 'none';
+      document.querySelector('p').textContent = 'Something went wrong. Please go back to Klartion and try again.';
     }
   </script>
 </body>
