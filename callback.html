@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Klartion — Connecting...</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #fff; color: #111; }
+    .wrap { text-align: center; }
+    .spinner { width: 32px; height: 32px; border: 2px solid #e5e4e0; border-top-color: #111; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    p { font-size: 14px; color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="spinner"></div>
+    <p>Completing bank connection...</p>
+  </div>
+  <script>
+    const params = window.location.search;
+    if (params.includes('code=')) {
+      window.location.href = 'http://192.168.1.104:3001/callback' + params;
+    } else {
+      document.querySelector('p').textContent = 'Something went wrong. Please go back to Klartion and try again.';
+      document.querySelector('.spinner').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
