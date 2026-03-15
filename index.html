@@ -18,7 +18,6 @@
       line-height: 1.7;
     }
 
-    /* NAV */
     nav {
       max-width: 760px;
       margin: 0 auto;
@@ -65,7 +64,6 @@
     }
     .nav-links a:hover { color: #1a1a1a; }
 
-    /* HERO */
     .hero {
       max-width: 760px;
       margin: 0 auto;
@@ -123,7 +121,6 @@
     }
     .hero-sub a { color: #777; }
 
-    /* DIVIDER */
     .divider {
       max-width: 760px;
       margin: 0 auto;
@@ -131,7 +128,6 @@
       border-top: 1px solid #e8e6e0;
     }
 
-    /* HOW IT WORKS */
     .section {
       max-width: 760px;
       margin: 0 auto;
@@ -153,6 +149,7 @@
       margin-bottom: 2.5rem;
       color: #1a1a1a;
     }
+
     .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -164,7 +161,7 @@
     .step-num {
       width: 28px;
       height: 28px;
-      background: #1a1a1a;
+      background: #2d7a4f;
       color: #fff;
       border-radius: 50%;
       display: flex;
@@ -188,7 +185,6 @@
       line-height: 1.65;
     }
 
-    /* WHAT YOU GET */
     .features {
       background: #f0efe9;
       border-radius: 12px;
@@ -217,7 +213,7 @@
     .feature-dot {
       width: 6px;
       height: 6px;
-      background: #1a1a1a;
+      background: #2d7a4f;
       border-radius: 50%;
       margin-top: 0.5rem;
       flex-shrink: 0;
@@ -229,7 +225,6 @@
     }
     .feature strong { color: #1a1a1a; font-weight: 600; }
 
-    /* PRICING */
     .pricing-box {
       border: 1.5px solid #1a1a1a;
       border-radius: 12px;
@@ -276,12 +271,11 @@
     .pricing-features li::before {
       content: '✓';
       font-weight: 600;
-      color: #1a1a1a;
+      color: #2d7a4f;
       font-size: 13px;
     }
 
-    /* FAQ */
-    .faq { display: flex; flex-direction: column; gap: 0; }
+    .faq { display: flex; flex-direction: column; }
     .faq-item {
       border-bottom: 1px solid #e8e6e0;
       padding: 1.25rem 0;
@@ -291,22 +285,24 @@
       font-size: 15px;
       font-weight: 600;
       color: #1a1a1a;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+      user-select: none;
     }
     .faq-q::after {
       content: '+';
-      font-size: 18px;
-      font-weight: 400;
+      font-size: 20px;
+      font-weight: 300;
       color: #999;
       flex-shrink: 0;
       transition: transform 0.2s;
     }
     .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-item.open .faq-q { margin-bottom: 0.5rem; }
     .faq-a {
       font-size: 14px;
       color: #555;
@@ -316,7 +312,6 @@
     .faq-item.open .faq-a { display: block; }
     .faq-a a { color: #1a1a1a; }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid #e8e6e0;
       max-width: 760px;
@@ -328,19 +323,9 @@
       flex-wrap: wrap;
       gap: 1rem;
     }
-    .footer-left {
-      font-size: 13px;
-      color: #999;
-    }
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .footer-links a {
-      font-size: 13px;
-      color: #888;
-      text-decoration: none;
-    }
+    .footer-left { font-size: 13px; color: #999; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
     .footer-links a:hover { color: #1a1a1a; }
   </style>
 </head>
@@ -358,45 +343,42 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="badge">Self-hosted · One-time payment · 2,500+ EU banks</div>
     <h1>Your bank transactions,<br><em>inside Notion.</em></h1>
-    <p>Klartion connects to your EU bank via open banking and syncs your transactions into a Notion database every day. Your data never leaves your machine.</p>
+    <p>Klartion connects to your EU bank and syncs your transactions into a Notion database every day. Automatic, private, yours.</p>
     <a href="https://david-alves.lemonsqueezy.com/checkout/buy/f24a36ac-3c66-4aaf-b272-9cce226a0ebf" class="btn-primary lemonsqueezy-button">Get Klartion for €39 →</a>
     <div class="hero-sub">
-      One-time payment · Includes lifetime updates · <a href="https://github.com/DAdjadj/klartion" target="_blank">Open source</a>
+      One-time payment · Lifetime updates · <a href="https://github.com/DAdjadj/klartion" target="_blank">Open source</a>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- HOW IT WORKS -->
   <section class="section" id="how-it-works">
     <div class="section-label">How it works</div>
-    <h2>Up and running in minutes.</h2>
+    <h2>Three steps and you're done.</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <h3>Buy and install</h3>
-        <p>Purchase your licence key, run one Docker command on your server or computer, and open Klartion in your browser.</p>
+        <p>Purchase your licence key and run one command to start Klartion on your computer or home server.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <h3>Connect Notion</h3>
-        <p>Duplicate the Klartion template into your Notion workspace, create a free integration, and paste the credentials into the setup wizard.</p>
+        <p>Duplicate the ready-made Notion template, then paste your credentials into the setup page.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <h3>Connect your bank</h3>
-        <p>Authorise read-only access to your bank via Enable Banking's open banking API. Klartion then syncs your transactions automatically, every day.</p>
+        <p>Approve read-only access to your bank. Klartion handles everything from there — automatically, every day.</p>
       </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- WHAT YOU GET -->
   <section class="section">
     <div class="features">
       <h2>Everything you need, nothing you don't.</h2>
@@ -411,19 +393,19 @@
         </div>
         <div class="feature">
           <div class="feature-dot"></div>
-          <p><strong>Your data stays local</strong> — bank data goes directly from Enable Banking to your machine. Never our servers.</p>
+          <p><strong>Your data stays local</strong> — bank data goes directly to your machine. Never our servers.</p>
         </div>
         <div class="feature">
           <div class="feature-dot"></div>
-          <p><strong>Email notifications</strong> — get a summary email on success, or an alert if something goes wrong.</p>
+          <p><strong>Email notifications</strong> — a summary on success, an alert if something goes wrong.</p>
         </div>
         <div class="feature">
           <div class="feature-dot"></div>
-          <p><strong>Pending transaction tracking</strong> — pending transactions are imported and updated to Cleared or Cancelled when they settle.</p>
+          <p><strong>Pending transaction tracking</strong> — transactions update from Pending to Cleared or Cancelled automatically.</p>
         </div>
         <div class="feature">
           <div class="feature-dot"></div>
-          <p><strong>Duplicate detection</strong> — Klartion never imports the same transaction twice, even if you reinstall.</p>
+          <p><strong>No duplicates, ever</strong> — Klartion tracks every transaction ID so nothing gets imported twice.</p>
         </div>
       </div>
     </div>
@@ -431,7 +413,6 @@
 
   <hr class="divider">
 
-  <!-- PRICING -->
   <section class="section">
     <div class="section-label">Pricing</div>
     <h2>Simple, honest pricing.</h2>
@@ -452,7 +433,6 @@
 
   <hr class="divider">
 
-  <!-- FAQ -->
   <section class="section" id="faq">
     <div class="section-label">FAQ</div>
     <h2>Common questions.</h2>
@@ -463,23 +443,23 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">Do I need to know how to code?</div>
-        <div class="faq-a">No coding needed. You do need to be comfortable running a single Docker command in a terminal. If you can follow step-by-step instructions, you can install Klartion. The setup wizard in the browser takes care of everything else.</div>
+        <div class="faq-a">No coding needed. You need to be comfortable running one command in a terminal. The rest is done through a browser-based setup wizard.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">Is my bank data safe?</div>
-        <div class="faq-a">Yes. Klartion uses read-only access via Enable Banking's regulated open banking API — it cannot move money or make changes to your account. Your transaction data is fetched directly to your machine and written to your own Notion database. It never passes through our servers.</div>
+        <div class="faq-a">Yes. Klartion uses read-only access via Enable Banking's regulated open banking API — it cannot move money or make changes to your account. Your data goes directly to your machine and is written to your own Notion database. It never passes through our servers.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">What do I need to run Klartion?</div>
-        <div class="faq-a">A computer or server that can run Docker — a Mac, Linux machine, NAS, or a small VPS all work. Klartion runs as a lightweight Docker container and uses very little memory or CPU. It does need to be running at the time of the daily sync.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggle(this)">What happens if I need help?</div>
-        <div class="faq-a">Email us at <a href="mailto:support@david-alves.com">support@david-alves.com</a>. We aim to respond within 2 business days.</div>
+        <div class="faq-a">A computer or server that can run Docker — a Mac, Linux machine, NAS, or a small VPS all work. Klartion is lightweight and uses very little memory or CPU.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggle(this)">Can I use it on more than one machine?</div>
-        <div class="faq-a">Each licence key can be activated on up to 2 machines. If you need to move to a new machine, you can deactivate your current installation from within the app and reactivate on the new one.</div>
+        <div class="faq-a">Each licence key can be activated on up to 2 machines. If you move to a new machine, you can deactivate your current installation from within the app and reactivate on the new one.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What if I need help?</div>
+        <div class="faq-a">Email us at <a href="mailto:support@david-alves.com">support@david-alves.com</a>. We aim to respond within 2 business days.</div>
       </div>
     </div>
   </section>
