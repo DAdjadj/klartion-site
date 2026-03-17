@@ -252,7 +252,7 @@
       <div class="wl-label">Coming soon</div>
       <h2>Klartion without the setup.</h2>
       <p>A fully hosted version is in the works — no Docker, no server. Just connect your bank and Notion and you're done. Join the waitlist to be first in line.</p>
-      <a href="https://klartion.com/waitlist" class="btn-primary" style="background:#2d7a4f;">Join the waitlist →</a>
+      <a href="#waitlist" class="btn-primary" style="background:#2d7a4f;" onclick="document.getElementById('waitlist-section').scrollIntoView({behavior:'smooth'});return false;">Join the waitlist →</a>
     </div>
   </section>
 
@@ -288,6 +288,59 @@
       </div>
     </div>
   </section>
+
+
+  <hr class="divider">
+
+  <section class="section" id="waitlist-section">
+    <div class="section-label">Klartion Hosted</div>
+    <h2>Join the waitlist.</h2>
+    <p style="color:#555;max-width:480px;margin:0 auto 2rem;font-size:16px;line-height:1.7">Be the first to know when the hosted version launches. No Docker, no server, no setup.</p>
+    <div style="max-width:400px;margin:0 auto">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="email" id="wl-email" placeholder="your@email.com" style="flex:1;min-width:200px;padding:12px 16px;border:1px solid #ddd;border-radius:8px;font-size:15px;font-family:inherit;outline:none">
+        <button onclick="joinWaitlist()" style="background:#2d7a4f;color:#fff;border:none;padding:12px 24px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap">Join →</button>
+      </div>
+      <div id="wl-msg" style="margin-top:12px;font-size:14px;display:none"></div>
+    </div>
+  </section>
+
+  <script>
+  async function joinWaitlist() {
+    var email = document.getElementById('wl-email').value.trim();
+    var msg = document.getElementById('wl-msg');
+    if (!email || !email.includes('@')) {
+      msg.style.display = 'block';
+      msg.style.color = '#c0392b';
+      msg.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    try {
+      var res = await fetch('https://api.klartion.com/waitlist', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email})
+      });
+      var data = await res.json();
+      msg.style.display = 'block';
+      if (data.status === 'ok') {
+        msg.style.color = '#2d7a4f';
+        msg.textContent = "You're on the list! I'll email you when it's ready.";
+        document.getElementById('wl-email').value = '';
+      } else {
+        msg.style.color = '#2d7a4f';
+        msg.textContent = "You're already on the list!";
+      }
+    } catch(e) {
+      msg.style.display = 'block';
+      msg.style.color = '#c0392b';
+      msg.textContent = 'Something went wrong. Try again or email support@david-alves.com.';
+    }
+  }
+  document.getElementById('wl-email').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') joinWaitlist();
+  });
+  </script>
 
   <footer>
     <div class="footer-left">© 2026 David Alves</div>
