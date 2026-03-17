@@ -32,7 +32,7 @@
   .substep-num { width: 22px; height: 22px; background: #f0efe9; border: 1px solid #e0ddd5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #2d7a4f; flex-shrink: 0; margin-top: 1px; }
   .substep-text { font-size: 13px; color: #555; line-height: 1.65; }
   code { background: #f0efe9; border: 1px solid #e0ddd5; padding: 2px 7px; border-radius: 4px; font-size: 12px; font-family: "Courier New", monospace; color: #1a1a1a; }
-  .code-block { background: #1a1a1a; border-radius: 10px; padding: 16px 18px; font-size: 12px; font-family: "Courier New", monospace; color: #d4d4d4; line-height: 1.9; margin-top: 12px; white-space: pre; overflow-x: auto; }
+  .code-block { background: #f0efe9; border: 1px solid #e0ddd5; border-radius: 10px; padding: 16px 18px; font-size: 12px; font-family: "Courier New", monospace; color: #1a1a1a; line-height: 1.9; margin-top: 12px; white-space: pre; overflow-x: auto; }
   .note { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #374151; line-height: 1.6; margin-top: 14px; }
   .note strong { color: #1a1a1a; }
   .done-card { background: #fff; border: 1.5px solid #1a1a1a; border-radius: 12px; padding: 28px; margin-top: 16px; }
@@ -145,7 +145,7 @@ docker compose up -d</div>
             <input type="text" id="server-url" placeholder="e.g. http://192.168.1.100:3001" oninput="checkUrl()">
             <button id="open-btn" onclick="openKlartion()">Open Klartion &rarr;</button>
           </div>
-          <div class="url-hint">The address you use to reach your server, including the port (default: 3001)</div>
+          <div class="url-hint">Klartion runs on port 3001 by default. If that port is already in use on your server, open <code>docker-compose.yml</code> and change <code>3001:3000</code> to any free port, then use that port here.</div>
         </div>
       </div>
     </div>
