@@ -146,7 +146,7 @@
     </div>
 
     <div class="intro">
-      Klartion is a self-hosted application. Your bank transactions, Notion data, and credentials never leave your machine — they are never sent to or stored on our servers. This policy explains the limited data we do handle.
+      Klartion is a self-hosted application. Your bank transactions, Notion data, and credentials never leave your machine — they are never sent to or stored on our servers. The only data we handle is what is strictly necessary to operate the licence system. This policy explains what that is.
     </div>
 
     <h2>Who we are</h2>
@@ -155,8 +155,8 @@
     <h2>What data we collect</h2>
     <p>We collect only the minimum necessary to operate the licence system:</p>
     <ul>
-      <li><strong>Your email address</strong> — collected by Lemon Squeezy when you purchase a licence, and shared with us for support purposes.</li>
-      <li><strong>Licence activation records</strong> — when you activate your licence key, Lemon Squeezy records that an activation occurred on a machine. We see aggregated activation counts, not device identifiers.</li>
+      <li><strong>Your email address</strong> — collected by Stripe when you purchase a licence, and stored on our licence server to deliver your licence key and provide support.</li>
+      <li><strong>Licence activation records</strong> — when you activate your licence key, we store an anonymised machine fingerprint (a hash of your hostname) and the number of active activations. We do not store device names, IP addresses, or any personally identifiable hardware information.</li>
     </ul>
 
     <div class="highlight">
@@ -174,7 +174,7 @@
     </ul>
 
     <h2>Third-party services</h2>
-    <p><strong>Lemon Squeezy</strong> — processes payments and manages licence keys. When you purchase Klartion, Lemon Squeezy collects your name, email, and payment information. Their privacy policy is available at <a href="https://www.lemonsqueezy.com/privacy" target="_blank">lemonsqueezy.com/privacy</a>.</p>
+    <p><strong>Stripe</strong> — processes payments. When you purchase Klartion, Stripe collects your email and payment information. Their privacy policy is available at <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a>.</p>
     <p><strong>Enable Banking</strong> — provides open banking API access to your bank on your behalf. Their privacy policy governs how they handle your banking authorisation. Klartion stores the resulting access tokens locally on your machine only.</p>
     <p><strong>Notion</strong> — Klartion writes transaction data to a Notion database you own. Notion's privacy policy governs how they handle that data.</p>
 
@@ -188,7 +188,7 @@
     <p>We do not sell, rent, or share your email address with third parties for marketing purposes.</p>
 
     <h2>Data retention</h2>
-    <p>We retain your email address for as long as your licence is active or until you request deletion. You can request deletion at any time by emailing <a href="mailto:support@david-alves.com">support@david-alves.com</a>. Lemon Squeezy's retention policies apply to payment records.</p>
+    <p>We retain your email address and licence activation records for as long as your licence is active or until you request deletion. You can request deletion at any time by emailing <a href="mailto:support@david-alves.com">support@david-alves.com</a>. Stripe's retention policies apply to payment records.</p>
 
     <h2>Your rights (GDPR)</h2>
     <p>If you are located in the European Union, you have the right to access, correct, or delete the personal data we hold about you. To exercise any of these rights, email <a href="mailto:support@david-alves.com">support@david-alves.com</a>. We will respond within 30 days.</p>
