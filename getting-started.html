@@ -122,13 +122,14 @@
       <div class="step-title">Install Klartion on your server or computer</div>
       <div class="step-desc">
         <p>You need <a href="https://docs.docker.com/engine/install/" target="_blank" style="color:#2d7a4f;">Docker</a> installed. Klartion runs as a lightweight container — it works on a Mac, a Linux machine, a NAS, or any small home server.</p>
-        <p style="margin-top:12px;"><strong>On your server</strong> — create a folder and start Klartion:</p>
+        <p style="margin-top:12px;"><strong style="font-size:15px;">On your server</strong> — create a folder and start Klartion:</p>
         <div class="code-block">mkdir -p ~/klartion/data && cd ~/klartion
 curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.yml
 docker compose up -d</div>
-        <p style="margin-top:16px;"><strong>Copy the <code>.pem</code> key file to your server.</strong> Run this on your local machine — replace <code>your-app-id.pem</code> with the actual filename from your Downloads folder and <code>user@your-server</code> with your SSH login:</p>
+        <div class="note" style="margin-top:14px;"><strong>Port:</strong> Klartion runs on port <code>3001</code> by default. If that port is already in use, open <code>docker-compose.yml</code> and change <code>3001:3000</code> to any free port number.</div>
+        <p style="margin-top:16px;"><strong style="font-size:15px;">Copy the <code>.pem</code> key file to your server.</strong> Run this on your local machine — replace <code>your-app-id.pem</code> with the actual filename from your Downloads folder and <code>user@your-server</code> with your SSH login:</p>
         <div class="code-block">scp ~/Downloads/your-app-id.pem user@your-server:~/klartion/data/eb_private.key</div>
-        <div class="note"><strong>Tip:</strong> The <code>~/klartion</code> folder can be placed anywhere on your server — a NAS, an external drive, or any path you prefer. Just keep the <code>data/</code> subfolder alongside <code>docker-compose.yml</code>. Also update <code>EB_APP_ID</code> in your <code>.env</code> file to match the filename of the <code>.pem</code> file (without the <code>.pem</code> extension).</div>
+
       </div>
     </div>
   </div>
@@ -142,7 +143,7 @@ docker compose up -d</div>
         <div class="done-card">
           <label>Your server address</label>
           <div class="url-row">
-            <input type="text" id="server-url" placeholder="e.g. http://192.168.1.100:3001" oninput="checkUrl()">
+            <input type="text" id="server-url" placeholder="e.g. http://192.168.1.100:3001" value="http://localhost:3001" oninput="checkUrl()">
             <button id="open-btn" onclick="openKlartion()">Open Klartion &rarr;</button>
           </div>
           <div class="url-hint">Klartion runs on port 3001 by default. If that port is already in use on your server, open <code>docker-compose.yml</code> and change <code>3001:3000</code> to any free port, then use that port here.</div>
@@ -170,6 +171,7 @@ function checkUrl() {
   btn.classList.toggle("active", active);
   btn.disabled = !active;
 }
+document.addEventListener("DOMContentLoaded", function() { checkUrl(); });
 function openKlartion() {
   const val = document.getElementById("server-url").value.trim().replace(/\/+$/, "");
   window.open(val, "_blank");
