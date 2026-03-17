@@ -43,6 +43,9 @@
   .url-row button { background: #1a1a1a; color: #fff; border: none; padding: 10px 22px; font-family: "Inter", sans-serif; font-weight: 600; font-size: 14px; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; opacity: 0.35; }
   .url-row button.active { opacity: 1; }
   .url-hint { font-size: 12px; color: #9ca3af; margin-top: 6px; }
+  .url-open-btn { background: #1a1a1a; color: #fff; border: none; padding: 10px 20px; font-family: "Inter", sans-serif; font-weight: 600; font-size: 14px; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; opacity: 0.35; }
+  .url-open-btn.active { opacity: 1; }
+  .url-open-btn:hover { opacity: 0.85; }
   footer { border-top: 1px solid #e8e6e0; padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   footer .left { font-size: 12px; color: #9ca3af; }
   footer .right { display: flex; gap: 20px; }
@@ -145,7 +148,7 @@ docker compose up -d</div>
             <input type="text" id="url-protocol" value="http://" style="width:80px; flex-shrink:0; font-family:'Courier New',monospace; font-size:13px; background:#fafaf8; border:1px solid #e0ddd5; border-radius:8px; padding:10px 10px; outline:none;" oninput="checkUrl()">
             <input type="text" id="url-host" value="localhost" placeholder="192.168.1.100" style="flex:1; min-width:120px; font-family:'Courier New',monospace; font-size:13px; background:#fafaf8; border:1px solid #e0ddd5; border-radius:8px; padding:10px 10px; outline:none;" oninput="checkUrl()">
             <input type="text" id="url-port" value="3001" style="width:64px; flex-shrink:0; font-family:'Courier New',monospace; font-size:13px; background:#fafaf8; border:1px solid #e0ddd5; border-radius:8px; padding:10px 10px; outline:none;" oninput="checkUrl()">
-            <button id="open-btn" onclick="openKlartion()" style="white-space:nowrap;">Open Klartion &rarr;</button>
+            <button id="open-btn" class="url-open-btn" onclick="openKlartion()">Open Klartion &rarr;</button>
           </div>
           <div class="url-hint">Enter your server's IP address or hostname. Change the port if you modified it in <code>docker-compose.yml</code>.</div>
         </div>
