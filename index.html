@@ -65,10 +65,11 @@
       background: #f0f7f4;
       border: 1.5px solid #c5e0d0;
       border-radius: 12px;
-      padding: 2.5rem;
+      padding: 3rem 2.5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
+      max-width: 100%;
     }
     .waitlist-box .wl-label {
       display: inline-block;
@@ -233,8 +234,8 @@
   <hr class="divider">
 
   <!-- WAITLIST -->
-  <section class="section">
-    <div class="waitlist-box">
+  <section style="width:100%;padding:0;margin:0;">
+    <div class="waitlist-box" style="border-radius:0;border-left:none;border-right:none;padding:4rem 2rem;">
       <svg style="position:absolute;top:16px;right:24px;opacity:0.12;" width="100" height="60" viewBox="0 0 100 60">
         <polyline points="0,55 15,45 30,50 45,30 60,35 75,15 90,20 100,8" fill="none" stroke="#2d7a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="45" cy="30" r="3" fill="#2d7a4f"/>
@@ -292,7 +293,7 @@
 
   <hr class="divider">
 
-  <section class="section" id="waitlist-section">
+  <section class="section" style="max-width:100%;padding-left:0;padding-right:0;" id="waitlist-section">
     <div class="section-label">Klartion Hosted</div>
     <h2>Join the waitlist.</h2>
     <p style="color:#555;max-width:480px;margin:0 auto 2rem;font-size:16px;line-height:1.7">Be the first to know when the hosted version launches. No Docker, no server, no setup.</p>
