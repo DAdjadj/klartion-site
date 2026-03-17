@@ -115,16 +115,6 @@
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
     .footer-links a:hover { color: #1a1a1a; }
-
-    #success-overlay { display:none; position:fixed; inset:0; background:rgba(250,250,248,0.92); z-index:999999; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
-    #success-overlay.visible { display:flex; }
-    .success-card { background:#fff; border:1.5px solid #1a1a1a; border-radius:16px; padding:48px 40px; text-align:center; max-width:420px; width:90%; position:relative; }
-    .success-icon { width:56px; height:56px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:24px; }
-    .success-card h2 { font-family:'Lora',serif; font-size:22px; font-weight:700; letter-spacing:-0.3px; margin-bottom:10px; }
-    .success-card p { font-size:14px; color:#555; line-height:1.65; margin-bottom:28px; }
-    .btn-start { display:block; background:#2d7a4f; color:#fff; border:none; padding:14px 32px; font-family:'Inter',sans-serif; font-weight:600; font-size:15px; border-radius:8px; cursor:pointer; transition:opacity 0.15s; width:100%; text-decoration:none; }
-    .btn-start:hover { opacity:0.85; }
-    .btn-close { position:absolute; top:16px; left:16px; width:32px; height:32px; background:#f0efe9; border:none; border-radius:50%; color:#6b7280; cursor:pointer; font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center; }
   </style>
 </head>
 <body>
@@ -146,9 +136,6 @@
     <h1>Your bank transactions,<br><em>inside Notion.</em></h1>
     <p>Klartion connects to your EU bank and syncs your transactions into a Notion database every day. Automatic, private, yours.</p>
     <a href="https://david-alves.lemonsqueezy.com/checkout/buy/f24a36ac-3c66-4aaf-b272-9cce226a0ebf?embed=1" class="btn-primary lemonsqueezy-button">Get Klartion for €39 →</a>
-    <div style="margin-top:1rem;">
-      <a href="#" onclick="document.getElementById('success-overlay').classList.add('visible'); return false;" style="font-size:13px; color:#999; text-decoration:none;">Already purchased? Get started &rarr;</a>
-    </div>
     <div class="hero-sub">One-time payment · Lifetime updates · <a href="https://github.com/DAdjadj/klartion" target="_blank">Open source</a></div>
   </section>
 
@@ -299,33 +286,11 @@
     </div>
   </footer>
 
-
-
-
-  <!-- Post-purchase overlay -->
-  <div id="success-overlay">
-    <div class="success-card">
-      <button class="btn-close" onclick="document.getElementById('success-overlay').classList.remove('visible')">&times;</button>
-      <div class="success-icon">&#x2713;</div>
-      <h2>Payment confirmed!</h2>
-      <p>Your license key has been sent to your email. Follow our step-by-step guide to get Klartion up and running.</p>
-      <a href="/getting-started.html" class="btn-start">Get started &rarr;</a>
-    </div>
-  </div>
-
   <script>
     function toggle(el) {
       el.parentElement.classList.toggle('open');
     }
-
-    window.addEventListener('message', function(event) {
-      if (event.data && event.data.event === 'Checkout.Success') {
-        document.getElementById('success-overlay').classList.add('visible');
-      }
-    });
-    if (new URLSearchParams(window.location.search).get('paid') === '1') {
-      document.getElementById('success-overlay').classList.add('visible');
-    }
   </script>
+
 </body>
 </html>

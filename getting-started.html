@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Started — Klartion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body { background: #fafaf8; color: #1a1a1a; font-family: "Inter", sans-serif; line-height: 1.7; min-height: 100vh; }
+  header { padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e8e6e0; background: #fafaf8; }
+  .logo { font-family: "Lora", serif; font-weight: 700; font-size: 18px; color: #1a1a1a; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 30px; height: 30px; background: #1a1a1a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: "Lora", serif; font-style: italic; font-size: 15px; flex-shrink: 0; }
+  .container { max-width: 720px; margin: 0 auto; padding: 64px 48px 120px; }
+  .success-badge { display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 500; color: #166534; margin-bottom: 24px; }
+  .page-title { font-family: "Lora", serif; font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.2; }
+  .page-sub { font-size: 16px; color: #555; margin-bottom: 56px; line-height: 1.65; }
+  .step { display: flex; gap: 28px; margin-bottom: 48px; }
+  .step-left { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .step-num { width: 40px; height: 40px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0; font-family: "Inter", sans-serif; }
+  .step-line { width: 2px; flex: 1; background: #e8e6e0; margin-top: 8px; min-height: 40px; }
+  .step:last-child .step-line { display: none; }
+  .step-body { padding-top: 8px; flex: 1; }
+  .step-title { font-family: "Lora", serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; }
+  .step-desc { font-size: 14px; color: #555; line-height: 1.75; }
+  .step-desc p { margin-bottom: 10px; }
+  .step-desc p:last-child { margin-bottom: 0; }
+  .substeps { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .substep { display: flex; gap: 12px; align-items: flex-start; }
+  .substep-num { width: 22px; height: 22px; background: #f0efe9; border: 1px solid #e0ddd5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #2d7a4f; flex-shrink: 0; margin-top: 1px; }
+  .substep-text { font-size: 13px; color: #555; line-height: 1.65; }
+  code { background: #f0efe9; border: 1px solid #e0ddd5; padding: 2px 7px; border-radius: 4px; font-size: 12px; font-family: "Courier New", monospace; color: #1a1a1a; }
+  .code-block { background: #1a1a1a; border-radius: 10px; padding: 16px 18px; font-size: 12px; font-family: "Courier New", monospace; color: #d4d4d4; line-height: 1.9; margin-top: 12px; white-space: pre; overflow-x: auto; }
+  .note { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #374151; line-height: 1.6; margin-top: 14px; }
+  .note strong { color: #1a1a1a; }
+  .done-card { background: #fff; border: 1.5px solid #1a1a1a; border-radius: 12px; padding: 28px; margin-top: 16px; }
+  .done-card label { display: block; font-size: 11px; font-weight: 600; color: #6b7280; letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 8px; }
+  .url-row { display: flex; gap: 10px; align-items: center; }
+  .url-row input { flex: 1; background: #fafaf8; border: 1px solid #e0ddd5; color: #1a1a1a; font-family: "Courier New", monospace; font-size: 13px; padding: 10px 14px; border-radius: 8px; outline: none; transition: border-color 0.2s; }
+  .url-row input:focus { border-color: #1a1a1a; }
+  .url-row button { background: #1a1a1a; color: #fff; border: none; padding: 10px 22px; font-family: "Inter", sans-serif; font-weight: 600; font-size: 14px; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; opacity: 0.35; }
+  .url-row button.active { opacity: 1; }
+  .url-hint { font-size: 12px; color: #9ca3af; margin-top: 6px; }
+  footer { border-top: 1px solid #e8e6e0; padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer .left { font-size: 12px; color: #9ca3af; }
+  footer .right { display: flex; gap: 20px; }
+  footer a { font-size: 12px; color: #9ca3af; text-decoration: none; }
+  footer a:hover { color: #1a1a1a; }
+  @media (max-width: 640px) {
+    header { padding: 16px 20px; }
+    .container { padding: 40px 20px 80px; }
+    .step { gap: 16px; }
+    .page-title { font-size: 28px; }
+    footer { padding: 20px; flex-direction: column; text-align: center; }
+    footer .right { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <a href="/" class="logo">
+    <div class="logo-mark">K</div>
+    Klartion
+  </a>
+</header>
+<div class="container">
+  <div class="success-badge">&#x2713; Purchase confirmed</div>
+  <h1 class="page-title">Let's get you set up</h1>
+  <p class="page-sub">Your license key is on its way to your email. Follow these steps to have Klartion running and syncing your bank transactions into Notion.</p>
+
+  <div class="step">
+    <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Create a free Enable Banking account</div>
+      <div class="step-desc">
+        <p>Enable Banking is the regulated open banking provider that Klartion uses to connect to your bank. You need a free developer account — no credit card required.</p>
+        <p>Go to <a href="https://enablebanking.com" target="_blank" style="color:#2d7a4f;">enablebanking.com</a> and sign up.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Register a Klartion application</div>
+      <div class="step-desc">
+        <p>Once logged in, go to <strong>API applications</strong> and click <strong>Register new application</strong>. Fill in the form as follows:</p>
+        <div class="substeps">
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong>Application name:</strong> Klartion</div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong>Allowed redirect URLs:</strong> <code>https://klartion.com/callback</code></div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong>Application description:</strong> Connect my bank to Notion</div></div>
+          <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong>Email for data protection matters:</strong> your email address</div></div>
+          <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong>Privacy URL:</strong> <code>https://klartion.com/privacy</code></div></div>
+          <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong>Terms URL:</strong> <code>https://klartion.com/terms</code></div></div>
+          <div class="substep"><div class="substep-num">7</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> key file will be downloaded automatically. The filename matches your Application ID. Keep it safe — you will need it in step 4.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Activate by linking your bank account</div>
+      <div class="step-desc">
+        <p>After registering, click <strong>Activate by linking accounts</strong> on your application page. This is a one-time requirement to activate your Enable Banking app.</p>
+        <div class="substeps">
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text">Select your country and bank from the dropdowns</div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text">Click <strong>Link</strong></div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text">Follow the steps to log in to your bank and approve read-only access</div></div>
+        </div>
+        <div class="note"><strong>Note:</strong> This is separate from the bank connection inside Klartion. Both are required — this activates your Enable Banking app, while Klartion handles the ongoing daily sync.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Install Klartion on your server or computer</div>
+      <div class="step-desc">
+        <p>You need <a href="https://docs.docker.com/engine/install/" target="_blank" style="color:#2d7a4f;">Docker</a> installed. Klartion runs as a lightweight container — it works on a Mac, a Linux machine, a NAS, or any small home server.</p>
+        <p style="margin-top:12px;"><strong>On your server</strong> — create a folder and start Klartion:</p>
+        <div class="code-block">mkdir -p ~/klartion/data && cd ~/klartion
+curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.yml
+docker compose up -d</div>
+        <p style="margin-top:16px;"><strong>Copy the <code>.pem</code> key file to your server.</strong> Run this on your local machine — replace <code>your-app-id.pem</code> with the actual filename from your Downloads folder and <code>user@your-server</code> with your SSH login:</p>
+        <div class="code-block">scp ~/Downloads/your-app-id.pem user@your-server:~/klartion/data/eb_private.key</div>
+        <div class="note"><strong>Tip:</strong> The <code>~/klartion</code> folder can be placed anywhere on your server — a NAS, an external drive, or any path you prefer. Just keep the <code>data/</code> subfolder alongside <code>docker-compose.yml</code>. Also update <code>EB_APP_ID</code> in your <code>.env</code> file to match the filename of the <code>.pem</code> file (without the <code>.pem</code> extension).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">Open Klartion and complete setup</div>
+      <div class="step-desc">
+        <p>Enter your server address below to open the Klartion setup wizard. It will guide you through entering your license key, connecting Notion, and authorising your bank.</p>
+        <div class="done-card">
+          <label>Your server address</label>
+          <div class="url-row">
+            <input type="text" id="server-url" placeholder="e.g. http://192.168.1.100:3001" oninput="checkUrl()">
+            <button id="open-btn" onclick="openKlartion()">Open Klartion &rarr;</button>
+          </div>
+          <div class="url-hint">The address you use to reach your server, including the port (default: 3001)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="left">&copy; 2026 David Alves</div>
+  <div class="right">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="mailto:support@david-alves.com">Support</a>
+    <a href="https://github.com/DAdjadj/klartion" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+function checkUrl() {
+  const val = document.getElementById("server-url").value.trim();
+  const btn = document.getElementById("open-btn");
+  const active = val.length > 6;
+  btn.classList.toggle("active", active);
+  btn.disabled = !active;
+}
+function openKlartion() {
+  const val = document.getElementById("server-url").value.trim().replace(/\/+$/, "");
+  window.open(val, "_blank");
+}
+</script>
+</body>
+</html>
