@@ -219,7 +219,7 @@
     _load(function(){
       var m=_banks.filter(function(b){return b.name.toLowerCase().includes(q);}).slice(0,8);
       st.textContent='';
-      if(!m.length){res.innerHTML='';st.innerHTML='No match for <strong>'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com" target="_blank" style="color:#1a1a1a;">Enable Banking</a>.';return;}
+      if(!m.length){res.innerHTML='';st.innerHTML='No match for <strong>'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com/open-banking-apis" target="_blank" style="color:#1a1a1a;">Enable Banking</a>.';return;}
       res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:8px;margin-bottom:6px;"><span style="font-size:14px;font-weight:500;color:#1a1a1a;">'+b.name+'</span><span style="font-size:11px;font-weight:600;color:#2d7a4f;background:#e8f5ee;border:1px solid #c5e0d0;padding:3px 8px;border-radius:20px;letter-spacing:0.05em;">'+b.country+'</span></div>';}).join('');
       if(m.length===8)st.innerHTML='<span style="color:#aaa;font-size:12px;">Showing first 8 results \u2014 type more to narrow down.</span>';
     });
