@@ -22,10 +22,14 @@
     const state = params.get('state');
 
     if (code && state) {
-      // Extract KLARTION_URL from state: format is "klartion-auth|http://host:port"
       const parts = state.split('|');
       const klartion_url = parts.length > 1 ? parts[1] : 'http://localhost:3001';
-      window.location.href = klartion_url + '/callback?' + window.location.search.slice(1);
+      const callbackUrl = klartion_url + '/callback?' + window.location.search.slice(1);
+      window.location.href = callbackUrl;
+      setTimeout(function() {
+        document.querySelector('.spinner').style.display = 'none';
+        document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:#111;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a><br><br><span style="font-size:12px;color:#9ca3af;">If your browser blocks this, paste this URL in a new tab:</span><br><code style="font-size:11px;color:#2d7a4f;word-break:break-all;">' + callbackUrl + '</code>';
+      }, 2000);
     } else {
       document.querySelector('.spinner').style.display = 'none';
       document.querySelector('p').textContent = 'Something went wrong. Please go back to Klartion and try again.';
