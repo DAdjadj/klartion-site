@@ -130,8 +130,32 @@
         <p style="margin-top:12px;">Create the folder and download the compose file:</p>
         <div class="code-block">mkdir -p ~/klartion/data && cd ~/klartion
 curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.yml</div>
+        <div style="margin-top:14px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:10px;padding:14px 16px;">
+          <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;">Port</div>
+          <div style="font-size:12px;color:#555;margin-bottom:10px;">Klartion runs on port <code>3001</code> by default. Change it below if that port is already in use.</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" id="port-input" value="3001" style="width:80px;font-family:'Courier New',monospace;font-size:13px;background:#fff;border:1px solid #e0ddd5;border-radius:6px;padding:8px 10px;outline:none;color:#1a1a1a;text-align:center;" oninput="updatePort()">
+            <span id="port-status" style="font-size:11px;color:#555;"></span>
+          </div>
+        </div>
         <p style="margin-top:16px;">Start the container:</p>
-        <div class="code-block">docker compose up -d</div>
+        <div class="code-block" id="start-cmd">docker compose up -d</div>
+        <script>
+        function updatePort() {
+          var port = document.getElementById('port-input').value.trim();
+          var status = document.getElementById('port-status');
+          var cmd = document.getElementById('start-cmd');
+          if (port && port !== '3001') {
+            cmd.textContent = "sed -i 's/3001:3000/" + port + ":3000/' docker-compose.yml && docker compose up -d";
+            status.textContent = 'Port ' + port + ' — the command below will update your compose file automatically.';
+          } else {
+            cmd.textContent = 'docker compose up -d';
+            status.textContent = '';
+          }
+          var urlPort = document.getElementById('url-port');
+          if (urlPort) urlPort.value = port || '3001';
+        }
+        </script>
 </div>
     </div>
   </div>
