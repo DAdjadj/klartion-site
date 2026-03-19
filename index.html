@@ -150,6 +150,14 @@
     <div style="margin-top:1rem;">
       <a href="#" onclick="document.getElementById('success-overlay').classList.add('visible'); return false;" style="font-size:13px; color:#999; text-decoration:none;">Already purchased? Get started &rarr;</a>
     </div>
+    <div style="margin-top:24px;padding-top:24px;border-top:1px solid #e8e6e0;">
+      <div style="font-size:14px;color:#555;margin-bottom:12px;">Or try free for 7 days — no credit card needed</div>
+      <div style="display:flex;gap:8px;max-width:420px;margin:0 auto;">
+        <input type="email" id="trial-email" placeholder="you@example.com" style="flex:1;padding:12px 16px;background:#fff;border:1.5px solid #d1cfc8;border-radius:8px;color:#1a1a1a;font-family:'Inter',sans-serif;font-size:14px;outline:none;">
+        <button onclick="startTrial()" id="trial-btn" style="padding:12px 24px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;">Start free trial</button>
+      </div>
+      <div id="trial-msg" style="font-size:13px;margin-top:8px;min-height:20px;"></div>
+    </div>
     <div class="hero-sub">One-time payment · Lifetime updates · <a href="https://github.com/DAdjadj/klartion" target="_blank">Open source</a></div>
   </section>
 
@@ -431,6 +439,38 @@
     if (new URLSearchParams(window.location.search).get('paid') === '1') {
       document.getElementById('success-overlay').classList.add('visible');
     }
+
+async function startTrial() {
+  var email = document.getElementById('trial-email').value.trim();
+  var msg = document.getElementById('trial-msg');
+  var btn = document.getElementById('trial-btn');
+  msg.style.color = '#555';
+  if (!email || email.indexOf('@') === -1) { msg.textContent = 'Please enter a valid email.'; msg.style.color = '#dc2626'; return; }
+  btn.textContent = 'Starting...';
+  btn.disabled = true;
+  try {
+    var res = await fetch('https://api.klartion.com/trial', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email})
+    });
+    var data = await res.json();
+    if (res.ok) {
+      msg.innerHTML = '✓ Check your email — your trial licence key has been sent!';
+      msg.style.color = '#2d7a4f';
+    } else {
+      msg.textContent = data.error || 'Something went wrong. Try again.';
+      msg.style.color = '#dc2626';
+      btn.textContent = 'Start free trial';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    msg.textContent = 'Something went wrong. Try again.';
+    msg.style.color = '#dc2626';
+    btn.textContent = 'Start free trial';
+    btn.disabled = false;
+  }
+}
   </script>
 </body>
 </html>
