@@ -20,10 +20,18 @@
     const params = new URLSearchParams(window.location.search);
     const code  = params.get('code');
     const state = params.get('state');
+    const error = params.get('error');
 
-    if (code && state) {
-      const parts = state.split('|');
-      const klartion_url = parts.length > 1 ? parts[1] : 'http://localhost:3001';
+    // Extract Klartion URL from state (format: "klartion-auth|https://kl.example.com")
+    function getKlartionUrl() {
+      if (!state) return '';
+      var parts = state.split('|');
+      return parts.length > 1 ? parts[1] : '';
+    }
+
+    if (code && state && !error) {
+      // Success — redirect to Klartion's /callback
+      const klartion_url = getKlartionUrl() || 'http://localhost:3001';
       const callbackUrl = klartion_url + '/callback?' + window.location.search.slice(1);
       window.location.href = callbackUrl;
       setTimeout(function() {
@@ -31,8 +39,14 @@
         document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:#111;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a><br><br><span style="font-size:12px;color:#9ca3af;">If your browser blocks this, paste this URL in a new tab:</span><br><code style="font-size:11px;color:#2d7a4f;word-break:break-all;">' + callbackUrl + '</code>';
       }, 2000);
     } else {
-      document.querySelector('.spinner').style.display = 'none';
-      document.querySelector('p').textContent = 'Something went wrong. Please go back to Klartion and try again.';
+      // Cancelled or error — redirect back to Klartion
+      var klUrl = getKlartionUrl();
+      if (klUrl) {
+        window.location.href = klUrl + '/connect?error=auth_cancelled';
+      } else {
+        document.querySelector('.spinner').style.display = 'none';
+        document.querySelector('p').innerHTML = 'Bank connection was cancelled or failed.<br><br><span style="font-size:13px;color:#6b7280;">Use your browser\'s back button or return to Klartion to try again.</span>';
+      }
     }
   </script>
 </body>
