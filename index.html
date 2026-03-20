@@ -484,6 +484,12 @@
           <div class="accent-line"></div>
           <h1>Bank transactions,<br>synced to <em>Notion.</em></h1>
           <p>Klartion connects to your EU bank via open banking and pushes every transaction into a Notion database. Once a day, automatically. Self-hosted, private, yours.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:1rem 1.5rem;margin-bottom:1.75rem;font-size:13px;color:#777;line-height:1.4;">
+            <span><strong style="color:#555;">Read-only access</strong> &mdash; can never move money</span>
+            <span><strong style="color:#555;">Regulated provider</strong> &mdash; via Enable Banking</span>
+            <span><strong style="color:#555;">Open source</strong> &mdash; full code on GitHub</span>
+            <span><strong style="color:#555;">Self-hosted</strong> &mdash; data never leaves your machine</span>
+          </div>
           <div class="opening-cta">
             <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary">Get Klartion for &euro;45 &rarr;</a>
           </div>
@@ -582,8 +588,8 @@
 
       <!-- Trial box -->
       <div class="trial-box">
-        <div class="trial-box-title">Try free for 7 days</div>
-        <div class="trial-box-sub">No credit card needed. Get a trial licence key sent to your inbox.</div>
+        <div class="trial-box-title">7-day free trial, no credit card needed</div>
+        <div class="trial-box-sub">Enter your email and get a trial licence key sent to your inbox instantly.</div>
         <div class="trial-form">
           <input type="email" id="trial-email" placeholder="you@example.com">
           <button onclick="startTrial()" id="trial-btn">Start free trial</button>
@@ -592,6 +598,58 @@
       </div>
     </section>
   </div>
+
+  <div class="container"><hr class="divider"></div>
+
+  <!-- ════════════ Supported banks ════════════ -->
+  <div class="container">
+    <section class="section bank-search-section">
+      <div class="section-label">Supported banks</div>
+      <h2>Is your bank supported?</h2>
+      <p>Search across 2,500+ European banks powered by Enable Banking. If it's in the list, Klartion can sync it.</p>
+      <div class="bank-search-wrap">
+        <input type="text" id="kl-bank-search" placeholder="Search your bank... e.g. Revolut, Millennium BCP, ING" oninput="klSearchBanks()"
+          onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#d1cfc8'">
+        <svg style="position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#aaa;pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <div id="kl-bank-results"></div>
+      <div id="kl-bank-status" style="font-size:13px;color:#888;min-height:20px;"></div>
+    </section>
+  </div>
+
+  <script>
+  (function(){
+    var _banks=null,_loading=false;
+    function _load(cb){
+      if(_banks!==null){cb();return;}
+      if(_loading){setTimeout(function(){_load(cb);},100);return;}
+      _loading=true;
+      document.getElementById('kl-bank-status').textContent='Loading bank list\u2026';
+      fetch('https://api.klartion.com/banks')
+        .then(function(r){return r.json();})
+        .then(function(d){
+          _banks=d.map(function(b){return{name:b.name,country:b.country};});
+          _loading=false;cb();
+        })
+        .catch(function(){_loading=false;document.getElementById('kl-bank-status').textContent='Could not load bank list. Try again later.';});
+    }
+    window.klSearchBanks=function(){
+      var q=document.getElementById('kl-bank-search').value.trim().toLowerCase();
+      var res=document.getElementById('kl-bank-results');
+      var st=document.getElementById('kl-bank-status');
+      if(!q){res.innerHTML='';st.textContent='';return;}
+      _load(function(){
+        var m=_banks.filter(function(b){return b.name.toLowerCase().includes(q);}).slice(0,8);
+        st.textContent='';
+        if(!m.length){res.innerHTML='';st.innerHTML='No match for <strong>'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com/open-banking-apis" target="_blank" style="color:#1a1a1a;">Enable Banking</a>.';return;}
+        res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:8px;margin-bottom:6px;"><span style="font-size:14px;font-weight:500;color:#1a1a1a;">'+b.name+'</span><span style="font-size:11px;font-weight:600;color:#2d7a4f;background:#e8f5ee;border:1px solid #c5e0d0;padding:3px 8px;border-radius:20px;letter-spacing:0.05em;">'+b.country+'</span></div>';}).join('');
+        if(m.length===8)st.innerHTML='<span style="color:#aaa;font-size:12px;">Showing first 8 results \u2014 type more to narrow down.</span>';
+      });
+    };
+  })();
+  </script>
 
   <div class="container"><hr class="divider"></div>
 
@@ -605,22 +663,29 @@
           <div class="how-step">
             <div class="how-step-num">1</div>
             <div>
-              <h3>Buy and install</h3>
-              <p>Purchase your licence key and follow a short setup guide to get Klartion running on your computer or home server via Docker.</p>
+              <h3>Create a free Enable Banking account</h3>
+              <p>Register at enablebanking.com and create an application. This is the regulated open banking provider that gives Klartion read-only access to your bank. Free, takes 5 minutes.</p>
             </div>
           </div>
           <div class="how-step">
             <div class="how-step-num">2</div>
             <div>
-              <h3>Connect Notion</h3>
-              <p>Duplicate the ready-made Notion template, then paste your Notion API credentials into the browser-based setup wizard.</p>
+              <h3>Install Klartion</h3>
+              <p>Download the docker-compose.yml and run <code>docker compose up -d</code>. Works on any machine with Docker &mdash; Linux, Mac, Raspberry Pi, NAS.</p>
             </div>
           </div>
           <div class="how-step">
             <div class="how-step-num">3</div>
             <div>
+              <h3>Follow the setup wizard</h3>
+              <p>Open Klartion in your browser. The wizard walks you through entering your licence key, connecting your Notion database, uploading your Enable Banking key, and setting up notifications.</p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">4</div>
+            <div>
               <h3>Connect your bank</h3>
-              <p>Search for your bank, approve read-only access, and choose a daily sync time. Klartion handles the rest.</p>
+              <p>Search for your bank, approve read-only access, and choose a sync schedule. Transactions flow into your Notion database automatically.</p>
             </div>
           </div>
         </div>
@@ -702,58 +767,6 @@
       </div>
     </section>
   </div>
-
-  <div class="container"><hr class="divider"></div>
-
-  <!-- ════════════ Supported banks ════════════ -->
-  <div class="container">
-    <section class="section bank-search-section">
-      <div class="section-label">Supported banks</div>
-      <h2>Is your bank supported?</h2>
-      <p>Search across 2,500+ European banks powered by Enable Banking. If it's in the list, Klartion can sync it.</p>
-      <div class="bank-search-wrap">
-        <input type="text" id="kl-bank-search" placeholder="Search your bank... e.g. Revolut, Millennium BCP, ING" oninput="klSearchBanks()"
-          onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#d1cfc8'">
-        <svg style="position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#aaa;pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-      </div>
-      <div id="kl-bank-results"></div>
-      <div id="kl-bank-status" style="font-size:13px;color:#888;min-height:20px;"></div>
-    </section>
-  </div>
-
-  <script>
-  (function(){
-    var _banks=null,_loading=false;
-    function _load(cb){
-      if(_banks!==null){cb();return;}
-      if(_loading){setTimeout(function(){_load(cb);},100);return;}
-      _loading=true;
-      document.getElementById('kl-bank-status').textContent='Loading bank list\u2026';
-      fetch('https://api.klartion.com/banks')
-        .then(function(r){return r.json();})
-        .then(function(d){
-          _banks=d.map(function(b){return{name:b.name,country:b.country};});
-          _loading=false;cb();
-        })
-        .catch(function(){_loading=false;document.getElementById('kl-bank-status').textContent='Could not load bank list. Try again later.';});
-    }
-    window.klSearchBanks=function(){
-      var q=document.getElementById('kl-bank-search').value.trim().toLowerCase();
-      var res=document.getElementById('kl-bank-results');
-      var st=document.getElementById('kl-bank-status');
-      if(!q){res.innerHTML='';st.textContent='';return;}
-      _load(function(){
-        var m=_banks.filter(function(b){return b.name.toLowerCase().includes(q);}).slice(0,8);
-        st.textContent='';
-        if(!m.length){res.innerHTML='';st.innerHTML='No match for <strong>'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com/open-banking-apis" target="_blank" style="color:#1a1a1a;">Enable Banking</a>.';return;}
-        res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:8px;margin-bottom:6px;"><span style="font-size:14px;font-weight:500;color:#1a1a1a;">'+b.name+'</span><span style="font-size:11px;font-weight:600;color:#2d7a4f;background:#e8f5ee;border:1px solid #c5e0d0;padding:3px 8px;border-radius:20px;letter-spacing:0.05em;">'+b.country+'</span></div>';}).join('');
-        if(m.length===8)st.innerHTML='<span style="color:#aaa;font-size:12px;">Showing first 8 results \u2014 type more to narrow down.</span>';
-      });
-    };
-  })();
-  </script>
 
   <div class="container"><hr class="divider"></div>
 
@@ -853,7 +866,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggle(this)">Do I need to know how to code?</div>
-          <div class="faq-a">No coding needed. Setup takes about 10 minutes &mdash; we walk you through every command step by step. The rest is done through a browser-based setup wizard.</div>
+          <div class="faq-a">No coding needed. You'll need Docker installed on your machine, but after that the entire setup is done through a browser-based wizard &mdash; no terminal commands beyond <code>docker compose up -d</code>.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggle(this)">Is my bank data safe?</div>
@@ -861,7 +874,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggle(this)">What do I need to run Klartion?</div>
-          <div class="faq-a">A computer or server that can run Docker &mdash; a Mac, Linux machine, Raspberry Pi, NAS, or a small VPS all work. Klartion is lightweight and uses very little memory or CPU.</div>
+          <div class="faq-a">A machine that can run Docker (Mac, Linux, Raspberry Pi, NAS, or a small VPS), a free <a href="https://enablebanking.com" target="_blank">Enable Banking</a> account for open banking access, and a Notion account with a database to sync into. Klartion is lightweight and uses very little memory or CPU.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q" onclick="toggle(this)">Can I use it on more than one machine?</div>
