@@ -932,13 +932,6 @@
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .mockup-footer-nav span {
-      cursor: pointer;
-      transition: color 0.15s;
-      user-select: none;
-    }
-    .mockup-footer-nav span:hover { color: #555; }
-    .mockup-footer-nav span.active:hover { color: #111; }
     .mockup-form-label {
       font-size: 8px; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.5px; color: #9ca3af; margin-bottom: 3px; margin-top: 8px;
@@ -994,6 +987,179 @@
       line-height: 1.65;
     }
     .notion-callout strong { color: #1a1a1a; }
+
+    /* ═══════════════════════════════════════════════
+       MOCKUP INTERACTIVITY
+       ═══════════════════════════════════════════════ */
+    .mockup-footer-nav span { cursor: pointer; }
+    .mockup-footer-nav span:hover { color: #555; }
+    .mockup-footer-nav span.active:hover { color: #111; }
+    .mockup-btn-primary,
+    .mockup-btn-ghost,
+    .mockup-connect-btn,
+    .mockup-bank-result { cursor: pointer !important; }
+    .mockup-btn-primary:hover { background: #333; }
+    .mockup-btn-ghost:hover { background: #f0efe9; border-color: #ccc; }
+    .mockup-footer-nav span {
+      padding: 2px 4px;
+      border-radius: 3px;
+      transition: color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .mockup-footer-nav span:hover { background: #f0efe9; }
+    .mockup-footer-nav span.active { background: transparent; }
+
+    /* Mockup explore hint */
+    .mockup-explore-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 10px;
+      animation: hint-pulse 2s ease-in-out infinite;
+      transition: opacity 0.4s ease;
+    }
+    .mockup-explore-hint.hidden { opacity: 0; pointer-events: none; }
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .mockup-explore-hint span { font-size: 13px; }
+
+    /* Sync now feedback */
+    .mockup-btn-ghost.syncing {
+      color: #166534 !important;
+      border-color: #bbf7d0 !important;
+      background: #f0fdf4 !important;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SOCIAL PROOF ROW
+       ═══════════════════════════════════════════════ */
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      align-items: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 1.25rem;
+      line-height: 1.6;
+    }
+    .trust-row a { color: #999; text-decoration: none; transition: color 0.15s; }
+    .trust-row a:hover { color: #1a1a1a; text-decoration: underline; }
+    .trust-row span { white-space: nowrap; }
+    .trust-row .trust-sep { color: #d1cfc8; }
+
+    /* ═══════════════════════════════════════════════
+       DATA FLOW VISUAL
+       ═══════════════════════════════════════════════ */
+    .data-flow-section { padding: 4rem 0; }
+    .data-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .data-flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .data-flow-box {
+      background: #fff;
+      border: 1.5px solid #e5e4e0;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      white-space: nowrap;
+    }
+    .data-flow-label {
+      font-size: 10px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .data-flow-arrow {
+      font-size: 18px;
+      color: #ccc;
+      padding: 0 8px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .data-flow { gap: 6px; }
+      .data-flow-box { padding: 10px 14px; font-size: 13px; }
+      .data-flow-arrow { padding: 0 4px; font-size: 14px; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       GETTING STARTED BANNER
+       ═══════════════════════════════════════════════ */
+    .getting-started-banner {
+      background: #fff;
+      border: 1px solid #e5e4e0;
+      border-left: 3px solid #2d7a4f;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .getting-started-banner h3 {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
+    }
+    .getting-started-banner p {
+      font-size: 13.5px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .getting-started-banner a.gs-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #2d7a4f;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+    .getting-started-banner a.gs-link:hover { color: #1a5c2c; text-decoration: underline; }
+
+    /* ═══════════════════════════════════════════════
+       PRICING TRIAL NOTE
+       ═══════════════════════════════════════════════ */
+    .pricing-trial-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .pricing-trial-note {
+      font-size: 13px;
+      color: #888;
+      margin-top: 0.75rem;
+    }
   </style>
 </head>
 <body>
@@ -1028,22 +1194,19 @@
           <p class="hero-sub">Klartion connects to your EU bank and pushes every transaction into a Notion database. Once a day, automatically. Self-hosted, private, yours.</p>
           <div class="hero-ctas">
             <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary btn-press">Get Klartion &mdash; &euro;45</a>
-            <a href="#trial" class="btn-outline btn-press" onclick="document.getElementById('trial-email').focus();return false;">Start free trial</a>
+            <a href="#trial" class="btn-outline btn-press" onclick="document.getElementById('trial-email').focus();return false;">Try free for 7 days</a>
           </div>
-          <div class="hero-trust">
+          <div class="trust-row">
+            <a href="https://github.com/DAdjadj/klartion" target="_blank">Open source</a>
+            <span class="trust-sep">|</span>
+            <span>2,500+ banks</span>
+            <span class="trust-sep">|</span>
+            <span>29 countries &nbsp;&#127465;&#127466; &#127467;&#127479; &#127466;&#127480; &#127477;&#127481; &#127475;&#127473; &#127470;&#127481;</span>
+            <span class="trust-sep">|</span>
             <span>Read-only access</span>
-            <span>&middot;</span>
-            <span>Self-hosted</span>
-            <span>&middot;</span>
-            <span>2,500+ EU banks</span>
-            <span>&middot;</span>
-            <span>Open source</span>
           </div>
           <div class="hero-meta">
             One-time payment &middot; Lifetime updates &middot; <a href="https://github.com/DAdjadj/klartion" target="_blank">View source</a>
-          </div>
-          <div class="hero-meta">
-            <a href="/getting-started.html">Already bought? Follow the setup guide &rarr;</a>
           </div>
         </div>
 
@@ -1178,7 +1341,7 @@
                       <div class="mockup-card-title">Status</div>
                       <div class="mockup-card-sub">All systems running smoothly.</div>
                     </div>
-                    <div class="mockup-btn-ghost">Sync now</div>
+                    <div class="mockup-btn-ghost" onclick="mockupSyncNow(this)">Sync now</div>
                   </div>
                   <div class="mockup-stat-row">
                     <span class="mockup-stat-label">Bank</span>
@@ -1230,6 +1393,9 @@
                 <span onclick="showMockupScreen(4)">Bank</span>
                 <span onclick="showMockupScreen(5)">Status</span>
               </div>
+            </div>
+            <div class="mockup-explore-hint" id="mockup-hint">
+              <span>&#9757;</span> Click to explore the app
             </div>
           </div>
         </div>
@@ -1310,6 +1476,40 @@
     };
   })();
   </script>
+
+  <div class="container"><hr class="divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       DATA FLOW
+       ════════════════════════════════════════════ -->
+  <div class="container">
+    <section class="data-flow-section fade-up">
+      <div class="section-label">How your data flows</div>
+      <h2 style="font-family:'Lora',serif;font-size:clamp(1.5rem,2.5vw,1.75rem);font-weight:700;letter-spacing:-0.01em;margin-bottom:0.25rem;">Bank to Notion, nothing in between.</h2>
+      <p class="section-intro" style="margin-bottom:0;">Your transactions travel a short, transparent path. No cloud service stores your data.</p>
+      <div class="data-flow">
+        <div class="data-flow-node">
+          <div class="data-flow-box">&#127974; Your Bank</div>
+          <div class="data-flow-label">Read-only access</div>
+        </div>
+        <div class="data-flow-arrow">&rarr;</div>
+        <div class="data-flow-node">
+          <div class="data-flow-box">Enable Banking</div>
+          <div class="data-flow-label">Regulated API</div>
+        </div>
+        <div class="data-flow-arrow">&rarr;</div>
+        <div class="data-flow-node">
+          <div class="data-flow-box">Klartion</div>
+          <div class="data-flow-label">Your server</div>
+        </div>
+        <div class="data-flow-arrow">&rarr;</div>
+        <div class="data-flow-node">
+          <div class="data-flow-box">Notion</div>
+          <div class="data-flow-label">Your database</div>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <div class="container"><hr class="divider"></div>
 
@@ -1567,6 +1767,7 @@
     <section class="section">
       <div class="section-label fade-up">Pricing</div>
       <h2 class="fade-up">Simple, honest pricing.</h2>
+      <div class="pricing-trial-badge fade-up">&#10003; 7-day free trial included</div>
       <div class="pricing-card fade-up">
         <div>
           <div class="price">&euro;45<span>one-time</span></div>
@@ -1580,7 +1781,16 @@
         </ul>
         <div>
           <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary btn-press" style="width:auto;">Get Klartion &rarr;</a>
+          <div class="pricing-trial-note">Try before you buy &mdash; no credit card needed</div>
         </div>
+      </div>
+      <!-- Getting started banner -->
+      <div class="getting-started-banner fade-up">
+        <div>
+          <h3>Already a customer?</h3>
+          <p>Follow the step-by-step guide to get Klartion up and running on your machine in 15 minutes.</p>
+        </div>
+        <a href="/getting-started.html" class="gs-link">Setup guide &rarr;</a>
       </div>
     </section>
   </div>
@@ -1668,7 +1878,7 @@
       <p>One-time payment. Lifetime updates. 7-day free trial.</p>
       <div class="final-cta-buttons">
         <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary btn-press">Get Klartion &mdash; &euro;45</a>
-        <a href="#trial" class="btn-outline btn-press" onclick="document.getElementById('trial-email').focus();return false;">Start free trial</a>
+        <a href="#trial" class="btn-outline btn-press" onclick="document.getElementById('trial-email').focus();return false;">Try free for 7 days</a>
       </div>
     </section>
   </div>
@@ -1807,38 +2017,80 @@
         { id: 'mockup-status', url: 'localhost:5555/status', step: 6 }
       ];
       var currentScreen = 0;
+      var hintDismissed = false;
+
+      function dismissHint() {
+        if (!hintDismissed) {
+          hintDismissed = true;
+          var hint = document.getElementById('mockup-hint');
+          if (hint) hint.classList.add('hidden');
+        }
+      }
+
       window.showMockupScreen = function(idx) {
+        dismissHint();
         if (idx === currentScreen) return;
         currentScreen = idx;
-        var allScreens = document.querySelectorAll('.mockup-screen');
+        var allScreens = document.querySelectorAll('#mockup-tour .mockup-screen');
         allScreens.forEach(function(s) { s.classList.remove('active'); });
         document.getElementById(screens[idx].id).classList.add('active');
-        // Update URL bar
         document.getElementById('mockup-url').textContent = screens[idx].url;
-        // Update steps bar
         var steps = document.querySelectorAll('#mockup-steps-bar .mockup-step');
         steps.forEach(function(step, i) {
           if (i < idx) step.style.background = '#37996b';
           else if (i === idx) step.style.background = (idx === 5) ? '#37996b' : '#111';
           else step.style.background = '#e5e4e0';
         });
-        // Update nav active state
         var navSpans = document.querySelectorAll('#mockup-nav span');
         navSpans.forEach(function(s, i) {
           if (i === idx) s.classList.add('active');
           else s.classList.remove('active');
         });
-        // Re-trigger animation
         var el = document.getElementById(screens[idx].id);
         el.style.animation = 'none';
-        el.offsetHeight; // reflow
+        el.offsetHeight;
         el.style.animation = '';
       };
+
+      window.mockupNext = function() {
+        if (currentScreen < screens.length - 1) {
+          showMockupScreen(currentScreen + 1);
+        }
+      };
+      window.mockupPrev = function() {
+        if (currentScreen > 0) {
+          showMockupScreen(currentScreen - 1);
+        }
+      };
+      window.mockupSyncNow = function(el) {
+        dismissHint();
+        var orig = el.textContent;
+        el.textContent = 'Syncing...';
+        el.classList.add('syncing');
+        setTimeout(function() {
+          el.textContent = 'Synced!';
+          setTimeout(function() {
+            el.textContent = orig;
+            el.classList.remove('syncing');
+          }, 1200);
+        }, 800);
+      };
+
       // Initialize first screen steps
       var steps = document.querySelectorAll('#mockup-steps-bar .mockup-step');
       steps.forEach(function(step, i) {
         if (i === 0) step.style.background = '#111';
         else step.style.background = '#e5e4e0';
+      });
+
+      // Bind "Continue" buttons inside mockup screens
+      document.getElementById('mockup-tour').addEventListener('click', function(e) {
+        var btn = e.target;
+        if (btn.classList.contains('mockup-btn-primary')) {
+          e.preventDefault();
+          dismissHint();
+          mockupNext();
+        }
       });
     })();
 
