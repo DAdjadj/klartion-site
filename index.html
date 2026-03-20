@@ -921,6 +921,61 @@
     .btn-close:hover { background: #e5e4e0; }
 
     /* ═══════════════════════════════════════════════
+       INTERACTIVE MOCKUP SCREENS
+       ═══════════════════════════════════════════════ */
+    .mockup-screen { display: none; }
+    .mockup-screen.active { display: block; }
+    .mockup-screen {
+      animation: mockup-fade 0.25s ease;
+    }
+    @keyframes mockup-fade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mockup-footer-nav span {
+      cursor: pointer;
+      transition: color 0.15s;
+      user-select: none;
+    }
+    .mockup-footer-nav span:hover { color: #555; }
+    .mockup-footer-nav span.active:hover { color: #111; }
+    .mockup-form-label {
+      font-size: 8px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: #9ca3af; margin-bottom: 3px; margin-top: 8px;
+      display: block;
+    }
+    .mockup-form-label:first-child { margin-top: 0; }
+    .mockup-input {
+      width: 100%; padding: 6px 8px; border: 1px solid #e5e4e0;
+      border-radius: 4px; font-size: 10px; font-family: 'Inter', sans-serif;
+      color: #111; background: #f7f6f3; outline: none;
+    }
+    .mockup-input-mono {
+      width: 100%; padding: 6px 8px; border: 1px solid #e5e4e0;
+      border-radius: 4px; font-size: 10px; font-family: 'Courier New', monospace;
+      color: #6b7280; background: #f7f6f3; outline: none;
+    }
+    .mockup-select {
+      width: 100%; padding: 6px 8px; border: 1px solid #e5e4e0;
+      border-radius: 4px; font-size: 10px; font-family: 'Inter', sans-serif;
+      color: #111; background: #f7f6f3; outline: none; appearance: none;
+      -webkit-appearance: none;
+    }
+    .mockup-success-msg {
+      padding: 5px 8px; background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 4px; font-size: 9px; color: #166534;
+      display: flex; align-items: center; gap: 4px; margin-top: 6px;
+    }
+    .mockup-btn-primary {
+      width: 100%; background: #111; color: #fff; border: none;
+      border-radius: 4px; padding: 6px; font-size: 10px; font-weight: 600;
+      font-family: 'Inter', sans-serif; margin-top: 10px; cursor: default;
+    }
+    .mockup-hint {
+      font-size: 8px; color: #9ca3af; margin-top: 2px; line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════════
        NOTION CALLOUT
        ═══════════════════════════════════════════════ */
     .notion-callout {
@@ -956,6 +1011,7 @@
         <a href="#how-it-works">How it works</a>
         <a href="#faq">FAQ</a>
         <a href="/help">Help</a>
+        <a href="/getting-started.html" style="font-weight:600;color:#1a1a1a;">Get started</a>
         <a href="https://github.com/DAdjadj/klartion" target="_blank">GitHub</a>
       </div>
     </nav>
@@ -987,25 +1043,25 @@
             One-time payment &middot; Lifetime updates &middot; <a href="https://github.com/DAdjadj/klartion" target="_blank">View source</a>
           </div>
           <div class="hero-meta">
-            <a href="#" onclick="document.getElementById('success-overlay').classList.add('visible'); return false;">Already purchased? Get started &rarr;</a>
+            <a href="/getting-started.html">Already bought? Follow the setup guide &rarr;</a>
           </div>
         </div>
 
         <div class="hero-visual fade-up fade-up-delay-1">
-          <!-- Status page mockup -->
-          <div class="mockup-frame">
+          <!-- Interactive product tour mockup -->
+          <div class="mockup-frame" id="mockup-tour">
             <div class="mockup-titlebar">
               <div class="mockup-dot r"></div>
               <div class="mockup-dot y"></div>
               <div class="mockup-dot g"></div>
-              <span class="mockup-titlebar-url">localhost:5555/status</span>
+              <span class="mockup-titlebar-url" id="mockup-url">localhost:5555/setup</span>
             </div>
             <div class="mockup-body">
               <div class="mockup-logo">
                 <div class="mockup-logo-mark">K</div>
                 <span class="mockup-logo-name">Klartion</span>
               </div>
-              <div class="mockup-steps">
+              <div class="mockup-steps" id="mockup-steps-bar">
                 <div class="mockup-step"></div>
                 <div class="mockup-step"></div>
                 <div class="mockup-step"></div>
@@ -1013,63 +1069,166 @@
                 <div class="mockup-step"></div>
                 <div class="mockup-step"></div>
               </div>
-              <div class="mockup-card">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                  <div>
-                    <div class="mockup-card-title">Status</div>
-                    <div class="mockup-card-sub">All systems running smoothly.</div>
+
+              <!-- ── Screen 1: License ── -->
+              <div class="mockup-screen active" id="mockup-license">
+                <div class="mockup-card">
+                  <div class="mockup-card-title" style="font-size:13px;">Welcome to Klartion</div>
+                  <div class="mockup-card-sub">Step 1 of 6 &mdash; enter your license key to get started</div>
+                  <span class="mockup-form-label">License key</span>
+                  <input class="mockup-input-mono" type="text" value="KL4R-T10N-XXXX-XXXX" disabled>
+                  <div class="mockup-hint">Don't have one? Purchase at klartion.com or start a free trial.</div>
+                  <div class="mockup-btn-primary">Continue &rarr;</div>
+                </div>
+              </div>
+
+              <!-- ── Screen 2: Notion ── -->
+              <div class="mockup-screen" id="mockup-notion">
+                <div class="mockup-card">
+                  <div class="mockup-card-title" style="font-size:13px;">Connect Notion</div>
+                  <div class="mockup-card-sub">Step 2 of 6 &mdash; where should transactions be written?</div>
+                  <span class="mockup-form-label">Internal integration secret</span>
+                  <input class="mockup-input-mono" type="text" value="secret_xxxxxxxxxxxxxxxxxxxxxxxx" disabled>
+                  <span class="mockup-form-label">Database ID</span>
+                  <input class="mockup-input-mono" type="text" value="4f95e8e7b231••••••••••••••••" disabled>
+                  <div class="mockup-success-msg" style="margin-top:8px;">
+                    <span>&#10003;</span> Connection verified &mdash; database found.
                   </div>
-                  <div class="mockup-btn-ghost">Sync now</div>
-                </div>
-                <div class="mockup-stat-row">
-                  <span class="mockup-stat-label">Bank</span>
-                  <span class="mockup-stat-value" style="display:flex;align-items:center;gap:5px;">
-                    Revolut (LT)
-                    <span class="mockup-pill"><span class="pulse-dot" style="width:4px;height:4px;background:#37996b;border-radius:50;display:inline-block;"></span> Connected</span>
-                  </span>
-                </div>
-                <div class="mockup-stat-row">
-                  <span class="mockup-stat-label">Last sync</span>
-                  <span class="mockup-stat-value">2026-03-20 08:00</span>
-                </div>
-                <div class="mockup-stat-row">
-                  <span class="mockup-stat-label">Sync</span>
-                  <span class="mockup-stat-value">08:00</span>
-                </div>
-                <div class="mockup-stat-row">
-                  <span class="mockup-stat-label">Transactions synced</span>
-                  <span class="mockup-stat-value">1,247</span>
-                </div>
-                <div class="mockup-stat-row">
-                  <span class="mockup-stat-label">Sync streak</span>
-                  <span class="mockup-stat-value">42 in a row</span>
+                  <div class="mockup-btn-primary">Verify and continue &rarr;</div>
                 </div>
               </div>
 
-              <div class="mockup-card">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                  <div class="mockup-card-title" style="font-size:11px;">Sync log</div>
-                  <span class="mockup-btn-ghost" style="font-size:8px;">Clear log</span>
+              <!-- ── Screen 3: Notifications ── -->
+              <div class="mockup-screen" id="mockup-notifications">
+                <div class="mockup-card">
+                  <div class="mockup-card-title" style="font-size:13px;">Notifications</div>
+                  <div class="mockup-card-sub">Step 3 of 6 &mdash; how should Klartion notify you?</div>
+                  <span class="mockup-form-label">Your Klartion URL</span>
+                  <input class="mockup-input" type="text" value="http://192.168.1.50:5555" disabled>
+                  <span class="mockup-form-label">Send notifications to</span>
+                  <input class="mockup-input" type="text" value="david@example.com" disabled>
+                  <span class="mockup-form-label">Email address to send from</span>
+                  <input class="mockup-input" type="text" value="david@icloud.com" disabled>
+                  <span class="mockup-form-label">App-specific password</span>
+                  <input class="mockup-input-mono" type="text" value="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" disabled>
+                  <div style="display:flex;align-items:center;gap:6px;margin-top:8px;">
+                    <span class="mockup-btn-ghost" style="font-size:9px;padding:3px 8px;">Send test email</span>
+                    <span style="color:#166534;font-size:9px;font-weight:600;">&#10003; Sent</span>
+                  </div>
+                  <div class="mockup-btn-primary">Continue</div>
                 </div>
-                <table class="mockup-log-table">
-                  <thead>
-                    <tr><th>Time</th><th>Status</th><th>Tx</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Mar 20 08:00</td><td><span class="mockup-badge mockup-badge-ok">success</span></td><td>12</td></tr>
-                    <tr><td>Mar 19 08:00</td><td><span class="mockup-badge mockup-badge-ok">success</span></td><td>8</td></tr>
-                    <tr><td>Mar 18 08:00</td><td><span class="mockup-badge mockup-badge-ok">success</span></td><td>3</td></tr>
-                  </tbody>
-                </table>
               </div>
 
-              <div class="mockup-footer-nav">
-                <span>License</span>
-                <span>Notion</span>
-                <span>Notifications</span>
-                <span>Sync</span>
-                <span>Bank</span>
-                <span class="active">Status</span>
+              <!-- ── Screen 4: Sync ── -->
+              <div class="mockup-screen" id="mockup-sync">
+                <div class="mockup-card">
+                  <div class="mockup-card-title" style="font-size:13px;">Sync</div>
+                  <div class="mockup-card-sub">Step 4 of 6 &mdash; when and how often should Klartion sync?</div>
+                  <span class="mockup-form-label">Daily sync time</span>
+                  <input class="mockup-input" type="text" value="08:00" disabled>
+                  <span class="mockup-form-label">Sync frequency</span>
+                  <div class="mockup-select" style="display:flex;align-items:center;justify-content:space-between;">
+                    <span>Every 24 hours</span>
+                    <span style="color:#9ca3af;font-size:8px;">&#9660;</span>
+                  </div>
+                  <div class="mockup-btn-primary">Continue</div>
+                </div>
+              </div>
+
+              <!-- ── Screen 5: Bank ── -->
+              <div class="mockup-screen" id="mockup-bank">
+                <div class="mockup-card">
+                  <div class="mockup-card-title" style="font-size:12px;">Bank</div>
+                  <div class="mockup-card-sub" style="margin-bottom:8px;">Step 5 of 6 &mdash; authorise read-only access via Enable Banking</div>
+                  <div style="margin-bottom:8px;padding:6px 8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;font-size:9px;color:#166534;display:flex;align-items:center;gap:4px;">
+                    <span>&#10003;</span> Private key loaded.
+                  </div>
+                  <div style="font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:4px;">Connected accounts (1/2)</div>
+                  <div style="margin-bottom:8px;padding:8px;border:1px solid #e5e4e0;border-radius:4px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <div>
+                        <span class="mockup-pill"><span class="pulse-dot" style="width:4px;height:4px;background:#37996b;border-radius:50%;display:inline-block;"></span> Connected</span>
+                        <div style="margin-top:4px;font-family:'Courier New',monospace;font-size:9px;color:#6b7280;">Revolut (LT)</div>
+                      </div>
+                      <span style="font-size:8px;color:#fca5a5;border:1px solid #fca5a5;padding:2px 6px;border-radius:3px;">Disconnect</span>
+                    </div>
+                    <div style="margin-top:4px;font-size:8px;color:#9ca3af;">Expires 2026-09-15</div>
+                  </div>
+                  <div style="border-top:1px solid #e5e4e0;padding-top:8px;margin-top:4px;">
+                    <div style="font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:4px;">Search your bank</div>
+                    <input class="mockup-search-input" type="text" value="Millennium" disabled>
+                    <div class="mockup-bank-result">
+                      <span style="font-weight:500;">Millennium BCP</span>
+                      <span class="mockup-bank-country">PT</span>
+                    </div>
+                    <div class="mockup-bank-result">
+                      <span style="font-weight:500;">Millennium BCP Empresas</span>
+                      <span class="mockup-bank-country">PT</span>
+                    </div>
+                    <button class="mockup-connect-btn">Authorise bank &rarr;</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ── Screen 6: Status ── -->
+              <div class="mockup-screen" id="mockup-status">
+                <div class="mockup-card">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                    <div>
+                      <div class="mockup-card-title">Status</div>
+                      <div class="mockup-card-sub">All systems running smoothly.</div>
+                    </div>
+                    <div class="mockup-btn-ghost">Sync now</div>
+                  </div>
+                  <div class="mockup-stat-row">
+                    <span class="mockup-stat-label">Bank</span>
+                    <span class="mockup-stat-value" style="display:flex;align-items:center;gap:5px;">
+                      Revolut (LT)
+                      <span class="mockup-pill"><span class="pulse-dot" style="width:4px;height:4px;background:#37996b;border-radius:50%;display:inline-block;"></span> Connected</span>
+                    </span>
+                  </div>
+                  <div class="mockup-stat-row">
+                    <span class="mockup-stat-label">Last sync</span>
+                    <span class="mockup-stat-value">2026-03-20 08:00</span>
+                  </div>
+                  <div class="mockup-stat-row">
+                    <span class="mockup-stat-label">Sync</span>
+                    <span class="mockup-stat-value">08:00</span>
+                  </div>
+                  <div class="mockup-stat-row">
+                    <span class="mockup-stat-label">Transactions synced</span>
+                    <span class="mockup-stat-value">1,247</span>
+                  </div>
+                  <div class="mockup-stat-row">
+                    <span class="mockup-stat-label">Sync streak</span>
+                    <span class="mockup-stat-value">42 in a row</span>
+                  </div>
+                </div>
+                <div class="mockup-card">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <div class="mockup-card-title" style="font-size:11px;">Sync log</div>
+                    <span class="mockup-btn-ghost" style="font-size:8px;">Clear log</span>
+                  </div>
+                  <table class="mockup-log-table">
+                    <thead>
+                      <tr><th>Time</th><th>Status</th><th>Tx</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Mar 20 08:00</td><td><span class="mockup-badge mockup-badge-ok">success</span></td><td>12</td></tr>
+                      <tr><td>Mar 19 08:00</td><td><span class="mockup-badge mockup-badge-ok">success</span></td><td>8</td></tr>
+                      <tr><td>Mar 18 08:00</td><td><span class="mockup-badge mockup-badge-ok">success</span></td><td>3</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="mockup-footer-nav" id="mockup-nav">
+                <span class="active" onclick="showMockupScreen(0)">License</span>
+                <span onclick="showMockupScreen(1)">Notion</span>
+                <span onclick="showMockupScreen(2)">Notifications</span>
+                <span onclick="showMockupScreen(3)">Sync</span>
+                <span onclick="showMockupScreen(4)">Bank</span>
+                <span onclick="showMockupScreen(5)">Status</span>
               </div>
             </div>
           </div>
@@ -1636,6 +1795,52 @@
     document.getElementById('wl-email').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') joinWaitlist();
     });
+
+    /* ── Interactive mockup tour ── */
+    (function() {
+      var screens = [
+        { id: 'mockup-license', url: 'localhost:5555/setup', step: 1 },
+        { id: 'mockup-notion', url: 'localhost:5555/setup/notion', step: 2 },
+        { id: 'mockup-notifications', url: 'localhost:5555/setup/notifications', step: 3 },
+        { id: 'mockup-sync', url: 'localhost:5555/setup/sync', step: 4 },
+        { id: 'mockup-bank', url: 'localhost:5555/connect', step: 5 },
+        { id: 'mockup-status', url: 'localhost:5555/status', step: 6 }
+      ];
+      var currentScreen = 0;
+      window.showMockupScreen = function(idx) {
+        if (idx === currentScreen) return;
+        currentScreen = idx;
+        var allScreens = document.querySelectorAll('.mockup-screen');
+        allScreens.forEach(function(s) { s.classList.remove('active'); });
+        document.getElementById(screens[idx].id).classList.add('active');
+        // Update URL bar
+        document.getElementById('mockup-url').textContent = screens[idx].url;
+        // Update steps bar
+        var steps = document.querySelectorAll('#mockup-steps-bar .mockup-step');
+        steps.forEach(function(step, i) {
+          if (i < idx) step.style.background = '#37996b';
+          else if (i === idx) step.style.background = (idx === 5) ? '#37996b' : '#111';
+          else step.style.background = '#e5e4e0';
+        });
+        // Update nav active state
+        var navSpans = document.querySelectorAll('#mockup-nav span');
+        navSpans.forEach(function(s, i) {
+          if (i === idx) s.classList.add('active');
+          else s.classList.remove('active');
+        });
+        // Re-trigger animation
+        var el = document.getElementById(screens[idx].id);
+        el.style.animation = 'none';
+        el.offsetHeight; // reflow
+        el.style.animation = '';
+      };
+      // Initialize first screen steps
+      var steps = document.querySelectorAll('#mockup-steps-bar .mockup-step');
+      steps.forEach(function(step, i) {
+        if (i === 0) step.style.background = '#111';
+        else step.style.background = '#e5e4e0';
+      });
+    })();
 
     /* ── Scroll-triggered fade-up animations ── */
     (function() {
