@@ -6,89 +6,214 @@
   <title>Klartion — Your bank transactions, inside Notion</title>
   <meta name="description" content="Klartion connects to your EU bank via open banking and syncs transactions into a Notion database every day. Self-hosted. Your data stays on your machine.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ═══════════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
-    body { background: #fafaf8; color: #1a1a1a; font-family: 'Inter', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    body {
+      background: #fafaf8;
+      color: #1a1a1a;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
 
-    /* ── Layout ── */
-    .container { max-width: 760px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
-    .container-wide { max-width: 1000px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    /* ═══════════════════════════════════════════════
+       TYPOGRAPHY
+       ═══════════════════════════════════════════════ */
+    h1, h2, h3 { font-family: 'Lora', Georgia, serif; color: #1a1a1a; }
+    em { font-style: italic; color: #444; }
 
-    /* ── Nav ── */
-    nav { padding: 1.25rem 0; display: flex; align-items: center; justify-content: space-between; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-mark { width: 30px; height: 30px; background: #1a1a1a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Lora', serif; font-style: italic; font-size: 15px; flex-shrink: 0; }
-    .logo-name { font-family: 'Lora', serif; font-size: 18px; font-weight: 700; color: #1a1a1a; }
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-links a { font-size: 14px; color: #666; text-decoration: none; transition: color 0.15s; }
-    .nav-links a:hover { color: #1a1a1a; }
+    /* ═══════════════════════════════════════════════
+       LAYOUT
+       ═══════════════════════════════════════════════ */
+    .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+    .container-wide { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ═══════════════════════════════════════════════
+       ANIMATIONS
+       ═══════════════════════════════════════════════ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up-delay-1 { transition-delay: 0.08s; }
+    .fade-up-delay-2 { transition-delay: 0.16s; }
+    .fade-up-delay-3 { transition-delay: 0.24s; }
+
+    /* Button press */
+    .btn-press { transition: transform 0.1s ease, opacity 0.15s ease; }
+    .btn-press:active { transform: scale(0.97); }
+
+    /* Card hover lift */
+    .card-lift {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+
+    /* Pulse on connected indicator */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .pulse-dot { animation: pulse-dot 2.4s ease-in-out infinite; }
+
+    /* ═══════════════════════════════════════════════
+       NAV
+       ═══════════════════════════════════════════════ */
+    .site-nav {
+      padding: 1.25rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 30px; height: 30px;
+      background: #1a1a1a;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .logo-name {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .nav-links { display: flex; gap: 1.75rem; align-items: center; }
+    .nav-links a {
+      font-size: 14px;
+      color: #666;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: #1a1a1a; text-decoration: underline; }
+
     @media (max-width: 520px) {
       .nav-links { gap: 1rem; }
       .nav-links a { font-size: 13px; }
     }
 
-    /* ── Hero ── */
-    .hero { padding: 5rem 0 3rem; }
+    /* ═══════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════ */
+    .hero { padding: 6rem 0 2rem; }
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 3.5rem;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 4rem;
       align-items: start;
     }
-    .hero-text { padding-top: 0.5rem; }
+    .hero-text { padding-top: 1rem; }
     .hero-text h1 {
-      font-family: 'Lora', serif;
-      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+      font-size: clamp(2rem, 3.8vw, 3rem);
       font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.18;
-      margin-bottom: 1rem;
-      color: #1a1a1a;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
     }
-    .hero-text h1 em { font-style: italic; color: #444; }
     .hero-sub {
-      font-size: 16px;
+      font-size: 17px;
       color: #555;
-      line-height: 1.75;
-      margin-bottom: 1.75rem;
-      max-width: 400px;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      max-width: 420px;
     }
-    .hero-ctas { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
-    .btn-primary {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: #1a1a1a; color: #fff; padding: 14px 28px; border-radius: 8px;
-      font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'Inter', sans-serif;
-      border: none; cursor: pointer; transition: opacity 0.15s;
+    .hero-ctas {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
     }
-    .btn-primary:hover { opacity: 0.85; }
-    .btn-outline {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: transparent; color: #1a1a1a; padding: 14px 24px; border-radius: 8px;
-      font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'Inter', sans-serif;
-      border: 1.5px solid #d1cfc8; cursor: pointer; transition: border-color 0.15s;
-    }
-    .btn-outline:hover { border-color: #1a1a1a; }
     .hero-trust {
-      display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem;
-      font-size: 13px; color: #888; line-height: 1.6; margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 1.25rem;
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
     }
     .hero-trust span { white-space: nowrap; }
     .hero-meta { font-size: 13px; color: #999; margin-top: 0.75rem; }
-    .hero-meta a { color: #777; text-decoration: none; }
-    .hero-meta a:hover { color: #1a1a1a; }
+    .hero-meta a { color: #777; text-decoration: none; transition: color 0.15s; }
+    .hero-meta a:hover { color: #1a1a1a; text-decoration: underline; }
 
-    @media (max-width: 720px) {
-      .hero { padding: 3rem 0 2rem; }
+    @media (max-width: 760px) {
+      .hero { padding: 3.5rem 0 1.5rem; }
       .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .hero-text { order: 1; }
+      .hero-text { order: 1; padding-top: 0; }
       .hero-sub { max-width: 100%; }
       .hero-visual { order: 2; }
     }
 
-    /* ── App Mockup shared ── */
+    /* ═══════════════════════════════════════════════
+       BUTTONS
+       ═══════════════════════════════════════════════ */
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #1a1a1a; color: #fff;
+      padding: 14px 28px; border-radius: 8px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; font-family: 'Inter', sans-serif;
+      border: none; cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; color: #1a1a1a;
+      padding: 14px 24px; border-radius: 8px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; font-family: 'Inter', sans-serif;
+      border: 1.5px solid #d1cfc8; cursor: pointer;
+      transition: border-color 0.2s, transform 0.1s;
+    }
+    .btn-outline:hover { border-color: #1a1a1a; }
+    .btn-outline:active { transform: scale(0.97); }
+
+    .btn-green {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #2d7a4f; color: #fff;
+      padding: 14px 32px; border-radius: 8px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; font-family: 'Inter', sans-serif;
+      border: none; cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn-green:hover { opacity: 0.85; }
+    .btn-green:active { transform: scale(0.97); }
+
+    /* ═══════════════════════════════════════════════
+       APP MOCKUP (Status page)
+       ═══════════════════════════════════════════════ */
     .mockup-frame {
       background: #fff;
       border: 1px solid #e5e4e0;
@@ -189,8 +314,7 @@
     .mockup-footer-nav span { color: #9ca3af; }
     .mockup-footer-nav span.active { color: #111; font-weight: 600; }
 
-    /* ── Connect Mockup ── */
-    .mockup-connect-card { margin-top: 0; }
+    /* Connect mockup */
     .mockup-search-input {
       width: 100%; padding: 7px 10px; border: 1px solid #e5e4e0;
       border-radius: 4px; font-size: 10px; font-family: 'Inter', sans-serif;
@@ -211,15 +335,15 @@
       margin-top: 6px;
     }
 
-    /* ── Trial box ── */
-    .trial-section {
-      padding: 3rem 0;
-    }
+    /* ═══════════════════════════════════════════════
+       TRIAL BOX
+       ═══════════════════════════════════════════════ */
+    .trial-section { padding: 3rem 0; }
     .trial-box {
       background: #f7f6f3;
       border: 1px solid #e5e4e0;
       border-radius: 12px;
-      padding: 2rem 2.5rem;
+      padding: 2.25rem 2.5rem;
       display: flex;
       align-items: center;
       gap: 2.5rem;
@@ -233,261 +357,597 @@
       margin-bottom: 0.25rem;
       color: #1a1a1a;
     }
-    .trial-box-sub { font-size: 14px; color: #666; }
+    .trial-box-sub { font-size: 14px; color: #666; line-height: 1.6; }
     .trial-box-form { flex: 1; min-width: 280px; }
     .trial-form { display: flex; gap: 8px; }
     .trial-form input[type="email"] {
-      flex: 1; padding: 12px 16px; background: #fff; border: 1.5px solid #d1cfc8;
-      border-radius: 8px; color: #1a1a1a; font-family: 'Inter', sans-serif;
-      font-size: 14px; outline: none; transition: border-color 0.2s;
+      flex: 1; padding: 12px 16px;
+      background: #fff; border: 1.5px solid #d1cfc8;
+      border-radius: 8px; color: #1a1a1a;
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      outline: none; transition: border-color 0.2s;
     }
     .trial-form input[type="email"]:focus { border-color: #1a1a1a; }
+    .trial-form input[type="email"]::placeholder { color: #aaa; }
     .trial-form button {
-      padding: 12px 24px; background: #1a1a1a; color: #fff; border: none;
-      border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px;
-      font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.15s;
+      padding: 12px 24px; background: #1a1a1a; color: #fff;
+      border: none; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      transition: opacity 0.15s, transform 0.1s;
     }
     .trial-form button:hover { opacity: 0.85; }
+    .trial-form button:active { transform: scale(0.97); }
     #trial-msg { font-size: 13px; margin-top: 8px; min-height: 20px; }
-    .already-link { font-size: 13px; color: #999; text-decoration: none; margin-top: 0.5rem; display: inline-block; }
-    .already-link:hover { color: #666; }
+    .already-link {
+      font-size: 13px; color: #999;
+      text-decoration: none; margin-top: 0.5rem;
+      display: inline-block; transition: color 0.15s;
+    }
+    .already-link:hover { color: #666; text-decoration: underline; }
 
     @media (max-width: 600px) {
       .trial-box { padding: 1.5rem; flex-direction: column; gap: 1.25rem; }
       .trial-form { flex-direction: column; }
     }
 
-    /* ── Divider ── */
+    /* ═══════════════════════════════════════════════
+       DIVIDER
+       ═══════════════════════════════════════════════ */
     .divider { border: none; border-top: 1px solid #e8e6e0; margin: 0; }
 
-    /* ── Section basics ── */
-    .section { padding: 4.5rem 0; }
+    /* ═══════════════════════════════════════════════
+       SECTIONS
+       ═══════════════════════════════════════════════ */
+    .section { padding: 6rem 0; }
     .section-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: #999; margin-bottom: 0.75rem;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #999; margin-bottom: 0.75rem;
     }
     .section h2 {
-      font-family: 'Lora', serif; font-size: 1.625rem; font-weight: 700;
-      letter-spacing: -0.01em; margin-bottom: 1rem; color: #1a1a1a;
+      font-family: 'Lora', serif;
+      font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
     }
     .section h2 em { font-style: italic; color: #444; }
+    .section-intro {
+      font-size: 16px; color: #555;
+      line-height: 1.75; margin-bottom: 2rem;
+      max-width: 540px;
+    }
 
-    /* ── Bank search ── */
-    .bank-search-section { position: relative; }
-    .bank-search-section > p { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 1.5rem; }
+    /* ═══════════════════════════════════════════════
+       BANK SEARCH
+       ═══════════════════════════════════════════════ */
     .bank-search-wrap { position: relative; margin-bottom: 16px; }
     #kl-bank-search {
-      width: 100%; padding: 14px 18px 14px 46px; border: 1.5px solid #d1cfc8;
-      border-radius: 8px; font-size: 16px; font-family: 'Inter', sans-serif;
-      color: #1a1a1a; background: #fff; outline: none; transition: border-color 0.2s;
+      width: 100%; padding: 14px 18px 14px 46px;
+      border: 1.5px solid #d1cfc8; border-radius: 8px;
+      font-size: 16px; font-family: 'Inter', sans-serif;
+      color: #1a1a1a; background: #fff;
+      outline: none; transition: border-color 0.2s;
     }
     #kl-bank-search:focus { border-color: #1a1a1a; }
+    #kl-bank-search::placeholder { color: #aaa; }
     .search-icon {
-      position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+      position: absolute; left: 15px; top: 50%;
+      transform: translateY(-50%);
       color: #aaa; pointer-events: none;
     }
 
-    /* ── How it works ── */
-    .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; align-items: start; }
-    .how-steps-list { display: flex; flex-direction: column; gap: 2rem; }
+    /* ═══════════════════════════════════════════════
+       NOTION TABLE MOCKUP
+       ═══════════════════════════════════════════════ */
+    .notion-preview-section { padding: 6rem 0; }
+    .notion-table-wrap {
+      background: #fff;
+      border: 1px solid #e5e4e0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-top: 2rem;
+    }
+    .notion-table-header {
+      padding: 16px 20px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #e5e4e0;
+    }
+    .notion-table-icon {
+      font-size: 18px;
+    }
+    .notion-table-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .notion-table-meta {
+      margin-left: auto;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .notion-view-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 20px;
+      border-bottom: 1px solid #e5e4e0;
+      font-size: 13px;
+    }
+    .notion-view-tab {
+      padding: 8px 14px;
+      color: #9ca3af;
+      position: relative;
+      cursor: default;
+    }
+    .notion-view-tab.active {
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+    .notion-view-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 14px;
+      right: 14px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 1px;
+    }
+    .notion-tbl {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .notion-tbl th {
+      text-align: left;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #9ca3af;
+      border-bottom: 1px solid #e5e4e0;
+      background: #fafaf8;
+      white-space: nowrap;
+    }
+    .notion-tbl td {
+      padding: 9px 16px;
+      font-size: 13px;
+      color: #1a1a1a;
+      border-bottom: 1px solid #f0efeb;
+      white-space: nowrap;
+    }
+    .notion-tbl tr:last-child td { border-bottom: none; }
+    .notion-tbl tr { transition: background 0.15s; }
+    .notion-tbl tbody tr:hover { background: #fafaf8; }
+    .notion-tbl .col-date { font-family: 'Inter', sans-serif; color: #555; }
+    .notion-tbl .col-desc { font-weight: 500; }
+    .notion-tbl .col-amount { font-family: 'Courier New', monospace; font-size: 13px; text-align: right; }
+    .notion-tbl .col-amount.negative { color: #1a1a1a; }
+    .notion-tbl .col-amount.positive { color: #166534; }
+    .notion-tbl .col-bank { color: #555; }
+    .notion-pill {
+      display: inline-flex; align-items: center;
+      padding: 2px 8px; border-radius: 3px;
+      font-size: 12px; font-weight: 500;
+    }
+    .notion-pill-booked { background: #dbeddb; color: #1a5c2c; }
+    .notion-pill-pending { background: #fdecc8; color: #7c5c20; }
+
+    @media (max-width: 700px) {
+      .notion-tbl { font-size: 12px; }
+      .notion-tbl th, .notion-tbl td { padding: 7px 10px; }
+      .notion-table-wrap { overflow-x: auto; }
+      .notion-tbl { min-width: 560px; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       HOW IT WORKS
+       ═══════════════════════════════════════════════ */
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      margin-top: 2.5rem;
+      align-items: start;
+    }
+    .how-steps-list { display: flex; flex-direction: column; gap: 2.25rem; }
     .how-step { display: flex; gap: 1rem; align-items: flex-start; }
     .how-step-num {
-      width: 28px; height: 28px; background: #1a1a1a; color: #fff;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 600; flex-shrink: 0; margin-top: 2px;
+      width: 28px; height: 28px;
+      background: #1a1a1a; color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600;
+      flex-shrink: 0; margin-top: 2px;
     }
-    .how-step h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
-    .how-step p { font-size: 14px; color: #666; line-height: 1.65; }
-    .how-step code { background: #f0efe9; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'Courier New', monospace; }
+    .how-step h3 {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .how-step p {
+      font-size: 14px; color: #666;
+      line-height: 1.7;
+    }
+    .how-step code {
+      background: #f0efe9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+    }
 
-    @media (max-width: 720px) {
+    @media (max-width: 760px) {
       .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     }
 
-    /* ── Notion callout ── */
-    .notion-callout {
-      display: flex; gap: 1rem; align-items: flex-start;
-      margin-top: 2.5rem; padding: 1.25rem 1.5rem;
-      background: #f7f6f3; border-radius: 8px; border-left: 3px solid #1a1a1a;
-    }
-    .notion-callout p { font-size: 14px; color: #555; line-height: 1.65; }
-    .notion-callout strong { color: #1a1a1a; }
-
-    /* ── Features ── */
+    /* ═══════════════════════════════════════════════
+       FEATURES
+       ═══════════════════════════════════════════════ */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
     }
     @media (max-width: 680px) { .features-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 440px) { .features-grid { grid-template-columns: 1fr; } }
+
     .feature-card {
-      padding: 1.5rem;
+      padding: 1.75rem;
       background: #fff;
       border: 1px solid #e5e4e0;
       border-radius: 10px;
+      border-top: 2px solid #1a1a1a;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .feature-icon {
+      font-size: 22px;
+      margin-bottom: 0.75rem;
+      display: block;
     }
     .feature-card h3 {
       font-family: 'Lora', serif;
       font-size: 15px;
       font-weight: 700;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
       color: #1a1a1a;
     }
     .feature-card p {
-      font-size: 13px;
+      font-size: 13.5px;
       color: #666;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    /* ── Pricing ── */
+    /* ═══════════════════════════════════════════════
+       PRICING
+       ═══════════════════════════════════════════════ */
     .pricing-card {
       border: 1.5px solid #1a1a1a;
       border-radius: 12px;
-      padding: 2.5rem;
+      padding: 2.75rem;
       display: grid;
       grid-template-columns: auto 1fr auto;
-      gap: 2rem;
+      gap: 2.5rem;
       align-items: center;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     .price {
-      font-family: 'Lora', serif; font-size: 3rem; font-weight: 700;
-      letter-spacing: -0.03em; color: #1a1a1a; line-height: 1;
+      font-family: 'Lora', serif;
+      font-size: 3.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1a1a1a;
+      line-height: 1;
     }
-    .price span { font-size: 1rem; font-weight: 400; color: #888; font-family: 'Inter', sans-serif; margin-left: 0.15rem; }
-    .price-label { font-size: 13px; color: #888; margin-top: 0.35rem; }
-    .pricing-features { flex: 1; min-width: 180px; }
+    .price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #888;
+      font-family: 'Inter', sans-serif;
+      margin-left: 0.15rem;
+    }
+    .price-label { font-size: 13px; color: #888; margin-top: 0.4rem; }
     .pricing-features li {
-      font-size: 14px; color: #555; list-style: none; padding: 0.2rem 0;
+      font-size: 14px; color: #555;
+      list-style: none; padding: 0.25rem 0;
       display: flex; align-items: center; gap: 0.5rem;
     }
-    .pricing-features li::before { content: '\2713'; font-weight: 600; color: #2d7a4f; font-size: 13px; }
-    @media (max-width: 680px) {
-      .pricing-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
+    .pricing-features li::before {
+      content: '\2713';
+      font-weight: 600;
+      color: #2d7a4f;
+      font-size: 13px;
     }
 
-    /* ── Hosted waitlist banner ── */
+    @media (max-width: 680px) {
+      .pricing-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       HOSTED WAITLIST BANNER
+       ═══════════════════════════════════════════════ */
     .waitlist-banner {
       background: #f0f7f4;
       border-top: 1.5px solid #c5e0d0;
       border-bottom: 1.5px solid #c5e0d0;
-      padding: 3.5rem 2rem;
+      padding: 4rem 2rem;
       text-align: center;
     }
     .waitlist-banner .wl-label {
-      display: inline-block; background: #2d7a4f; color: #fff;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; padding: 0.25rem 0.75rem;
-      border-radius: 100px; margin-bottom: 1rem;
+      display: inline-block;
+      background: #2d7a4f; color: #fff;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
     }
     .waitlist-banner h2 {
-      font-family: 'Lora', serif; font-size: 1.5rem; font-weight: 700;
-      margin-bottom: 0.625rem; color: #1a1a1a;
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.625rem;
     }
     .waitlist-banner p {
-      font-size: 14px; color: #555; max-width: 420px;
-      margin: 0 auto 1.75rem; line-height: 1.65;
+      font-size: 15px; color: #555;
+      max-width: 440px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
     }
-    .btn-green {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: #2d7a4f; color: #fff; padding: 14px 32px; border-radius: 8px;
-      font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'Inter', sans-serif;
-      border: none; cursor: pointer; transition: opacity 0.15s;
-    }
-    .btn-green:hover { opacity: 0.85; }
 
-    /* ── FAQ ── */
-    .faq { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
+    /* ═══════════════════════════════════════════════
+       FAQ
+       ═══════════════════════════════════════════════ */
+    .faq {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 3rem;
+    }
     @media (max-width: 600px) { .faq { grid-template-columns: 1fr; } }
-    .faq-item { border-bottom: 1px solid #e8e6e0; padding: 1.25rem 0; align-self: start; }
+
+    .faq-item {
+      border-bottom: 1px solid #e8e6e0;
+      padding: 1.25rem 0;
+      align-self: start;
+    }
     .faq-q {
-      font-size: 14px; font-weight: 600; color: #1a1a1a; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: 0.75rem; user-select: none; line-height: 1.4;
+      font-size: 14px; font-weight: 600; color: #1a1a1a;
+      cursor: pointer;
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 0.75rem;
+      user-select: none; line-height: 1.4;
     }
     .faq-q::after {
-      content: '+'; font-size: 18px; font-weight: 300; color: #999;
-      flex-shrink: 0; transition: transform 0.2s; margin-top: -1px;
+      content: '+';
+      font-size: 18px; font-weight: 300;
+      color: #999;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-top: -1px;
     }
     .faq-item.open .faq-q::after { transform: rotate(45deg); }
-    .faq-item.open .faq-q { margin-bottom: 0.5rem; }
-    .faq-a { font-size: 13px; color: #555; line-height: 1.7; display: none; }
-    .faq-item.open .faq-a { display: block; }
+    .faq-a {
+      font-size: 13.5px; color: #555; line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  padding-top 0.3s ease;
+      padding-top: 0;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding-top: 0.6rem;
+    }
     .faq-a a { color: #1a1a1a; }
+    .faq-a code {
+      background: #f0efe9;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 12.5px;
+      font-family: 'Courier New', monospace;
+    }
 
-    /* ── Waitlist form section ── */
+    /* ═══════════════════════════════════════════════
+       WAITLIST FORM SECTION
+       ═══════════════════════════════════════════════ */
     .waitlist-form-section { text-align: center; }
     .waitlist-form-section h2 { text-align: center; }
     .waitlist-form-section p {
-      color: #555; max-width: 480px; margin: 0 auto 2rem;
-      font-size: 16px; line-height: 1.7;
+      color: #555;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      font-size: 16px;
+      line-height: 1.7;
     }
     .waitlist-form-wrap { max-width: 400px; margin: 0 auto; }
     .waitlist-form { display: flex; gap: 8px; flex-wrap: wrap; }
     .waitlist-form input[type="email"] {
-      flex: 1; min-width: 200px; padding: 12px 16px; border: 1px solid #ddd;
-      border-radius: 8px; font-size: 15px; font-family: inherit; outline: none;
+      flex: 1; min-width: 200px;
+      padding: 12px 16px;
+      border: 1.5px solid #d1cfc8;
+      border-radius: 8px; font-size: 15px;
+      font-family: inherit; outline: none;
       transition: border-color 0.2s;
     }
     .waitlist-form input[type="email"]:focus { border-color: #1a1a1a; }
+    .waitlist-form input[type="email"]::placeholder { color: #aaa; }
     .waitlist-form button {
-      background: #2d7a4f; color: #fff; border: none; padding: 12px 24px;
-      border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer;
-      font-family: inherit; white-space: nowrap; transition: opacity 0.15s;
+      background: #2d7a4f; color: #fff;
+      border: none; padding: 12px 24px;
+      border-radius: 8px; font-size: 15px;
+      font-weight: 600; cursor: pointer;
+      font-family: inherit; white-space: nowrap;
+      transition: opacity 0.15s, transform 0.1s;
     }
     .waitlist-form button:hover { opacity: 0.85; }
+    .waitlist-form button:active { transform: scale(0.97); }
     #wl-msg { margin-top: 12px; font-size: 14px; display: none; }
 
-    /* ── Footer ── */
+    /* ═══════════════════════════════════════════════
+       FINAL CTA
+       ═══════════════════════════════════════════════ */
+    .final-cta {
+      text-align: center;
+      padding: 6rem 0;
+    }
+    .final-cta h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .final-cta p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .final-cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════ */
     footer {
       border-top: 1px solid #e8e6e0;
       padding: 2rem 0;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     .footer-left { font-size: 13px; color: #999; }
     .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
-    .footer-links a:hover { color: #1a1a1a; }
+    .footer-links a {
+      font-size: 13px; color: #888;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: #1a1a1a; text-decoration: underline; }
 
-    /* ── Success overlay ── */
+    /* ═══════════════════════════════════════════════
+       SUCCESS OVERLAY
+       ═══════════════════════════════════════════════ */
     #success-overlay {
-      display: none; position: fixed; inset: 0; background: rgba(250,250,248,0.92);
-      z-index: 999999; align-items: center; justify-content: center; backdrop-filter: blur(4px);
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(250,250,248,0.92);
+      z-index: 999999;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
     }
     #success-overlay.visible { display: flex; }
     .success-card {
-      background: #fff; border: 1.5px solid #1a1a1a; border-radius: 16px;
-      padding: 48px 40px; text-align: center; max-width: 420px; width: 90%; position: relative;
+      background: #fff;
+      border: 1.5px solid #1a1a1a;
+      border-radius: 16px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      position: relative;
+      animation: success-pop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes success-pop {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
     .success-icon {
-      width: 56px; height: 56px; background: #f0fdf4; border: 1px solid #bbf7d0;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px; font-size: 24px;
+      width: 56px; height: 56px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 24px;
     }
-    .success-card h2 { font-family: 'Lora', serif; font-size: 22px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 10px; }
-    .success-card p { font-size: 14px; color: #555; line-height: 1.65; margin-bottom: 28px; }
+    .success-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .success-card p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
     .btn-start {
-      display: block; background: #2d7a4f; color: #fff; border: none; padding: 14px 32px;
-      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
-      border-radius: 8px; cursor: pointer; transition: opacity 0.15s; width: 100%; text-decoration: none;
+      display: block;
+      background: #2d7a4f; color: #fff;
+      border: none;
+      padding: 14px 32px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 15px;
+      border-radius: 8px; cursor: pointer;
+      transition: opacity 0.15s;
+      width: 100%;
+      text-decoration: none;
     }
     .btn-start:hover { opacity: 0.85; }
     .btn-close {
-      position: absolute; top: 16px; left: 16px; width: 32px; height: 32px;
-      background: #f0efe9; border: none; border-radius: 50%; color: #6b7280;
-      cursor: pointer; font-size: 18px; line-height: 1;
+      position: absolute;
+      top: 16px; left: 16px;
+      width: 32px; height: 32px;
+      background: #f0efe9;
+      border: none; border-radius: 50%;
+      color: #6b7280;
+      cursor: pointer; font-size: 18px;
+      line-height: 1;
       display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
     }
+    .btn-close:hover { background: #e5e4e0; }
+
+    /* ═══════════════════════════════════════════════
+       NOTION CALLOUT
+       ═══════════════════════════════════════════════ */
+    .notion-callout {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-top: 2.5rem;
+      padding: 1.25rem 1.5rem;
+      background: #f7f6f3;
+      border-radius: 8px;
+      border-left: 3px solid #1a1a1a;
+    }
+    .notion-callout p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.65;
+    }
+    .notion-callout strong { color: #1a1a1a; }
   </style>
 </head>
 <body>
 
-  <!-- ════════════ Nav ════════════ -->
+  <!-- ════════════════════════════════════════════
+       NAV
+       ════════════════════════════════════════════ -->
   <div class="container-wide">
-    <nav>
+    <nav class="site-nav">
       <a class="logo" href="/">
         <div class="logo-mark">K</div>
         <span class="logo-name">Klartion</span>
@@ -501,16 +961,18 @@
     </nav>
   </div>
 
-  <!-- ════════════ Hero ════════════ -->
+  <!-- ════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════ -->
   <div class="container-wide">
     <section class="hero">
       <div class="hero-grid">
-        <div class="hero-text">
-          <h1>Your bank transactions,<br>flowing into <em>Notion.</em></h1>
-          <p class="hero-sub">Klartion connects to your EU bank and syncs every transaction into a Notion database. Once a day, automatically. Self-hosted and private.</p>
+        <div class="hero-text fade-up">
+          <h1>Your bank transactions,<br>inside <em>Notion.</em></h1>
+          <p class="hero-sub">Klartion connects to your EU bank and pushes every transaction into a Notion database. Once a day, automatically. Self-hosted, private, yours.</p>
           <div class="hero-ctas">
-            <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary">Get Klartion &mdash; &euro;45</a>
-            <a href="#trial" class="btn-outline" onclick="document.getElementById('trial-email').focus();return false;">Start free trial</a>
+            <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary btn-press">Get Klartion &mdash; &euro;45</a>
+            <a href="#trial" class="btn-outline btn-press" onclick="document.getElementById('trial-email').focus();return false;">Start free trial</a>
           </div>
           <div class="hero-trust">
             <span>Read-only access</span>
@@ -529,8 +991,8 @@
           </div>
         </div>
 
-        <div class="hero-visual">
-          <!-- Status page mockup (mirrors actual Klartion status.html) -->
+        <div class="hero-visual fade-up fade-up-delay-1">
+          <!-- Status page mockup -->
           <div class="mockup-frame">
             <div class="mockup-titlebar">
               <div class="mockup-dot r"></div>
@@ -563,7 +1025,7 @@
                   <span class="mockup-stat-label">Bank</span>
                   <span class="mockup-stat-value" style="display:flex;align-items:center;gap:5px;">
                     Revolut (LT)
-                    <span class="mockup-pill">Connected</span>
+                    <span class="mockup-pill"><span class="pulse-dot" style="width:4px;height:4px;background:#37996b;border-radius:50;display:inline-block;"></span> Connected</span>
                   </span>
                 </div>
                 <div class="mockup-stat-row">
@@ -616,9 +1078,11 @@
     </section>
   </div>
 
-  <!-- ════════════ Trial box ════════════ -->
+  <!-- ════════════════════════════════════════════
+       TRIAL BOX
+       ════════════════════════════════════════════ -->
   <div class="container-wide" id="trial">
-    <section class="trial-section">
+    <section class="trial-section fade-up">
       <div class="trial-box">
         <div class="trial-box-content">
           <div class="trial-box-title">7-day free trial</div>
@@ -627,7 +1091,7 @@
         <div class="trial-box-form">
           <div class="trial-form">
             <input type="email" id="trial-email" placeholder="you@example.com">
-            <button onclick="startTrial()" id="trial-btn">Start free trial</button>
+            <button onclick="startTrial()" id="trial-btn" class="btn-press">Start free trial</button>
           </div>
           <div id="trial-msg"></div>
         </div>
@@ -637,15 +1101,16 @@
 
   <div class="container"><hr class="divider"></div>
 
-  <!-- ════════════ Supported banks ════════════ -->
+  <!-- ════════════════════════════════════════════
+       FIND YOUR BANK
+       ════════════════════════════════════════════ -->
   <div class="container">
-    <section class="section bank-search-section">
+    <section class="section fade-up">
       <div class="section-label">Supported banks</div>
-      <h2>Is your bank supported?</h2>
-      <p>Search across 2,500+ European banks powered by Enable Banking. If it's in the list, Klartion can sync it.</p>
+      <h2>Find your bank</h2>
+      <p class="section-intro">Search across 2,500+ European banks powered by Enable Banking. If it's in the list, Klartion can sync it.</p>
       <div class="bank-search-wrap">
-        <input type="text" id="kl-bank-search" placeholder="Search your bank... e.g. Revolut, Millennium BCP, ING" oninput="klSearchBanks()"
-          onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#d1cfc8'">
+        <input type="text" id="kl-bank-search" placeholder="Search your bank... e.g. Revolut, Millennium BCP, ING" oninput="klSearchBanks()">
         <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
@@ -680,7 +1145,7 @@
         var m=_banks.filter(function(b){return b.name.toLowerCase().includes(q);}).slice(0,8);
         st.textContent='';
         if(!m.length){res.innerHTML='';st.innerHTML='No match for <strong>'+q+'</strong>. Try a different spelling or check <a href="https://enablebanking.com/open-banking-apis" target="_blank" style="color:#1a1a1a;">Enable Banking</a>.';return;}
-        res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:8px;margin-bottom:6px;"><span style="font-size:14px;font-weight:500;color:#1a1a1a;">'+b.name+'</span><span style="font-size:11px;font-weight:600;color:#2d7a4f;background:#e8f5ee;border:1px solid #c5e0d0;padding:3px 8px;border-radius:20px;letter-spacing:0.05em;">'+b.country+'</span></div>';}).join('');
+        res.innerHTML=m.map(function(b){return'<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:8px;margin-bottom:6px;transition:transform 0.15s;"><span style="font-size:14px;font-weight:500;color:#1a1a1a;">'+b.name+'</span><span style="font-size:11px;font-weight:600;color:#2d7a4f;background:#e8f5ee;border:1px solid #c5e0d0;padding:3px 8px;border-radius:20px;letter-spacing:0.05em;">'+b.country+'</span></div>';}).join('');
         if(m.length===8)st.innerHTML='<span style="color:#aaa;font-size:12px;">Showing first 8 results \u2014 type more to narrow down.</span>';
       });
     };
@@ -689,35 +1154,121 @@
 
   <div class="container"><hr class="divider"></div>
 
-  <!-- ════════════ How it works ════════════ -->
+  <!-- ════════════════════════════════════════════
+       NOTION TABLE PREVIEW
+       ════════════════════════════════════════════ -->
+  <div class="container-wide">
+    <section class="notion-preview-section">
+      <div class="container">
+        <div class="section-label fade-up">The result</div>
+        <h2 class="fade-up" style="font-family:'Lora',serif;font-size:clamp(1.5rem,2.5vw,1.75rem);font-weight:700;letter-spacing:-0.01em;margin-bottom:0.75rem;">Your transactions, right where you work</h2>
+        <p class="section-intro fade-up">Every transaction becomes a row in your Notion database. Use Notion's filters, formulas, and views to build any budget tracker or spending overview you want.</p>
+      </div>
+      <div class="container-wide">
+        <div class="notion-table-wrap fade-up">
+          <div class="notion-table-header">
+            <span class="notion-table-icon">&#128179;</span>
+            <span class="notion-table-title">Bank Transactions</span>
+            <span class="notion-table-meta">1,247 entries</span>
+          </div>
+          <div class="notion-view-tabs">
+            <div class="notion-view-tab active">All transactions</div>
+            <div class="notion-view-tab">This month</div>
+            <div class="notion-view-tab">By category</div>
+          </div>
+          <table class="notion-tbl">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th style="text-align:right;">Amount</th>
+                <th>Bank</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-date">Mar 20, 2026</td>
+                <td class="col-desc">Lidl Groceries</td>
+                <td class="col-amount negative">&minus;&euro;47.82</td>
+                <td class="col-bank">Revolut</td>
+                <td><span class="notion-pill notion-pill-booked">Booked</span></td>
+              </tr>
+              <tr>
+                <td class="col-date">Mar 20, 2026</td>
+                <td class="col-desc">Spotify Premium</td>
+                <td class="col-amount negative">&minus;&euro;10.99</td>
+                <td class="col-bank">Revolut</td>
+                <td><span class="notion-pill notion-pill-pending">Pending</span></td>
+              </tr>
+              <tr>
+                <td class="col-date">Mar 19, 2026</td>
+                <td class="col-desc">Salary &mdash; Acme Corp</td>
+                <td class="col-amount positive">+&euro;3,240.00</td>
+                <td class="col-bank">Millennium BCP</td>
+                <td><span class="notion-pill notion-pill-booked">Booked</span></td>
+              </tr>
+              <tr>
+                <td class="col-date">Mar 19, 2026</td>
+                <td class="col-desc">Transfer to savings</td>
+                <td class="col-amount negative">&minus;&euro;500.00</td>
+                <td class="col-bank">Millennium BCP</td>
+                <td><span class="notion-pill notion-pill-booked">Booked</span></td>
+              </tr>
+              <tr>
+                <td class="col-date">Mar 18, 2026</td>
+                <td class="col-desc">BoltFood delivery</td>
+                <td class="col-amount negative">&minus;&euro;18.50</td>
+                <td class="col-bank">Revolut</td>
+                <td><span class="notion-pill notion-pill-booked">Booked</span></td>
+              </tr>
+              <tr>
+                <td class="col-date">Mar 18, 2026</td>
+                <td class="col-desc">Notion subscription</td>
+                <td class="col-amount negative">&minus;&euro;8.00</td>
+                <td class="col-bank">Revolut</td>
+                <td><span class="notion-pill notion-pill-pending">Pending</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container"><hr class="divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       HOW IT WORKS
+       ════════════════════════════════════════════ -->
   <div class="container-wide">
     <section class="section" id="how-it-works">
-      <div class="section-label">How it works</div>
-      <h2>Set up once, forget about it.</h2>
+      <div class="section-label fade-up">Set up in 15 minutes</div>
+      <h2 class="fade-up">Set up once, forget about it.</h2>
       <div class="how-grid">
         <div class="how-steps-list">
-          <div class="how-step">
+          <div class="how-step fade-up">
             <div class="how-step-num">1</div>
             <div>
               <h3>Create a free Enable Banking account</h3>
               <p>Register at enablebanking.com and create an application. This is the regulated open banking provider that gives Klartion read-only access to your bank. Free, takes 5 minutes.</p>
             </div>
           </div>
-          <div class="how-step">
+          <div class="how-step fade-up">
             <div class="how-step-num">2</div>
             <div>
               <h3>Run <code>docker compose up -d</code></h3>
               <p>Download the docker-compose.yml and start Klartion. Works on any machine with Docker &mdash; Linux, Mac, Raspberry Pi, NAS, a cheap VPS.</p>
             </div>
           </div>
-          <div class="how-step">
+          <div class="how-step fade-up">
             <div class="how-step-num">3</div>
             <div>
               <h3>Follow the browser-based setup wizard</h3>
               <p>Open Klartion in your browser. The wizard walks you through entering your licence key, connecting your Notion database, uploading your Enable Banking key, and setting up notifications.</p>
             </div>
           </div>
-          <div class="how-step">
+          <div class="how-step fade-up">
             <div class="how-step-num">4</div>
             <div>
               <h3>Connect your bank</h3>
@@ -727,7 +1278,7 @@
         </div>
 
         <!-- Bank connection mockup -->
-        <div>
+        <div class="fade-up fade-up-delay-2">
           <div class="mockup-frame">
             <div class="mockup-titlebar">
               <div class="mockup-dot r"></div>
@@ -748,7 +1299,7 @@
                 <div class="mockup-step" style="background:#111;"></div>
                 <div class="mockup-step" style="background:#e5e4e0;"></div>
               </div>
-              <div class="mockup-card mockup-connect-card">
+              <div class="mockup-card">
                 <div class="mockup-card-title" style="font-size:12px;">Bank</div>
                 <div class="mockup-card-sub" style="margin-bottom:8px;">Step 5 of 6 &mdash; authorise read-only access via Enable Banking</div>
 
@@ -760,7 +1311,7 @@
                 <div style="margin-bottom:8px;padding:8px;border:1px solid #e5e4e0;border-radius:4px;">
                   <div style="display:flex;justify-content:space-between;align-items:center;">
                     <div>
-                      <span class="mockup-pill">Connected</span>
+                      <span class="mockup-pill"><span class="pulse-dot" style="width:4px;height:4px;background:#37996b;border-radius:50%;display:inline-block;"></span> Connected</span>
                       <div style="margin-top:4px;font-family:'Courier New',monospace;font-size:9px;color:#6b7280;">Revolut (LT)</div>
                     </div>
                     <span style="font-size:8px;color:#fca5a5;border:1px solid #fca5a5;padding:2px 6px;border-radius:3px;">Disconnect</span>
@@ -796,7 +1347,7 @@
         </div>
       </div>
 
-      <div class="notion-callout">
+      <div class="notion-callout fade-up">
         <div>
           <p><strong>Each transaction becomes a row in your Notion database</strong> &mdash; date, amount, currency, description, bank, and status (pending/booked). Use Notion's filters, formulas, and views to build whatever budget tracker or spending overview you want.</p>
         </div>
@@ -806,33 +1357,41 @@
 
   <div class="container"><hr class="divider"></div>
 
-  <!-- ════════════ Features ════════════ -->
+  <!-- ════════════════════════════════════════════
+       FEATURES
+       ════════════════════════════════════════════ -->
   <div class="container">
     <section class="section">
-      <div class="section-label">Features</div>
-      <h2>Everything you need, nothing you don't.</h2>
+      <div class="section-label fade-up">Features</div>
+      <h2 class="fade-up">Everything you need, nothing you don't.</h2>
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="feature-card card-lift fade-up">
+          <span class="feature-icon">&#9200;</span>
           <h3>Daily automatic sync</h3>
           <p>Transactions sync once a day at a time you choose. No manual exports, no CSV imports.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card card-lift fade-up fade-up-delay-1">
+          <span class="feature-icon">&#127974;</span>
           <h3>2,500+ European banks</h3>
           <p>Revolut, N26, Monzo, Wise, Millennium BCP, Santander, ING, BNP Paribas, and many more.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card card-lift fade-up fade-up-delay-2">
+          <span class="feature-icon">&#128274;</span>
           <h3>Your data stays local</h3>
           <p>Bank data goes directly from your bank to your machine to Notion. Never through our servers.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card card-lift fade-up">
+          <span class="feature-icon">&#128231;</span>
           <h3>Email notifications</h3>
           <p>A summary email on success, an alert if something goes wrong. Stay informed without checking.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card card-lift fade-up fade-up-delay-1">
+          <span class="feature-icon">&#128260;</span>
           <h3>Pending tracking</h3>
           <p>Transactions update from Pending to Booked or Cancelled automatically as your bank settles them.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card card-lift fade-up fade-up-delay-2">
+          <span class="feature-icon">&#10003;</span>
           <h3>No duplicates, ever</h3>
           <p>Every transaction ID is tracked. Nothing gets imported twice, even across multiple syncs.</p>
         </div>
@@ -842,12 +1401,14 @@
 
   <div class="container"><hr class="divider"></div>
 
-  <!-- ════════════ Pricing ════════════ -->
+  <!-- ════════════════════════════════════════════
+       PRICING
+       ════════════════════════════════════════════ -->
   <div class="container">
     <section class="section">
-      <div class="section-label">Pricing</div>
-      <h2>Simple, honest pricing.</h2>
-      <div class="pricing-card">
+      <div class="section-label fade-up">Pricing</div>
+      <h2 class="fade-up">Simple, honest pricing.</h2>
+      <div class="pricing-card fade-up">
         <div>
           <div class="price">&euro;45<span>one-time</span></div>
           <div class="price-label">Early access price &middot; No subscription</div>
@@ -859,7 +1420,7 @@
           <li>7-day free trial, no credit card</li>
         </ul>
         <div>
-          <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary" style="width:auto;">Get Klartion &rarr;</a>
+          <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary btn-press" style="width:auto;">Get Klartion &rarr;</a>
         </div>
       </div>
     </section>
@@ -867,44 +1428,50 @@
 
   <div class="container"><hr class="divider"></div>
 
-  <!-- ════════════ Hosted waitlist banner ════════════ -->
+  <!-- ════════════════════════════════════════════
+       HOSTED WAITLIST BANNER
+       ════════════════════════════════════════════ -->
   <section class="waitlist-banner">
-    <div class="wl-label">Coming soon</div>
-    <h2>Don't want to self-host?</h2>
-    <p>A fully hosted version is in the works &mdash; no Docker, no server. Just connect your bank and Notion and you're done.</p>
-    <a href="#waitlist" class="btn-green" onclick="document.getElementById('waitlist-section').scrollIntoView({behavior:'smooth'});return false;">Join the waitlist &rarr;</a>
+    <div class="fade-up">
+      <div class="wl-label">Coming soon</div>
+      <h2>Don't want to self-host?</h2>
+      <p>A fully hosted version is in the works &mdash; no Docker, no server. Just connect your bank and Notion and you're done.</p>
+      <a href="#waitlist" class="btn-green btn-press" onclick="document.getElementById('waitlist-section').scrollIntoView({behavior:'smooth'});return false;">Join the waitlist &rarr;</a>
+    </div>
   </section>
 
   <div class="container"><hr class="divider"></div>
 
-  <!-- ════════════ FAQ ════════════ -->
+  <!-- ════════════════════════════════════════════
+       FAQ
+       ════════════════════════════════════════════ -->
   <div class="container">
     <section class="section" id="faq">
-      <div class="section-label">FAQ</div>
-      <h2>Common questions.</h2>
+      <div class="section-label fade-up">FAQ</div>
+      <h2 class="fade-up">Common questions.</h2>
       <div class="faq">
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggle(this)">Which banks are supported?</div>
+        <div class="faq-item fade-up">
+          <div class="faq-q" onclick="toggleFaq(this)">Which banks are supported?</div>
           <div class="faq-a">Any of the 2,500+ banks across 29 European countries supported by Enable Banking, including Revolut, N26, Monzo, Wise, Millennium BCP, Santander, ING, BNP Paribas, and many more. Personal accounts only.</div>
         </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggle(this)">Do I need to know how to code?</div>
+        <div class="faq-item fade-up">
+          <div class="faq-q" onclick="toggleFaq(this)">Do I need to know how to code?</div>
           <div class="faq-a">No coding needed. You'll need Docker installed on your machine, but after that the entire setup is done through a browser-based wizard &mdash; no terminal commands beyond <code>docker compose up -d</code>.</div>
         </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggle(this)">Is my bank data safe?</div>
+        <div class="faq-item fade-up">
+          <div class="faq-q" onclick="toggleFaq(this)">Is my bank data safe?</div>
           <div class="faq-a">Yes. Klartion uses read-only access via Enable Banking's regulated open banking API &mdash; it cannot move money or make any changes to your account. Your data goes directly to your machine and never passes through our servers.</div>
         </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggle(this)">What do I need to run Klartion?</div>
+        <div class="faq-item fade-up">
+          <div class="faq-q" onclick="toggleFaq(this)">What do I need to run Klartion?</div>
           <div class="faq-a">A machine that can run Docker (Mac, Linux, Raspberry Pi, NAS, or a small VPS), a free <a href="https://enablebanking.com" target="_blank">Enable Banking</a> account for open banking access, and a Notion account with a database to sync into. Klartion is lightweight and uses very little memory or CPU.</div>
         </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggle(this)">Can I use it on more than one machine?</div>
+        <div class="faq-item fade-up">
+          <div class="faq-q" onclick="toggleFaq(this)">Can I use it on more than one machine?</div>
           <div class="faq-a">Each licence key can be activated on up to 2 machines. If you move to a new machine, deactivate your current installation from within the app and reactivate on the new one.</div>
         </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggle(this)">Is there a hosted version?</div>
+        <div class="faq-item fade-up">
+          <div class="faq-q" onclick="toggleFaq(this)">Is there a hosted version?</div>
           <div class="faq-a">Not yet, but it's coming. Join the waitlist above to be notified when it launches.</div>
         </div>
       </div>
@@ -913,60 +1480,43 @@
 
   <div class="container"><hr class="divider"></div>
 
-  <!-- ════════════ Waitlist form ════════════ -->
+  <!-- ════════════════════════════════════════════
+       WAITLIST FORM
+       ════════════════════════════════════════════ -->
   <div class="container">
     <section class="section waitlist-form-section" id="waitlist-section">
-      <div class="section-label">Klartion Hosted</div>
-      <h2>Join the waitlist.</h2>
-      <p>Be the first to know when the hosted version launches. No Docker, no server, no setup.</p>
-      <div class="waitlist-form-wrap">
+      <div class="section-label fade-up">Klartion Hosted</div>
+      <h2 class="fade-up">Join the waitlist.</h2>
+      <p class="fade-up">Be the first to know when the hosted version launches. No Docker, no server, no setup.</p>
+      <div class="waitlist-form-wrap fade-up">
         <div class="waitlist-form">
           <input type="email" id="wl-email" placeholder="your@email.com">
-          <button onclick="joinWaitlist()">Join &rarr;</button>
+          <button onclick="joinWaitlist()" class="btn-press">Join &rarr;</button>
         </div>
         <div id="wl-msg"></div>
       </div>
     </section>
   </div>
 
-  <script>
-  async function joinWaitlist() {
-    var email = document.getElementById('wl-email').value.trim();
-    var msg = document.getElementById('wl-msg');
-    if (!email || !email.includes('@')) {
-      msg.style.display = 'block';
-      msg.style.color = '#c0392b';
-      msg.textContent = 'Please enter a valid email address.';
-      return;
-    }
-    try {
-      var res = await fetch('https://api.klartion.com/waitlist', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: email})
-      });
-      var data = await res.json();
-      msg.style.display = 'block';
-      if (data.status === 'ok') {
-        msg.style.color = '#2d7a4f';
-        msg.textContent = "You're on the list! I'll email you when it's ready.";
-        document.getElementById('wl-email').value = '';
-      } else {
-        msg.style.color = '#2d7a4f';
-        msg.textContent = "You're already on the list!";
-      }
-    } catch(e) {
-      msg.style.display = 'block';
-      msg.style.color = '#c0392b';
-      msg.textContent = 'Something went wrong. Try again or email support@david-alves.com.';
-    }
-  }
-  document.getElementById('wl-email').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') joinWaitlist();
-  });
-  </script>
+  <div class="container"><hr class="divider"></div>
 
-  <!-- ════════════ Footer ════════════ -->
+  <!-- ════════════════════════════════════════════
+       FINAL CTA
+       ════════════════════════════════════════════ -->
+  <div class="container">
+    <section class="final-cta fade-up">
+      <h2>Ready to bring your transactions<br>into <em>Notion</em>?</h2>
+      <p>One-time payment. Lifetime updates. 7-day free trial.</p>
+      <div class="final-cta-buttons">
+        <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary btn-press">Get Klartion &mdash; &euro;45</a>
+        <a href="#trial" class="btn-outline btn-press" onclick="document.getElementById('trial-email').focus();return false;">Start free trial</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════ -->
   <div class="container">
     <footer>
       <div class="footer-left">&copy; 2026 David Alves</div>
@@ -979,7 +1529,9 @@
     </footer>
   </div>
 
-  <!-- Post-purchase overlay -->
+  <!-- ════════════════════════════════════════════
+       SUCCESS OVERLAY
+       ════════════════════════════════════════════ -->
   <div id="success-overlay">
     <div class="success-card">
       <button class="btn-close" onclick="document.getElementById('success-overlay').classList.remove('visible')">&times;</button>
@@ -990,11 +1542,16 @@
     </div>
   </div>
 
+  <!-- ════════════════════════════════════════════
+       SCRIPTS
+       ════════════════════════════════════════════ -->
   <script>
-    function toggle(el) {
+    /* ── FAQ toggle with smooth animation ── */
+    function toggleFaq(el) {
       el.parentElement.classList.toggle('open');
     }
 
+    /* ── Stripe success overlay ── */
     window.addEventListener('message', function(event) {
       if (event.data && event.data.event === 'Checkout.Success') {
         document.getElementById('success-overlay').classList.add('visible');
@@ -1004,12 +1561,17 @@
       document.getElementById('success-overlay').classList.add('visible');
     }
 
+    /* ── Trial form ── */
     async function startTrial() {
       var email = document.getElementById('trial-email').value.trim();
       var msg = document.getElementById('trial-msg');
       var btn = document.getElementById('trial-btn');
       msg.style.color = '#555';
-      if (!email || email.indexOf('@') === -1) { msg.textContent = 'Please enter a valid email.'; msg.style.color = '#dc2626'; return; }
+      if (!email || email.indexOf('@') === -1) {
+        msg.textContent = 'Please enter a valid email.';
+        msg.style.color = '#dc2626';
+        return;
+      }
       btn.textContent = 'Starting...';
       btn.disabled = true;
       try {
@@ -1035,6 +1597,64 @@
         btn.disabled = false;
       }
     }
+    document.getElementById('trial-email').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') startTrial();
+    });
+
+    /* ── Waitlist form ── */
+    async function joinWaitlist() {
+      var email = document.getElementById('wl-email').value.trim();
+      var msg = document.getElementById('wl-msg');
+      if (!email || !email.includes('@')) {
+        msg.style.display = 'block';
+        msg.style.color = '#c0392b';
+        msg.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      try {
+        var res = await fetch('https://api.klartion.com/waitlist', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({email: email})
+        });
+        var data = await res.json();
+        msg.style.display = 'block';
+        if (data.status === 'ok') {
+          msg.style.color = '#2d7a4f';
+          msg.textContent = "You're on the list! I'll email you when it's ready.";
+          document.getElementById('wl-email').value = '';
+        } else {
+          msg.style.color = '#2d7a4f';
+          msg.textContent = "You're already on the list!";
+        }
+      } catch(e) {
+        msg.style.display = 'block';
+        msg.style.color = '#c0392b';
+        msg.textContent = 'Something went wrong. Try again or email support@david-alves.com.';
+      }
+    }
+    document.getElementById('wl-email').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') joinWaitlist();
+    });
+
+    /* ── Scroll-triggered fade-up animations ── */
+    (function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.fade-up').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
   </script>
 </body>
 </html>
