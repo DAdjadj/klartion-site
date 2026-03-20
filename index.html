@@ -15,10 +15,10 @@
 
     /* ── Layout ── */
     .container { max-width: 760px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
-    .container-wide { max-width: 920px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .container-wide { max-width: 1000px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
 
     /* ── Nav ── */
-    nav { padding: 1.5rem 0; display: flex; align-items: center; justify-content: space-between; }
+    nav { padding: 1.25rem 0; display: flex; align-items: center; justify-content: space-between; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo-mark { width: 30px; height: 30px; background: #1a1a1a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Lora', serif; font-style: italic; font-size: 15px; flex-shrink: 0; }
     .logo-name { font-family: 'Lora', serif; font-size: 18px; font-weight: 700; color: #1a1a1a; }
@@ -30,48 +30,65 @@
       .nav-links a { font-size: 13px; }
     }
 
-    /* ── Opening ── */
-    .opening { padding: 6rem 0 2rem; }
-    .opening-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .opening-text { padding-top: 1rem; }
-    .opening-text h1 {
+    /* ── Hero ── */
+    .hero { padding: 5rem 0 3rem; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .hero-text { padding-top: 0.5rem; }
+    .hero-text h1 {
       font-family: 'Lora', serif;
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
       font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-      margin-bottom: 1.25rem;
+      letter-spacing: -0.03em;
+      line-height: 1.18;
+      margin-bottom: 1rem;
       color: #1a1a1a;
     }
-    .opening-text h1 em { font-style: italic; color: #444; }
-    .opening-text > p {
+    .hero-text h1 em { font-style: italic; color: #444; }
+    .hero-sub {
       font-size: 16px;
       color: #555;
       line-height: 1.75;
-      margin-bottom: 2rem;
-      max-width: 380px;
+      margin-bottom: 1.75rem;
+      max-width: 400px;
     }
-    .opening-cta { display: flex; flex-direction: column; gap: 0.75rem; }
+    .hero-ctas { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
     .btn-primary {
       display: inline-flex; align-items: center; justify-content: center;
-      background: #1a1a1a; color: #fff; padding: 14px 32px; border-radius: 8px;
+      background: #1a1a1a; color: #fff; padding: 14px 28px; border-radius: 8px;
       font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'Inter', sans-serif;
       border: none; cursor: pointer; transition: opacity 0.15s;
     }
     .btn-primary:hover { opacity: 0.85; }
-    .opening-meta { font-size: 13px; color: #999; margin-top: 0.5rem; }
-    .opening-meta a { color: #777; text-decoration: none; }
-    .opening-meta a:hover { color: #1a1a1a; }
+    .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; color: #1a1a1a; padding: 14px 24px; border-radius: 8px;
+      font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'Inter', sans-serif;
+      border: 1.5px solid #d1cfc8; cursor: pointer; transition: border-color 0.15s;
+    }
+    .btn-outline:hover { border-color: #1a1a1a; }
+    .hero-trust {
+      display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem;
+      font-size: 13px; color: #888; line-height: 1.6; margin-top: 0.5rem;
+    }
+    .hero-trust span { white-space: nowrap; }
+    .hero-meta { font-size: 13px; color: #999; margin-top: 0.75rem; }
+    .hero-meta a { color: #777; text-decoration: none; }
+    .hero-meta a:hover { color: #1a1a1a; }
 
-    @media (max-width: 680px) {
-      .opening { padding: 3.5rem 0 1.5rem; }
-      .opening-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .opening-text { order: 1; }
-      .opening-text > p { max-width: 100%; }
-      .opening-visual { order: 2; }
+    @media (max-width: 720px) {
+      .hero { padding: 3rem 0 2rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-text { order: 1; }
+      .hero-sub { max-width: 100%; }
+      .hero-visual { order: 2; }
     }
 
-    /* ── App Mockup: Status Page ── */
+    /* ── App Mockup shared ── */
     .mockup-frame {
       background: #fff;
       border: 1px solid #e5e4e0;
@@ -80,6 +97,7 @@
       font-size: 12px;
       line-height: 1.5;
       position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.03);
     }
     .mockup-titlebar {
       background: #f7f6f3;
@@ -171,75 +189,6 @@
     .mockup-footer-nav span { color: #9ca3af; }
     .mockup-footer-nav span.active { color: #111; font-weight: 600; }
 
-    /* ── Trial box ── */
-    .trial-box {
-      background: #f7f6f3;
-      border: 1px solid #e5e4e0;
-      border-radius: 10px;
-      padding: 1.75rem 2rem;
-      margin-top: 3rem;
-    }
-    .trial-box-title {
-      font-family: 'Lora', serif;
-      font-size: 1.125rem;
-      font-weight: 700;
-      margin-bottom: 0.35rem;
-      color: #1a1a1a;
-    }
-    .trial-box-sub { font-size: 14px; color: #666; margin-bottom: 1.25rem; }
-    .trial-form { display: flex; gap: 8px; }
-    .trial-form input[type="email"] {
-      flex: 1; padding: 12px 16px; background: #fff; border: 1.5px solid #d1cfc8;
-      border-radius: 8px; color: #1a1a1a; font-family: 'Inter', sans-serif;
-      font-size: 14px; outline: none; transition: border-color 0.2s;
-    }
-    .trial-form input[type="email"]:focus { border-color: #1a1a1a; }
-    .trial-form button {
-      padding: 12px 24px; background: #1a1a1a; color: #fff; border: none;
-      border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px;
-      font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.15s;
-    }
-    .trial-form button:hover { opacity: 0.85; }
-    #trial-msg { font-size: 13px; margin-top: 8px; min-height: 20px; }
-    .already-link { font-size: 13px; color: #999; text-decoration: none; margin-top: 0.75rem; display: inline-block; }
-    .already-link:hover { color: #666; }
-
-    @media (max-width: 520px) {
-      .trial-form { flex-direction: column; }
-      .trial-box { padding: 1.5rem; }
-    }
-
-    /* ── Divider ── */
-    .divider { border: none; border-top: 1px solid #e8e6e0; margin: 0; }
-
-    /* ── Section basics ── */
-    .section { padding: 4.5rem 0; }
-    .section-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: #999; margin-bottom: 0.75rem;
-    }
-    .section h2 {
-      font-family: 'Lora', serif; font-size: 1.625rem; font-weight: 700;
-      letter-spacing: -0.01em; margin-bottom: 1rem; color: #1a1a1a;
-    }
-    .section h2 em { font-style: italic; color: #444; }
-
-    /* ── How it works ── */
-    .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; align-items: start; }
-    .how-steps-list { display: flex; flex-direction: column; gap: 2rem; }
-    .how-step { display: flex; gap: 1rem; align-items: flex-start; }
-    .how-step-num {
-      width: 28px; height: 28px; background: #1a1a1a; color: #fff;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 600; flex-shrink: 0; margin-top: 2px;
-    }
-    .how-step h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
-    .how-step p { font-size: 14px; color: #666; line-height: 1.65; }
-
-    @media (max-width: 680px) {
-      .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    }
-
     /* ── Connect Mockup ── */
     .mockup-connect-card { margin-top: 0; }
     .mockup-search-input {
@@ -262,54 +211,161 @@
       margin-top: 6px;
     }
 
+    /* ── Trial box ── */
+    .trial-section {
+      padding: 3rem 0;
+    }
+    .trial-box {
+      background: #f7f6f3;
+      border: 1px solid #e5e4e0;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .trial-box-content { flex: 1; min-width: 220px; }
+    .trial-box-title {
+      font-family: 'Lora', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #1a1a1a;
+    }
+    .trial-box-sub { font-size: 14px; color: #666; }
+    .trial-box-form { flex: 1; min-width: 280px; }
+    .trial-form { display: flex; gap: 8px; }
+    .trial-form input[type="email"] {
+      flex: 1; padding: 12px 16px; background: #fff; border: 1.5px solid #d1cfc8;
+      border-radius: 8px; color: #1a1a1a; font-family: 'Inter', sans-serif;
+      font-size: 14px; outline: none; transition: border-color 0.2s;
+    }
+    .trial-form input[type="email"]:focus { border-color: #1a1a1a; }
+    .trial-form button {
+      padding: 12px 24px; background: #1a1a1a; color: #fff; border: none;
+      border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px;
+      font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.15s;
+    }
+    .trial-form button:hover { opacity: 0.85; }
+    #trial-msg { font-size: 13px; margin-top: 8px; min-height: 20px; }
+    .already-link { font-size: 13px; color: #999; text-decoration: none; margin-top: 0.5rem; display: inline-block; }
+    .already-link:hover { color: #666; }
+
+    @media (max-width: 600px) {
+      .trial-box { padding: 1.5rem; flex-direction: column; gap: 1.25rem; }
+      .trial-form { flex-direction: column; }
+    }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid #e8e6e0; margin: 0; }
+
+    /* ── Section basics ── */
+    .section { padding: 4.5rem 0; }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #999; margin-bottom: 0.75rem;
+    }
+    .section h2 {
+      font-family: 'Lora', serif; font-size: 1.625rem; font-weight: 700;
+      letter-spacing: -0.01em; margin-bottom: 1rem; color: #1a1a1a;
+    }
+    .section h2 em { font-style: italic; color: #444; }
+
     /* ── Bank search ── */
     .bank-search-section { position: relative; }
-    .bank-search-section p { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 1.5rem; }
+    .bank-search-section > p { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 1.5rem; }
     .bank-search-wrap { position: relative; margin-bottom: 16px; }
     #kl-bank-search {
-      width: 100%; padding: 13px 18px 13px 44px; border: 1.5px solid #d1cfc8;
-      border-radius: 8px; font-size: 15px; font-family: 'Inter', sans-serif;
+      width: 100%; padding: 14px 18px 14px 46px; border: 1.5px solid #d1cfc8;
+      border-radius: 8px; font-size: 16px; font-family: 'Inter', sans-serif;
       color: #1a1a1a; background: #fff; outline: none; transition: border-color 0.2s;
     }
     #kl-bank-search:focus { border-color: #1a1a1a; }
+    .search-icon {
+      position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+      color: #aaa; pointer-events: none;
+    }
+
+    /* ── How it works ── */
+    .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; align-items: start; }
+    .how-steps-list { display: flex; flex-direction: column; gap: 2rem; }
+    .how-step { display: flex; gap: 1rem; align-items: flex-start; }
+    .how-step-num {
+      width: 28px; height: 28px; background: #1a1a1a; color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; flex-shrink: 0; margin-top: 2px;
+    }
+    .how-step h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .how-step p { font-size: 14px; color: #666; line-height: 1.65; }
+    .how-step code { background: #f0efe9; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'Courier New', monospace; }
+
+    @media (max-width: 720px) {
+      .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ── Notion callout ── */
+    .notion-callout {
+      display: flex; gap: 1rem; align-items: flex-start;
+      margin-top: 2.5rem; padding: 1.25rem 1.5rem;
+      background: #f7f6f3; border-radius: 8px; border-left: 3px solid #1a1a1a;
+    }
+    .notion-callout p { font-size: 14px; color: #555; line-height: 1.65; }
+    .notion-callout strong { color: #1a1a1a; }
 
     /* ── Features ── */
-    .features-box {
-      background: #f0efe9;
-      border-radius: 12px;
-      padding: 2.5rem;
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
-    .features-box h2 {
-      font-family: 'Lora', serif; font-size: 1.375rem; font-weight: 700;
-      margin-bottom: 1.5rem; color: #1a1a1a;
+    @media (max-width: 680px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 440px) { .features-grid { grid-template-columns: 1fr; } }
+    .feature-card {
+      padding: 1.5rem;
+      background: #fff;
+      border: 1px solid #e5e4e0;
+      border-radius: 10px;
     }
-    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
-    @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
-    .feature { display: flex; gap: 0.625rem; align-items: flex-start; }
-    .feature-dot { width: 6px; height: 6px; background: #2d7a4f; border-radius: 50%; margin-top: 0.5rem; flex-shrink: 0; }
-    .feature p { font-size: 14px; color: #444; line-height: 1.55; }
-    .feature strong { color: #1a1a1a; font-weight: 600; }
+    .feature-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #1a1a1a;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
 
     /* ── Pricing ── */
-    .pricing-box {
-      border: 1.5px solid #1a1a1a; border-radius: 12px; padding: 2rem 2.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 2rem; flex-wrap: wrap;
+    .pricing-card {
+      border: 1.5px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 1.5rem;
     }
     .price {
-      font-family: 'Lora', serif; font-size: 2.5rem; font-weight: 700;
-      letter-spacing: -0.02em; color: #1a1a1a; line-height: 1;
+      font-family: 'Lora', serif; font-size: 3rem; font-weight: 700;
+      letter-spacing: -0.03em; color: #1a1a1a; line-height: 1;
     }
-    .price span { font-size: 1rem; font-weight: 400; color: #888; font-family: 'Inter', sans-serif; margin-left: 0.25rem; }
+    .price span { font-size: 1rem; font-weight: 400; color: #888; font-family: 'Inter', sans-serif; margin-left: 0.15rem; }
     .price-label { font-size: 13px; color: #888; margin-top: 0.35rem; }
-    .pricing-features { flex: 1; min-width: 200px; }
+    .pricing-features { flex: 1; min-width: 180px; }
     .pricing-features li {
       font-size: 14px; color: #555; list-style: none; padding: 0.2rem 0;
       display: flex; align-items: center; gap: 0.5rem;
     }
     .pricing-features li::before { content: '\2713'; font-weight: 600; color: #2d7a4f; font-size: 13px; }
-    @media (max-width: 600px) {
-      .pricing-box { padding: 1.5rem; gap: 1.5rem; }
+    @media (max-width: 680px) {
+      .pricing-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
     }
 
     /* ── Hosted waitlist banner ── */
@@ -317,10 +373,8 @@
       background: #f0f7f4;
       border-top: 1.5px solid #c5e0d0;
       border-bottom: 1.5px solid #c5e0d0;
-      padding: 3rem 2rem;
+      padding: 3.5rem 2rem;
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
     .waitlist-banner .wl-label {
       display: inline-block; background: #2d7a4f; color: #fff;
@@ -333,7 +387,7 @@
       margin-bottom: 0.625rem; color: #1a1a1a;
     }
     .waitlist-banner p {
-      font-size: 14px; color: #555; max-width: 400px;
+      font-size: 14px; color: #555; max-width: 420px;
       margin: 0 auto 1.75rem; line-height: 1.65;
     }
     .btn-green {
@@ -427,41 +481,12 @@
       cursor: pointer; font-size: 18px; line-height: 1;
       display: flex; align-items: center; justify-content: center;
     }
-
-    /* ── Decorative accents ── */
-    .accent-line {
-      width: 40px; height: 3px; background: #1a1a1a; border-radius: 2px;
-      margin-bottom: 1.5rem;
-    }
-
-    /* ── App preview pair ── */
-    .previews-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-    @media (max-width: 680px) {
-      .previews-pair { grid-template-columns: 1fr; }
-    }
-    .preview-caption {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #999; margin-bottom: 0.5rem;
-    }
-
-    /* ── Notion mention ── */
-    .notion-callout {
-      display: flex; gap: 1rem; align-items: flex-start;
-      margin-top: 2rem; padding: 1.25rem 1.5rem;
-      background: #f7f6f3; border-radius: 8px; border-left: 3px solid #1a1a1a;
-    }
-    .notion-callout p { font-size: 14px; color: #555; line-height: 1.65; }
-    .notion-callout strong { color: #1a1a1a; }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- ════════════ Nav ════════════ -->
+  <div class="container-wide">
     <nav>
       <a class="logo" href="/">
         <div class="logo-mark">K</div>
@@ -476,33 +501,36 @@
     </nav>
   </div>
 
-  <!-- ════════════ Opening ════════════ -->
-  <div class="container">
-    <section class="opening">
-      <div class="opening-grid">
-        <div class="opening-text">
-          <div class="accent-line"></div>
-          <h1>Bank transactions,<br>synced to <em>Notion.</em></h1>
-          <p>Klartion connects to your EU bank via open banking and pushes every transaction into a Notion database. Once a day, automatically. Self-hosted, private, yours.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:1rem 1.5rem;margin-bottom:1.75rem;font-size:13px;color:#777;line-height:1.4;">
-            <span><strong style="color:#555;">Read-only access</strong> &mdash; can never move money</span>
-            <span><strong style="color:#555;">Regulated provider</strong> &mdash; via Enable Banking</span>
-            <span><strong style="color:#555;">Open source</strong> &mdash; full code on GitHub</span>
-            <span><strong style="color:#555;">Self-hosted</strong> &mdash; data never leaves your machine</span>
+  <!-- ════════════ Hero ════════════ -->
+  <div class="container-wide">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <h1>Your bank transactions,<br>flowing into <em>Notion.</em></h1>
+          <p class="hero-sub">Klartion connects to your EU bank and syncs every transaction into a Notion database. Once a day, automatically. Self-hosted and private.</p>
+          <div class="hero-ctas">
+            <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary">Get Klartion &mdash; &euro;45</a>
+            <a href="#trial" class="btn-outline" onclick="document.getElementById('trial-email').focus();return false;">Start free trial</a>
           </div>
-          <div class="opening-cta">
-            <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary">Get Klartion for &euro;45 &rarr;</a>
+          <div class="hero-trust">
+            <span>Read-only access</span>
+            <span>&middot;</span>
+            <span>Self-hosted</span>
+            <span>&middot;</span>
+            <span>2,500+ EU banks</span>
+            <span>&middot;</span>
+            <span>Open source</span>
           </div>
-          <div class="opening-meta" style="margin-top:0.75rem;">
-            One-time payment &middot; Lifetime updates &middot; <a href="https://github.com/DAdjadj/klartion" target="_blank">Open source</a>
+          <div class="hero-meta">
+            One-time payment &middot; Lifetime updates &middot; <a href="https://github.com/DAdjadj/klartion" target="_blank">View source</a>
           </div>
-          <div class="opening-meta">
+          <div class="hero-meta">
             <a href="#" onclick="document.getElementById('success-overlay').classList.add('visible'); return false;">Already purchased? Get started &rarr;</a>
           </div>
         </div>
 
-        <div class="opening-visual">
-          <!-- Status page mockup -->
+        <div class="hero-visual">
+          <!-- Status page mockup (mirrors actual Klartion status.html) -->
           <div class="mockup-frame">
             <div class="mockup-titlebar">
               <div class="mockup-dot r"></div>
@@ -585,16 +613,24 @@
           </div>
         </div>
       </div>
+    </section>
+  </div>
 
-      <!-- Trial box -->
+  <!-- ════════════ Trial box ════════════ -->
+  <div class="container-wide" id="trial">
+    <section class="trial-section">
       <div class="trial-box">
-        <div class="trial-box-title">7-day free trial, no credit card needed</div>
-        <div class="trial-box-sub">Enter your email and get a trial licence key sent to your inbox instantly.</div>
-        <div class="trial-form">
-          <input type="email" id="trial-email" placeholder="you@example.com">
-          <button onclick="startTrial()" id="trial-btn">Start free trial</button>
+        <div class="trial-box-content">
+          <div class="trial-box-title">7-day free trial</div>
+          <div class="trial-box-sub">No credit card. Get a trial licence key sent to your inbox instantly.</div>
         </div>
-        <div id="trial-msg"></div>
+        <div class="trial-box-form">
+          <div class="trial-form">
+            <input type="email" id="trial-email" placeholder="you@example.com">
+            <button onclick="startTrial()" id="trial-btn">Start free trial</button>
+          </div>
+          <div id="trial-msg"></div>
+        </div>
       </div>
     </section>
   </div>
@@ -610,7 +646,7 @@
       <div class="bank-search-wrap">
         <input type="text" id="kl-bank-search" placeholder="Search your bank... e.g. Revolut, Millennium BCP, ING" oninput="klSearchBanks()"
           onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#d1cfc8'">
-        <svg style="position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#aaa;pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </div>
@@ -654,7 +690,7 @@
   <div class="container"><hr class="divider"></div>
 
   <!-- ════════════ How it works ════════════ -->
-  <div class="container">
+  <div class="container-wide">
     <section class="section" id="how-it-works">
       <div class="section-label">How it works</div>
       <h2>Set up once, forget about it.</h2>
@@ -670,14 +706,14 @@
           <div class="how-step">
             <div class="how-step-num">2</div>
             <div>
-              <h3>Install Klartion</h3>
-              <p>Download the docker-compose.yml and run <code>docker compose up -d</code>. Works on any machine with Docker &mdash; Linux, Mac, Raspberry Pi, NAS.</p>
+              <h3>Run <code>docker compose up -d</code></h3>
+              <p>Download the docker-compose.yml and start Klartion. Works on any machine with Docker &mdash; Linux, Mac, Raspberry Pi, NAS, a cheap VPS.</p>
             </div>
           </div>
           <div class="how-step">
             <div class="how-step-num">3</div>
             <div>
-              <h3>Follow the setup wizard</h3>
+              <h3>Follow the browser-based setup wizard</h3>
               <p>Open Klartion in your browser. The wizard walks you through entering your licence key, connecting your Notion database, uploading your Enable Banking key, and setting up notifications.</p>
             </div>
           </div>
@@ -685,7 +721,7 @@
             <div class="how-step-num">4</div>
             <div>
               <h3>Connect your bank</h3>
-              <p>Search for your bank, approve read-only access, and choose a sync schedule. Transactions flow into your Notion database automatically.</p>
+              <p>Search for your bank, approve read-only access, and choose a sync schedule. Transactions flow into your Notion database daily, automatically.</p>
             </div>
           </div>
         </div>
@@ -762,7 +798,7 @@
 
       <div class="notion-callout">
         <div>
-          <p><strong>Transactions land directly in Notion.</strong> Each row includes the date, amount, currency, description, bank, and status (pending/booked). Use Notion's filters, formulas, and views to build the budget tracker you want.</p>
+          <p><strong>Each transaction becomes a row in your Notion database</strong> &mdash; date, amount, currency, description, bank, and status (pending/booked). Use Notion's filters, formulas, and views to build whatever budget tracker or spending overview you want.</p>
         </div>
       </div>
     </section>
@@ -773,33 +809,32 @@
   <!-- ════════════ Features ════════════ -->
   <div class="container">
     <section class="section">
-      <div class="features-box">
-        <h2>Everything you need, nothing you don't.</h2>
-        <div class="feature-grid">
-          <div class="feature">
-            <div class="feature-dot"></div>
-            <p><strong>Daily automatic sync</strong> &mdash; once a day, at a time you choose.</p>
-          </div>
-          <div class="feature">
-            <div class="feature-dot"></div>
-            <p><strong>2,500+ European banks</strong> &mdash; Revolut, N26, Monzo, Wise, Millennium BCP, Santander, ING, and more.</p>
-          </div>
-          <div class="feature">
-            <div class="feature-dot"></div>
-            <p><strong>Your data stays local</strong> &mdash; bank data goes directly to your machine. Never our servers.</p>
-          </div>
-          <div class="feature">
-            <div class="feature-dot"></div>
-            <p><strong>Email notifications</strong> &mdash; a summary on success, an alert if something goes wrong.</p>
-          </div>
-          <div class="feature">
-            <div class="feature-dot"></div>
-            <p><strong>Pending transaction tracking</strong> &mdash; transactions update from Pending to Cleared or Cancelled automatically.</p>
-          </div>
-          <div class="feature">
-            <div class="feature-dot"></div>
-            <p><strong>No duplicates, ever</strong> &mdash; Klartion tracks every transaction ID so nothing gets imported twice.</p>
-          </div>
+      <div class="section-label">Features</div>
+      <h2>Everything you need, nothing you don't.</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Daily automatic sync</h3>
+          <p>Transactions sync once a day at a time you choose. No manual exports, no CSV imports.</p>
+        </div>
+        <div class="feature-card">
+          <h3>2,500+ European banks</h3>
+          <p>Revolut, N26, Monzo, Wise, Millennium BCP, Santander, ING, BNP Paribas, and many more.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Your data stays local</h3>
+          <p>Bank data goes directly from your bank to your machine to Notion. Never through our servers.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Email notifications</h3>
+          <p>A summary email on success, an alert if something goes wrong. Stay informed without checking.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Pending tracking</h3>
+          <p>Transactions update from Pending to Booked or Cancelled automatically as your bank settles them.</p>
+        </div>
+        <div class="feature-card">
+          <h3>No duplicates, ever</h3>
+          <p>Every transaction ID is tracked. Nothing gets imported twice, even across multiple syncs.</p>
         </div>
       </div>
     </section>
@@ -812,7 +847,7 @@
     <section class="section">
       <div class="section-label">Pricing</div>
       <h2>Simple, honest pricing.</h2>
-      <div class="pricing-box">
+      <div class="pricing-card">
         <div>
           <div class="price">&euro;45<span>one-time</span></div>
           <div class="price-label">Early access price &middot; No subscription</div>
@@ -821,9 +856,11 @@
           <li>Lifetime licence, yours to keep</li>
           <li>Up to 2 machine activations</li>
           <li>All future updates included</li>
-          <li>Email support</li>
+          <li>7-day free trial, no credit card</li>
         </ul>
-        <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary" style="width:auto;">Buy now &rarr;</a>
+        <div>
+          <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-primary" style="width:auto;">Get Klartion &rarr;</a>
+        </div>
       </div>
     </section>
   </div>
@@ -832,23 +869,9 @@
 
   <!-- ════════════ Hosted waitlist banner ════════════ -->
   <section class="waitlist-banner">
-    <svg style="position:absolute;top:16px;right:24px;opacity:0.12;" width="100" height="60" viewBox="0 0 100 60">
-      <polyline points="0,55 15,45 30,50 45,30 60,35 75,15 90,20 100,8" fill="none" stroke="#2d7a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="45" cy="30" r="3" fill="#2d7a4f"/>
-      <circle cx="75" cy="15" r="3" fill="#2d7a4f"/>
-      <circle cx="100" cy="8" r="3" fill="#2d7a4f"/>
-    </svg>
-    <svg style="position:absolute;bottom:16px;left:20px;opacity:0.1;" width="70" height="50" viewBox="0 0 70 50">
-      <ellipse cx="22" cy="38" rx="18" ry="7" fill="none" stroke="#2d7a4f" stroke-width="2"/>
-      <rect x="4" y="20" width="36" height="18" fill="none" stroke="#2d7a4f" stroke-width="2"/>
-      <ellipse cx="22" cy="20" rx="18" ry="7" fill="none" stroke="#2d7a4f" stroke-width="2"/>
-      <ellipse cx="48" cy="28" rx="14" ry="5.5" fill="none" stroke="#2d7a4f" stroke-width="1.5"/>
-      <rect x="34" y="14" width="28" height="14" fill="none" stroke="#2d7a4f" stroke-width="1.5"/>
-      <ellipse cx="48" cy="14" rx="14" ry="5.5" fill="none" stroke="#2d7a4f" stroke-width="1.5"/>
-    </svg>
     <div class="wl-label">Coming soon</div>
-    <h2>Klartion without the setup.</h2>
-    <p>A fully hosted version is in the works &mdash; no Docker, no server. Just connect your bank and Notion and you're done. Join the waitlist to be first in line.</p>
+    <h2>Don't want to self-host?</h2>
+    <p>A fully hosted version is in the works &mdash; no Docker, no server. Just connect your bank and Notion and you're done.</p>
     <a href="#waitlist" class="btn-green" onclick="document.getElementById('waitlist-section').scrollIntoView({behavior:'smooth'});return false;">Join the waitlist &rarr;</a>
   </section>
 
