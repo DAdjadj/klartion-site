@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help — Klartion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body { background: #fafaf8; color: #1a1a1a; font-family: "Inter", sans-serif; line-height: 1.7; min-height: 100vh; }
+  header { padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e8e6e0; background: #fafaf8; }
+  .logo { font-family: "Lora", serif; font-weight: 700; font-size: 18px; color: #1a1a1a; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 30px; height: 30px; background: #1a1a1a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: "Lora", serif; font-style: italic; font-size: 15px; flex-shrink: 0; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 64px 48px 120px; }
+
+  .page-title { font-family: "Lora", serif; font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.2; }
+  .page-sub { font-size: 16px; color: #555; margin-bottom: 56px; line-height: 1.65; }
+
+  .faq-item { background: #fff; border: 1px solid #e8e6e0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .faq-q { font-family: "Lora", serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .faq-q::after { content: '+'; font-size: 20px; color: #9ca3af; font-weight: 400; flex-shrink: 0; font-family: "Inter", sans-serif; }
+  .faq-q.open::after { content: '-'; }
+  .faq-a { font-size: 14px; color: #555; line-height: 1.75; display: none; }
+  .faq-a.open { display: block; }
+  .faq-a p { margin-bottom: 10px; }
+  .faq-a p:last-child { margin-bottom: 0; }
+  .faq-a code { background: #f0efe9; border: 1px solid #e0ddd5; padding: 2px 7px; border-radius: 4px; font-size: 12px; font-family: "Courier New", monospace; color: #1a1a1a; }
+  .faq-a strong { color: #1a1a1a; }
+  .faq-a a { color: #1a1a1a; font-weight: 600; }
+
+  .section-label { font-size: 11px; font-weight: 600; color: #9ca3af; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; margin-top: 48px; }
+  .section-label:first-of-type { margin-top: 0; }
+
+  .contact { background: #fff; border: 1.5px solid #1a1a1a; border-radius: 12px; padding: 28px; margin-top: 48px; text-align: center; }
+  .contact p { font-size: 14px; color: #555; line-height: 1.7; }
+  .contact a { color: #1a1a1a; text-decoration: none; font-weight: 600; }
+
+  @media (max-width: 640px) {
+    header { padding: 16px 20px; }
+    .container { padding: 40px 20px 80px; }
+    .page-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <div class="logo-mark">K</div>
+    Klartion
+  </a>
+</header>
+
+<div class="container">
+  <h1 class="page-title">Help</h1>
+  <p class="page-sub">Common questions and troubleshooting for Klartion.</p>
+
+  <div class="section-label">Syncing</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">Transactions aren't syncing</div>
+    <div class="faq-a">
+      <p>A few things to check:</p>
+      <p><strong>1. Check if your bank session is still active.</strong> Go to the Status page and look for an expiry warning. If expired, click "Re-authorise bank".</p>
+      <p><strong>2. Some banks have a delay.</strong> Open banking transactions can take 1-2 days to appear, even if they show in your bank's app. Try again tomorrow.</p>
+      <p><strong>3. Check the sync log.</strong> Go to the Status page and look at the sync log. If it says "success" with 0 transactions, your bank returned no new transactions for that period.</p>
+      <p><strong>4. Download your logs</strong> from the Status page and send them to <a href="mailto:support@klartion.com">support@klartion.com</a> if the issue persists.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">I'm getting duplicate transactions in Notion</div>
+    <div class="faq-a">
+      <p>Klartion tracks transaction IDs to prevent duplicates. If you're seeing duplicates, it's usually because:</p>
+      <p><strong>The same transaction appears with different IDs</strong> from your bank (e.g. pending vs settled). Klartion tracks pending transactions and updates them when they settle, but some banks handle this differently.</p>
+      <p>If you reset your sync and re-sync from an earlier date, Klartion will check existing transaction IDs and skip anything already in your Notion database.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">My bank says "rate limiting"</div>
+    <div class="faq-a">
+      <p>Some banks limit how often you can request transaction data through open banking. This is normal and temporary. Klartion will automatically retry on the next scheduled sync.</p>
+      <p>If it keeps happening, try reducing your sync frequency to every 24 hours.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Bank connection</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">My bank session expired</div>
+    <div class="faq-a">
+      <p>Bank sessions through open banking typically last 90-180 days. When yours expires, go to the Bank page and click <strong>"Re-authorise bank"</strong>. You'll go through your bank's login again to renew access.</p>
+      <p>Klartion sends you an email warning when your session is about to expire.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">My bank isn't listed</div>
+    <div class="faq-a">
+      <p>Klartion supports 2,500+ European banks through Enable Banking. If your bank isn't showing up, make sure you've selected the correct country when connecting.</p>
+      <p>Some banks are only available as "personal" or "business" accounts — try switching the account type.</p>
+      <p>If your bank still doesn't appear, it may not be supported by Enable Banking yet. You can check their <a href="https://enablebanking.com/coverage" target="_blank">coverage page</a>.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Notion</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">Klartion can't access my Notion database</div>
+    <div class="faq-a">
+      <p>Make sure your Notion integration is connected to the database:</p>
+      <p><strong>1.</strong> Open your Notion database page.</p>
+      <p><strong>2.</strong> Click the <strong>...</strong> menu in the top right, then <strong>Connections</strong>.</p>
+      <p><strong>3.</strong> Search for your integration name and click <strong>Connect</strong>.</p>
+      <p>Also check that the <strong>Database ID</strong> in your Klartion settings is correct. You can find it in your Notion database URL — it's the long string of characters after your workspace name.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">How do I create a Notion API key?</div>
+    <div class="faq-a">
+      <p>Go to <a href="https://www.notion.so/my-integrations" target="_blank">notion.so/my-integrations</a> and click <strong>"New integration"</strong>. Give it a name (e.g. "Klartion"), select your workspace, and click <strong>Submit</strong>.</p>
+      <p>Copy the <strong>Internal Integration Secret</strong> — that's your API key. Paste it into Klartion's setup wizard.</p>
+      <p>Don't forget to also connect the integration to your database (see above).</p>
+    </div>
+  </div>
+
+  <div class="section-label">Setup & updates</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">How do I update Klartion?</div>
+    <div class="faq-a">
+      <p>Click <strong>"Check for updates"</strong> on the Status page. If an update is available, it will be installed automatically.</p>
+      <p>You can see which version you're running in the footer of any page.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">Email notifications aren't working</div>
+    <div class="faq-a">
+      <p>Go to the Notifications setup page and check your SMTP settings. Use the <strong>"Send test email"</strong> button to verify your configuration.</p>
+      <p>Common issues:</p>
+      <p><strong>Gmail:</strong> You need an <a href="https://myaccount.google.com/apppasswords" target="_blank">App Password</a>, not your regular password. Use <code>smtp.gmail.com</code> as the SMTP host.</p>
+      <p><strong>Outlook/Hotmail:</strong> Use <code>smtp-mail.outlook.com</code> as the SMTP host.</p>
+      <p><strong>iCloud:</strong> You need an App-Specific Password from <a href="https://appleid.apple.com" target="_blank">appleid.apple.com</a>. Use <code>smtp.mail.me.com</code>.</p>
+    </div>
+  </div>
+
+  <div class="section-label">License</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">How many machines can I activate?</div>
+    <div class="faq-a">
+      <p>Each license can be activated on up to <strong>2 machines</strong>. If you need to move your license to a different machine, deactivate it first from the Status page, then re-enter your key on the new machine.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">My license says "not activated on this machine"</div>
+    <div class="faq-a">
+      <p>This happens when the license was activated on a different machine or the activation was reset. Go to the License setup page and re-enter your license key.</p>
+      <p>If you've reached the activation limit, deactivate from another machine first, or contact support.</p>
+    </div>
+  </div>
+
+  <div class="contact">
+    <p>Still stuck? Send your logs and a description of the issue to<br><a href="mailto:support@klartion.com">support@klartion.com</a></p>
+    <p style="margin-top:8px;font-size:12px;color:#9ca3af;">You can download your logs from the Status page inside Klartion.</p>
+  </div>
+
+</div>
+
+<script>
+function toggle(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
