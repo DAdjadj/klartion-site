@@ -792,6 +792,25 @@
     }
 
     /* ═══════════════════════════════════════════════
+       REVIEWS
+       ═══════════════════════════════════════════════ */
+    .review-card {
+      background: #fff;
+      border: 1px solid #e5e4e0;
+      border-radius: 10px;
+      padding: 24px;
+      transition: box-shadow 0.2s;
+    }
+    .review-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .review-stars { color: #f59e0b; font-size: 16px; letter-spacing: 1px; margin-bottom: 12px; }
+    .review-text { font-size: 16px; color: #444; line-height: 1.65; margin-bottom: 16px; }
+    .review-author { font-size: 14px; color: #999; font-weight: 500; }
+
+    @media (max-width: 900px) {
+      #reviews-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ═══════════════════════════════════════════════
        DIVIDER
        ═══════════════════════════════════════════════ */
     .divider { border: none; border-top: 1px solid #e5e4e0; margin: 0; }
@@ -1230,6 +1249,19 @@
     </section>
   </div>
 
+  <!-- ════════════════════════════════════════════
+       REVIEWS
+       ════════════════════════════════════════════ -->
+  <div class="container" id="reviews-section" style="display:none;">
+    <hr class="divider">
+    <section style="padding:5rem 0;">
+      <div class="fade-up" style="text-align:center;margin-bottom:2.5rem;">
+        <h2 style="font-size:32px;font-weight:700;letter-spacing:-0.02em;line-height:1.2;">What users say</h2>
+      </div>
+      <div id="reviews-grid" class="fade-up fade-up-delay-1" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;"></div>
+    </section>
+  </div>
+
   <div class="container"><hr class="divider"></div>
 
   <!-- ════════════════════════════════════════════
@@ -1365,6 +1397,44 @@
       <a href="/getting-started.html" class="btn-start">Get started &rarr;</a>
     </div>
   </div>
+
+  <!-- ════════════════════════════════════════════
+       REVIEWS SCRIPT
+       ════════════════════════════════════════════ -->
+  <script>
+  (function(){
+    fetch('https://api.klartion.com/reviews?product=klartion')
+      .then(function(r){return r.json();})
+      .then(function(reviews){
+        var approved = reviews.filter(function(r){return r.approved;});
+        if(!approved.length) return;
+        var section = document.getElementById('reviews-section');
+        section.style.display = 'block';
+        var grid = document.getElementById('reviews-grid');
+        grid.innerHTML = approved.map(function(r){
+          var stars = '';
+          for(var i=0;i<5;i++) stars += i < r.rating ? '\u2605' : '\u2606';
+          var name = r.name || 'Anonymous';
+          return '<div class="review-card">'
+            + '<div class="review-stars">' + stars + '</div>'
+            + '<div class="review-text">' + r.review.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>'
+            + '<div class="review-author">' + name.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>'
+            + '</div>';
+        }).join('');
+        // Re-observe new fade-up elements for scroll animation
+        var observer = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting){
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+        section.querySelectorAll('.fade-up').forEach(function(el){ observer.observe(el); });
+      })
+      .catch(function(){});
+  })();
+  </script>
 
   <!-- ════════════════════════════════════════════
        BANK SEARCH SCRIPT
