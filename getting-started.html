@@ -5,61 +5,354 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Getting Started — Klartion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 16px; }
-  body { background: #fafaf8; color: #1a1a1a; font-family: "Inter", sans-serif; line-height: 1.7; min-height: 100vh; }
-  header { padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e8e6e0; background: #fafaf8; }
-  .logo { font-family: "Lora", serif; font-weight: 700; font-size: 18px; color: #1a1a1a; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo-mark { width: 30px; height: 30px; background: #1a1a1a; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: "Lora", serif; font-style: italic; font-size: 15px; flex-shrink: 0; }
-  .container { max-width: 720px; margin: 0 auto; padding: 64px 48px 120px; }
-  .success-badge { display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 500; color: #166534; margin-bottom: 24px; }
-  .page-title { font-family: "Lora", serif; font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.2; }
-  .page-sub { font-size: 16px; color: #555; margin-bottom: 56px; line-height: 1.65; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #fafaf8;
+    color: #1a1a1a;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+  a { color: #2d7a4f; text-decoration: none; transition: color 0.15s; }
+  a:hover { color: #1a5c2c; text-decoration: underline; }
+
+  /* NAV */
+  header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e4e0;
+    background: #fafaf8;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #1a1a1a;
+  }
+  .logo:hover { text-decoration: none; color: #1a1a1a; }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: #1a1a1a;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* CONTAINER */
+  .container { max-width: 760px; margin: 0 auto; padding: 64px 2rem 120px; }
+
+  /* SUCCESS BADGE */
+  .success-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #166534;
+    margin-bottom: 24px;
+  }
+
+  /* PAGE TITLE */
+  .page-title {
+    font-family: 'Lora', serif;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    color: #1a1a1a;
+  }
+  .page-sub {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 56px;
+    line-height: 1.7;
+  }
+
+  /* STEPS */
   .step { display: flex; gap: 28px; margin-bottom: 48px; }
   .step-left { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
-  .step-num { width: 40px; height: 40px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0; font-family: "Inter", sans-serif; }
-  .step-line { width: 2px; flex: 1; background: #e8e6e0; margin-top: 8px; min-height: 40px; }
+  .step-num {
+    width: 44px; height: 44px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .step-line { width: 2px; flex: 1; background: #e5e4e0; margin-top: 8px; min-height: 40px; }
   .step:last-child .step-line { display: none; }
   .step-body { padding-top: 8px; flex: 1; }
-  .step-title { font-family: "Lora", serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; }
-  .step-desc { font-size: 14px; color: #555; line-height: 1.75; }
-  .step-desc p { margin-bottom: 10px; }
+  .step-title {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+  }
+  .step-desc { font-size: 18px; color: #444; line-height: 1.7; }
+  .step-desc p { margin-bottom: 12px; }
   .step-desc p:last-child { margin-bottom: 0; }
-  .substeps { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* SUBSTEPS */
+  .substeps { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
   .substep { display: flex; gap: 12px; align-items: flex-start; }
-  .substep-num { width: 22px; height: 22px; background: #f0efe9; border: 1px solid #e0ddd5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #2d7a4f; flex-shrink: 0; margin-top: 1px; }
-  .substep-text { font-size: 13px; color: #555; line-height: 1.65; }
-  code { background: #f0efe9; border: 1px solid #e0ddd5; padding: 2px 7px; border-radius: 4px; font-size: 12px; font-family: "Courier New", monospace; color: #1a1a1a; }
-  .copy-btn { padding: 2px 8px; font-size: 11px; font-weight: 600; font-family: "Inter", sans-serif; background: #fff; border: 1px solid #e0ddd5; border-radius: 4px; cursor: pointer; color: #6b7280; transition: border-color 0.15s, color 0.15s; vertical-align: middle; }
+  .substep-num {
+    width: 24px; height: 24px;
+    background: #f0efe9;
+    border: 1px solid #e0ddd5;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #2d7a4f;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .substep-text { font-size: 16px; color: #444; line-height: 1.65; }
+  .substep-text strong { color: #1a1a1a; }
+
+  /* CODE */
+  code {
+    background: #f0efe9;
+    border: 1px solid #e0ddd5;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    color: #1a1a1a;
+  }
+  .code-block {
+    background: #f0efe9;
+    border: 1px solid #e0ddd5;
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-family: 'JetBrains Mono', 'Fira Mono', 'Menlo', monospace;
+    color: #1a1a1a;
+    font-weight: 500;
+    line-height: 1.8;
+    margin-top: 12px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  /* COPY BUTTON */
+  .copy-btn {
+    padding: 3px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #6b7280;
+    transition: border-color 0.15s, color 0.15s;
+    vertical-align: middle;
+  }
   .copy-btn:hover { border-color: #1a1a1a; color: #1a1a1a; }
-  .code-block { background: #f0efe9; border: 1px solid #e0ddd5; border-radius: 10px; padding: 16px 18px; font-size: 13px; font-family: "JetBrains Mono", "Fira Mono", "Menlo", monospace; color: #1a1a1a; font-weight: 500; line-height: 1.9; margin-top: 12px; white-space: pre; overflow-x: auto; }
-  .note { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #374151; line-height: 1.6; margin-top: 14px; }
+
+  /* NOTE */
+  .note {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 16px;
+    color: #444;
+    line-height: 1.65;
+    margin-top: 16px;
+  }
   .note strong { color: #1a1a1a; }
-  .done-card { background: #fff; border: 1.5px solid #1a1a1a; border-radius: 12px; padding: 28px; margin-top: 16px; }
-  .done-card label { display: block; font-size: 11px; font-weight: 600; color: #6b7280; letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 8px; }
-  .url-row { display: flex; gap: 10px; align-items: center; }
-  .url-row input { flex: 1; background: #fafaf8; border: 1px solid #e0ddd5; color: #1a1a1a; font-family: "Courier New", monospace; font-size: 13px; padding: 10px 14px; border-radius: 8px; outline: none; transition: border-color 0.2s; }
+
+  /* INFO BOX */
+  .info-box {
+    background: #f0efe9;
+    border: 1px solid #e0ddd5;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 16px;
+  }
+  .info-box-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+  .info-box-desc {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 10px;
+    line-height: 1.65;
+  }
+
+  /* OS TABS */
+  .os-tabs {
+    display: flex;
+    gap: 0;
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+  .os-tab {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    background: #f0efe9;
+    border: 1px solid #e0ddd5;
+    border-bottom: none;
+    cursor: pointer;
+    color: #6b7280;
+    transition: background 0.15s, color 0.15s;
+  }
+  .os-tab:first-child { border-radius: 8px 0 0 0; }
+  .os-tab:last-child { border-radius: 0 8px 0 0; }
+  .os-tab.active { background: #fff; color: #1a1a1a; border-bottom: 1px solid #fff; position: relative; z-index: 1; }
+  .os-panel {
+    display: none;
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-radius: 0 8px 8px 8px;
+    padding: 20px;
+    margin-top: -1px;
+  }
+  .os-panel.active { display: block; }
+  .os-panel .code-block { margin-top: 0; }
+
+  /* DONE CARD */
+  .done-card {
+    background: #fff;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 28px;
+    margin-top: 16px;
+  }
+  .done-card label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .url-row {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .url-row input {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 16px;
+    background: #fafaf8;
+    border: 1px solid #e0ddd5;
+    color: #1a1a1a;
+    padding: 12px 14px;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
   .url-row input:focus { border-color: #1a1a1a; }
-  .url-row button { background: #1a1a1a; color: #fff; border: none; padding: 10px 22px; font-family: "Inter", sans-serif; font-weight: 600; font-size: 14px; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; opacity: 0.35; }
-  .url-row button.active { opacity: 1; }
-  .url-hint { font-size: 12px; color: #9ca3af; margin-top: 6px; }
-  .url-open-btn { background: #1a1a1a; color: #fff; border: none; padding: 10px 20px; font-family: "Inter", sans-serif; font-weight: 600; font-size: 14px; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; opacity: 0.35; }
+  .url-hint { font-size: 14px; color: #6b7280; margin-top: 8px; line-height: 1.5; }
+  .url-open-btn {
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    opacity: 0.35;
+  }
   .url-open-btn.active { opacity: 1; }
   .url-open-btn:hover { opacity: 0.85; }
-  footer { border-top: 1px solid #e8e6e0; padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  footer .left { font-size: 12px; color: #9ca3af; }
-  footer .right { display: flex; gap: 20px; }
-  footer a { font-size: 12px; color: #9ca3af; text-decoration: none; }
-  footer a:hover { color: #1a1a1a; }
+
+  /* PORTAINER CARD */
+  .portainer-card {
+    background: #fff;
+    border: 1px solid #e5e4e0;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-top: 20px;
+  }
+  .portainer-card .code-block {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* BOTTOM CARD */
+  .bottom-card {
+    margin-top: 48px;
+    background: #fff;
+    border: 1px solid #e5e4e0;
+    border-radius: 14px;
+    padding: 28px;
+  }
+  .bottom-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'Lora', serif;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+  }
+  .bottom-card-desc {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.7;
+  }
+  .bottom-card-desc strong { color: #1a1a1a; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid #e5e4e0;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .left { font-size: 15px; color: #666; }
+  footer .right { display: flex; gap: 2rem; }
+  footer a { font-size: 15px; color: #444; text-decoration: none; }
+  footer a:hover { color: #1a1a1a; text-decoration: underline; }
+
   @media (max-width: 640px) {
-    header { padding: 16px 20px; }
-    .container { padding: 40px 20px 80px; }
+    header { padding: 1rem 1.25rem; }
+    .container { padding: 40px 1.25rem 80px; }
     .step { gap: 16px; }
-    .page-title { font-size: 28px; }
-    footer { padding: 20px; flex-direction: column; text-align: center; }
+    .page-title { font-size: 32px; }
+    footer { padding: 1.25rem; flex-direction: column; text-align: center; }
     footer .right { justify-content: center; }
+    .url-row { flex-direction: column; }
+    .url-row input { width: 100%; }
+    .os-tab { padding: 8px 14px; font-size: 14px; }
   }
 </style>
 </head>
@@ -75,17 +368,19 @@
   <h1 class="page-title">Let's get you set up</h1>
   <p class="page-sub">Your license key is on its way to your email. Follow these steps to have Klartion running and syncing your bank transactions into Notion.</p>
 
+  <!-- STEP 1 -->
   <div class="step">
     <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
     <div class="step-body">
       <div class="step-title">Create a free Enable Banking account</div>
       <div class="step-desc">
         <p>Enable Banking is the regulated open banking provider that Klartion uses to connect to your bank. You need a free developer account — no credit card required.</p>
-        <p>Go to <a href="https://enablebanking.com" target="_blank" style="color:#2d7a4f;">enablebanking.com</a> and sign up.</p>
+        <p>Go to <a href="https://enablebanking.com" target="_blank">enablebanking.com</a> and sign up.</p>
       </div>
     </div>
   </div>
 
+  <!-- STEP 2 -->
   <div class="step">
     <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
     <div class="step-body">
@@ -95,7 +390,7 @@
         <div class="substeps">
           <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong>Application name:</strong> <code>Klartion</code> <button class="copy-btn" onclick="copyText('Klartion', this)">Copy</button></div></div>
           <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong>Allowed redirect URLs:</strong> <code>https://klartion.com/callback</code> <button class="copy-btn" onclick="copyText('https://klartion.com/callback', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong>Application description:</strong> <code>Connect my bank to Notion</code> <button class="copy-btn" onclick="copyText('Connect my bank to Notion', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong>Application description:</strong> <code>Connect Notion with my bank</code> <button class="copy-btn" onclick="copyText('Connect Notion with my bank', this)">Copy</button></div></div>
           <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong>Email for data protection matters:</strong> your email address</div></div>
           <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong>Privacy URL:</strong> <code>https://klartion.com/privacy</code> <button class="copy-btn" onclick="copyText('https://klartion.com/privacy', this)">Copy</button></div></div>
           <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong>Terms URL:</strong> <code>https://klartion.com/terms</code> <button class="copy-btn" onclick="copyText('https://klartion.com/terms', this)">Copy</button></div></div>
@@ -105,61 +400,78 @@
     </div>
   </div>
 
+  <!-- STEP 3 -->
   <div class="step">
     <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
     <div class="step-body">
+      <div class="step-title">Set your application to Production</div>
+      <div class="step-desc">
+        <p>After registering, your application starts in <strong>Sandbox</strong> mode. You need to switch it to <strong>Production</strong> before connecting a real bank account.</p>
+        <div class="substeps">
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text">Open your application in the Enable Banking dashboard</div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text">Find the <strong>Environment</strong> toggle and switch from <strong>Sandbox</strong> to <strong>Production</strong></div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text">Confirm the switch when prompted</div></div>
+        </div>
+        <div class="note"><strong>Note:</strong> You must be in Production mode for Klartion to access real bank data. Sandbox mode is only for testing with mock data.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+    <div class="step-body">
       <div class="step-title">Activate by linking your bank account</div>
       <div class="step-desc">
-        <p>After registering, click <strong>Activate by linking accounts</strong> on your application page. This is a one-time requirement to activate your Enable Banking app.</p>
+        <p>After switching to Production, click <strong>Activate by linking accounts</strong> on your application page. This is a one-time requirement to activate your Enable Banking app.</p>
         <div class="substeps">
           <div class="substep"><div class="substep-num">1</div><div class="substep-text">Select your country and bank from the dropdowns</div></div>
           <div class="substep"><div class="substep-num">2</div><div class="substep-text">Click <strong>Link</strong></div></div>
           <div class="substep"><div class="substep-num">3</div><div class="substep-text">Follow the steps to log in to your bank and approve read-only access</div></div>
         </div>
-        <div class="note"><strong>Note:</strong> This is separate from the bank connection inside Klartion. Both are required — this activates your Enable Banking app, while Klartion handles the ongoing daily sync.</div>
+        <div class="note"><strong>Important:</strong> You must add your banks here first, before connecting them inside Klartion. This activates your Enable Banking app, while Klartion handles the ongoing daily sync.</div>
       </div>
     </div>
   </div>
 
+  <!-- STEP 5 -->
   <div class="step">
-    <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+    <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
     <div class="step-body">
-      <div class="step-title">Install Klartion on your server or computer</div>
+      <div class="step-title">Install Klartion</div>
       <div class="step-desc">
-        <p>You need <a href="https://docs.docker.com/engine/install/" target="_blank" style="color:#2d7a4f;">Docker</a> installed. Klartion runs as a lightweight container — it works on a Mac, a Linux machine, a Raspberry Pi, a NAS, or any small home server.</p>
-        <p style="margin-top:12px;">Create the folder and download the compose file:</p>
-        <div class="code-block">mkdir -p ~/klartion/data && cd ~/klartion
+        <p>You need <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a> installed. Klartion runs as a lightweight container — it works on a Mac, a Linux machine, a Raspberry Pi, a NAS, or any small home server.</p>
+
+        <div class="os-tabs">
+          <div class="os-tab active" onclick="switchOS('unix')">Linux / Mac</div>
+          <div class="os-tab" onclick="switchOS('win')">Windows</div>
+        </div>
+        <div class="os-panel active" id="os-unix">
+          <div class="code-block">mkdir -p ~/klartion/data && cd ~/klartion
 curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.yml</div>
-        <div style="margin-top:14px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:10px;padding:14px 16px;">
-          <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;">Port</div>
-          <div style="font-size:12px;color:#555;margin-bottom:10px;">Klartion runs on port <code>3001</code> by default. Change it below if that port is already in use.</div>
+        </div>
+        <div class="os-panel" id="os-win">
+          <div class="code-block">mkdir %USERPROFILE%\klartion\data
+cd %USERPROFILE%\klartion
+curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.yml</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-title">Port</div>
+          <div class="info-box-desc">Klartion runs on port <code>5555</code> by default. Change it below if that port is already in use.</div>
           <div style="display:flex;gap:8px;align-items:center;">
-            <input type="text" id="port-input" value="3001" style="width:80px;font-family:'Courier New',monospace;font-size:13px;background:#fff;border:1px solid #e0ddd5;border-radius:6px;padding:8px 10px;outline:none;color:#1a1a1a;text-align:center;" oninput="updatePort()">
-            <span id="port-status" style="font-size:11px;color:#555;"></span>
+            <input type="text" id="port-input" value="5555" style="width:80px;font-family:'JetBrains Mono','Courier New',monospace;font-size:16px;background:#fff;border:1px solid #e0ddd5;border-radius:6px;padding:10px 12px;outline:none;color:#1a1a1a;text-align:center;" oninput="updatePort()">
+            <span id="port-status" style="font-size:14px;color:#444;"></span>
           </div>
         </div>
+
         <p style="margin-top:16px;">Start the container:</p>
         <div class="code-block" id="start-cmd">docker compose up -d</div>
-        <script>
-        function updatePort() {
-          var port = document.getElementById('port-input').value.trim();
-          var status = document.getElementById('port-status');
-          var cmd = document.getElementById('start-cmd');
-          if (port && port !== '3001') {
-            cmd.textContent = "sed -i 's/3001:3000/" + port + ":3000/' docker-compose.yml && docker compose up -d";
-            status.textContent = 'Port ' + port + ' — the command below will update your compose file automatically.';
-          } else {
-            cmd.textContent = 'docker compose up -d';
-            status.textContent = '';
-          }
-          var urlPort = document.getElementById('url-port');
-          if (urlPort) urlPort.value = port || '3001';
-        }
-        </script>
-        <div style="margin-top:20px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:10px;padding:14px 16px;">
-          <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px;">Using Portainer?</div>
-          <div style="font-size:12px;color:#555;line-height:1.65;">Go to <strong>Stacks</strong> → <strong>Add stack</strong>, name it <code>klartion</code>, select <strong>Web editor</strong> and paste:</div>
-          <div class="code-block" style="font-size:12px;line-height:1.7;">services:
+
+        <div class="portainer-card">
+          <div class="info-box-title">Using Portainer?</div>
+          <div class="info-box-desc">Go to <strong>Stacks</strong> &rarr; <strong>Add stack</strong>, name it <code>klartion</code>, select <strong>Web editor</strong> and paste:</div>
+          <div class="code-block">services:
   klartion:
     image: daalves/klartion:latest
     container_name: klartion
@@ -168,25 +480,26 @@ curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.y
       - ./data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "3001:3000"</div>
-          <div style="font-size:12px;color:#555;margin-top:8px;">Click <strong>Deploy the stack</strong>, then continue to the next step.</div>
+      - "5555:3000"</div>
+          <p style="font-size:16px;color:#444;margin-top:10px;">Click <strong>Deploy the stack</strong>, then continue to the next step.</p>
         </div>
-</div>
+      </div>
     </div>
   </div>
 
+  <!-- STEP 6 -->
   <div class="step">
-    <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
+    <div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div>
     <div class="step-body">
       <div class="step-title">Open Klartion and complete setup</div>
       <div class="step-desc">
-        <p>Enter your server address below to open the Klartion setup wizard. It will guide you through entering your license key, connecting Notion, and authorising your bank.</p>
+        <p>Enter your server address below to open the Klartion setup wizard. It will guide you through entering your license key, connecting your Notion API, uploading your Enable Banking key, configuring notifications, and authorising your bank.</p>
         <div class="done-card">
           <label>Your server address</label>
-          <div style="display:flex; gap:4px; align-items:center; flex-wrap:wrap;">
-            <input type="text" id="url-protocol" value="http://" style="width:80px; flex-shrink:0; font-family:'Courier New',monospace; font-size:13px; background:#fafaf8; border:1px solid #e0ddd5; border-radius:8px; padding:10px 10px; outline:none;" oninput="checkUrl()">
-            <input type="text" id="url-host" value="localhost" placeholder="192.168.1.100" style="flex:1; min-width:120px; font-family:'Courier New',monospace; font-size:13px; background:#fafaf8; border:1px solid #e0ddd5; border-radius:8px; padding:10px 10px; outline:none;" oninput="checkUrl()">
-            <input type="text" id="url-port" value="3001" style="width:64px; flex-shrink:0; font-family:'Courier New',monospace; font-size:13px; background:#fafaf8; border:1px solid #e0ddd5; border-radius:8px; padding:10px 10px; outline:none;" oninput="checkUrl()">
+          <div class="url-row">
+            <input type="text" id="url-protocol" value="http://" style="width:84px; flex-shrink:0;" oninput="checkUrl()">
+            <input type="text" id="url-host" value="localhost" placeholder="192.168.1.100" style="flex:1; min-width:120px;" oninput="checkUrl()">
+            <input type="text" id="url-port" value="5555" style="width:72px; flex-shrink:0;" oninput="checkUrl()">
             <button id="open-btn" class="url-open-btn" onclick="openKlartion()">Open Klartion &rarr;</button>
           </div>
           <div class="url-hint">Enter your server's IP address or hostname. Change the port if you modified it in <code>docker-compose.yml</code>.</div>
@@ -195,12 +508,12 @@ curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.y
     </div>
   </div>
 
-  <div style="margin-top:48px;background:#f0efe9;border:1px solid #e0ddd5;border-radius:14px;padding:28px;">
-    <div style="font-size:18px;font-weight:700;font-family:'Lora',serif;letter-spacing:-0.3px;margin-bottom:8px;">Multiple bank accounts</div>
-    <div style="font-size:14px;color:#555;line-height:1.7;">
-      <p>Klartion supports connecting <strong style="color:#1a1a1a;">up to 2 bank accounts</strong> by default. Each bank's transactions are tagged with the bank name in a "Bank" column in your Notion database.</p>
-      <p style="margin-top:10px;">To add a second bank, go to the <strong style="color:#1a1a1a;">Bank</strong> tab in the setup wizard after connecting your first bank.</p>
-      <p style="margin-top:10px;">Need more than 2? You can purchase additional bank account slots for <strong style="color:#1a1a1a;">€10 each</strong> from the Status page inside the app.</p>
+  <div class="bottom-card">
+    <div class="bottom-card-title">Multiple bank accounts</div>
+    <div class="bottom-card-desc">
+      <p>Klartion supports connecting <strong>up to 2 bank accounts</strong> by default. Each bank's transactions are tagged with the bank name in a "Bank" column in your Notion database.</p>
+      <p style="margin-top:10px;">To add a second bank, go to the <strong>Bank</strong> tab in the setup wizard after connecting your first bank.</p>
+      <p style="margin-top:10px;">Need more than 2? You can purchase additional bank account slots for <strong>&euro;10 each</strong> from the Status page inside the app.</p>
     </div>
   </div>
 
@@ -223,16 +536,43 @@ function copyText(text, btn) {
     setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
   });
 }
+function updatePort() {
+  var port = document.getElementById('port-input').value.trim();
+  var status = document.getElementById('port-status');
+  var cmd = document.getElementById('start-cmd');
+  if (port && port !== '5555') {
+    cmd.textContent = "sed -i 's/5555:3000/" + port + ":3000/' docker-compose.yml && docker compose up -d";
+    status.textContent = 'Port ' + port + ' — the command below will update your compose file automatically.';
+  } else {
+    cmd.textContent = 'docker compose up -d';
+    status.textContent = '';
+  }
+  var urlPort = document.getElementById('url-port');
+  if (urlPort) urlPort.value = port || '5555';
+}
+function switchOS(os) {
+  var tabs = document.querySelectorAll('.os-tab');
+  var panels = document.querySelectorAll('.os-panel');
+  tabs.forEach(function(t) { t.classList.remove('active'); });
+  panels.forEach(function(p) { p.classList.remove('active'); });
+  if (os === 'win') {
+    tabs[1].classList.add('active');
+    document.getElementById('os-win').classList.add('active');
+  } else {
+    tabs[0].classList.add('active');
+    document.getElementById('os-unix').classList.add('active');
+  }
+}
 function getUrl() {
-  const protocol = document.getElementById("url-protocol").value.trim().replace(/\/+$/, "");
-  const host = document.getElementById("url-host").value.trim().replace(/\/+/g, "");
-  const port = document.getElementById("url-port").value.trim();
+  var protocol = document.getElementById("url-protocol").value.trim().replace(/\/+$/, "");
+  var host = document.getElementById("url-host").value.trim().replace(/\/+/g, "");
+  var port = document.getElementById("url-port").value.trim();
   return protocol + "//" + host + ":" + port;
 }
 function checkUrl() {
-  const host = document.getElementById("url-host").value.trim();
-  const btn = document.getElementById("open-btn");
-  const active = host.length > 0;
+  var host = document.getElementById("url-host").value.trim();
+  var btn = document.getElementById("open-btn");
+  var active = host.length > 0;
   btn.classList.toggle("active", active);
   btn.disabled = !active;
 }
