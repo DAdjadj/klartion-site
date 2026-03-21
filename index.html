@@ -199,6 +199,10 @@
     .hero-trial-form button:active { transform: scale(0.97); }
     #trial-msg { font-size: 16px; margin-top: 8px; min-height: 22px; }
 
+    .hero-already { margin-top: 16px; }
+    .hero-already a { font-size: 16px; color: #888; text-decoration: none; transition: color 0.15s; }
+    .hero-already a:hover { color: #1a1a1a; }
+
     .hero-trust {
       display: flex;
       flex-wrap: wrap;
@@ -407,8 +411,8 @@
     .mockup-explore-hint {
       text-align: center;
       font-size: 14px;
-      color: #666;
-      margin-top: 12px;
+      color: #999;
+      margin-bottom: 12px;
       animation: hint-pulse 2s ease-in-out infinite;
       transition: opacity 0.4s ease;
     }
@@ -934,6 +938,9 @@
             </div>
             <div id="trial-msg"></div>
           </div>
+          <div class="hero-already">
+            <a href="/getting-started.html">Already a customer? Follow the setup guide &rarr;</a>
+          </div>
           <div class="hero-trust">
             <span>&#128274; Read-only</span>
             <span>&#127466;&#127482; 2,500+ banks</span>
@@ -942,6 +949,7 @@
         </div>
 
         <div class="hero-visual fade-up fade-up-delay-1">
+          <div class="mockup-explore-hint" id="mockup-hint">&#8595; Click to explore the app</div>
           <div class="mockup-frame" id="mockup-tour">
             <div class="mockup-titlebar">
               <div class="mockup-dot r"></div>
@@ -1125,7 +1133,6 @@
               </div>
             </div>
           </div>
-          <div class="mockup-explore-hint" id="mockup-hint">Click to explore &#8595;</div>
         </div>
       </div>
     </section>
@@ -1262,10 +1269,6 @@
                 <p>Search for your bank, approve read-only access, and choose a sync schedule. Transactions flow into Notion daily.</p>
               </div>
             </div>
-          </div>
-          <div class="already-customer">
-            <a href="/getting-started.html">Already a customer? Start here &rarr;</a>
-            <p>Step-by-step guide to get running in 15 minutes.</p>
           </div>
         </div>
 
