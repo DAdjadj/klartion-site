@@ -458,9 +458,9 @@ curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.y
 
         <div class="info-box">
           <div class="info-box-title">Port</div>
-          <div class="info-box-desc">Klartion runs on port <code>5555</code> by default. Change it below if that port is already in use.</div>
+          <div class="info-box-desc">Klartion runs on port <code>3001</code> by default. Change it below if that port is already in use.</div>
           <div style="display:flex;gap:8px;align-items:center;">
-            <input type="text" id="port-input" value="5555" style="width:80px;font-family:'JetBrains Mono','Courier New',monospace;font-size:16px;background:#fff;border:1px solid #e0ddd5;border-radius:6px;padding:10px 12px;outline:none;color:#1a1a1a;text-align:center;" oninput="updatePort()">
+            <input type="text" id="port-input" value="3001" style="width:80px;font-family:'JetBrains Mono','Courier New',monospace;font-size:16px;background:#fff;border:1px solid #e0ddd5;border-radius:6px;padding:10px 12px;outline:none;color:#1a1a1a;text-align:center;" oninput="updatePort()">
             <span id="port-status" style="font-size:14px;color:#444;"></span>
           </div>
         </div>
@@ -480,7 +480,7 @@ curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.y
       - ./data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "5555:3000"</div>
+      - "3001:3000"</div>
           <p style="font-size:16px;color:#444;margin-top:10px;">Click <strong>Deploy the stack</strong>, then continue to the next step.</p>
         </div>
       </div>
@@ -499,7 +499,7 @@ curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.y
           <div class="url-row">
             <input type="text" id="url-protocol" value="http://" style="width:84px; flex-shrink:0;" oninput="checkUrl()">
             <input type="text" id="url-host" value="localhost" placeholder="192.168.1.100" style="flex:1; min-width:120px;" oninput="checkUrl()">
-            <input type="text" id="url-port" value="5555" style="width:72px; flex-shrink:0;" oninput="checkUrl()">
+            <input type="text" id="url-port" value="3001" style="width:72px; flex-shrink:0;" oninput="checkUrl()">
             <button id="open-btn" class="url-open-btn" onclick="openKlartion()">Open Klartion &rarr;</button>
           </div>
           <div class="url-hint">Enter your server's IP address or hostname. Change the port if you modified it in <code>docker-compose.yml</code>.</div>
@@ -540,15 +540,15 @@ function updatePort() {
   var port = document.getElementById('port-input').value.trim();
   var status = document.getElementById('port-status');
   var cmd = document.getElementById('start-cmd');
-  if (port && port !== '5555') {
-    cmd.textContent = "sed -i 's/5555:3000/" + port + ":3000/' docker-compose.yml && docker compose up -d";
+  if (port && port !== '3001') {
+    cmd.textContent = "sed -i 's/3001:3000/" + port + ":3000/' docker-compose.yml && docker compose up -d";
     status.textContent = 'Port ' + port + ' — the command below will update your compose file automatically.';
   } else {
     cmd.textContent = 'docker compose up -d';
     status.textContent = '';
   }
   var urlPort = document.getElementById('url-port');
-  if (urlPort) urlPort.value = port || '5555';
+  if (urlPort) urlPort.value = port || '3001';
 }
 function switchOS(os) {
   var tabs = document.querySelectorAll('.os-tab');
