@@ -820,7 +820,7 @@
        ═══════════════════════════════════════════════ */
     footer {
       border-top: 1px solid #e5e4e0;
-      padding: 32px 0;
+      padding: 32px 48px;
     }
     .footer-main {
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
@@ -1388,28 +1388,26 @@
   <!-- ════════════════════════════════════════════
        SECTION 5: FOOTER
        ════════════════════════════════════════════ -->
-  <div class="container">
-    <footer>
-      <div class="footer-main">
-        <div class="left" style="display:flex;align-items:center;gap:8px;"><img src="/da.png" alt="DA" style="width:32px;height:auto;opacity:0.6;"> &copy; 2026 Klartion</div>
-        <div class="right">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="/help">Help</a>
-          <a href="https://github.com/DAdjadj/klartion" target="_blank">GitHub</a>
-          <a href="mailto:support@david-alves.com">Support</a>
-        </div>
+  <footer>
+    <div class="footer-main">
+      <div class="left" style="display:flex;align-items:center;gap:8px;"><img src="/da.png" alt="DA" style="width:32px;height:auto;opacity:0.6;"> &copy; 2026 Klartion</div>
+      <div class="right">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/help">Help</a>
+        <a href="https://github.com/DAdjadj/klartion" target="_blank">GitHub</a>
+        <a href="mailto:support@david-alves.com">Support</a>
       </div>
-      <div class="pikapods-footer">
-        <p>Don't want to self-host? A hosted version is coming soon.</p>
-        <div class="pikapods-row">
-          <input type="email" id="wl-email" placeholder="you@example.com">
-          <button onclick="joinWaitlist()" class="btn-press">Join waitlist</button>
-        </div>
-        <div id="wl-msg"></div>
+    </div>
+    <div class="pikapods-footer">
+      <p>Don't want to self-host? A hosted version is coming soon.</p>
+      <div class="pikapods-row">
+        <input type="email" id="wl-email" placeholder="you@example.com">
+        <button onclick="joinWaitlist()" class="btn-press">Join waitlist</button>
       </div>
-    </footer>
-  </div>
+      <div id="wl-msg"></div>
+    </div>
+  </footer>
 
   <!-- ════════════════════════════════════════════
        SUCCESS OVERLAY
