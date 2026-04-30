@@ -368,6 +368,11 @@
   <h1 class="page-title">Let's get you set up</h1>
   <p class="page-sub">Your license key is on its way to your email. Follow these steps to have Klartion running and syncing your bank transactions into Notion.</p>
 
+  <div class="note" style="margin-bottom:24px;">
+    <strong>Where is your bank?</strong>
+    <p style="margin-top:8px;">Steps 1&ndash;4 below set up <strong>Enable Banking</strong> for <strong>EU banks</strong>. If your bank is in the <strong>US or Canada</strong>, skip to the <a href="#simplefin">SimpleFIN setup section</a> below &mdash; it&rsquo;s shorter and replaces Steps 1&ndash;4. Steps 5 and 6 (install Klartion, run the setup wizard) are the same regardless of provider, and you can use both providers on the same install.</p>
+  </div>
+
   <!-- STEP 1 -->
   <div class="step">
     <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
@@ -434,6 +439,24 @@
     </div>
   </div>
 
+  <!-- SIMPLEFIN ALTERNATIVE -->
+  <div id="simplefin" class="step">
+    <div class="step-left"><div class="step-num" style="background:var(--surface, #f7f6f3); color:var(--text, #1a1a1a); border:1px solid #e0ddd5;">US</div><div class="step-line"></div></div>
+    <div class="step-body">
+      <div class="step-title">For US/Canadian banks: set up SimpleFIN instead</div>
+      <div class="step-desc">
+        <p>Skip Steps 1&ndash;4 above. SimpleFIN Bridge is the bank-data provider Klartion uses for North American banks. It&rsquo;s simpler than Enable Banking but charges <strong>$15/year</strong> for the bridge, paid to SimpleFIN directly &mdash; not to Klartion.</p>
+        <div class="substeps">
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text">Sign up at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a> and pay the $15/year fee.</div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text">Inside SimpleFIN, link the banks you want to sync. Their flow tells you whether your specific bank is supported before you commit.</div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text">Click <strong>Setup Token</strong>. SimpleFIN displays a one-time code &mdash; copy it.</div></div>
+          <div class="substep"><div class="substep-num">4</div><div class="substep-text">In Klartion (after Steps 5 and 6 below), open the <strong>Bank</strong> tab, switch the toggle to <strong>US/Canadian banks (via SimpleFIN)</strong>, and paste the code. Klartion lists your linked accounts so you can pick which to sync.</div></div>
+        </div>
+        <div class="note"><strong>Note:</strong> Setup tokens are one-shot. If a token is rejected as already used, just generate a new one in SimpleFIN.</div>
+      </div>
+    </div>
+  </div>
+
   <!-- STEP 5 -->
   <div class="step">
     <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
@@ -495,7 +518,7 @@ curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.y
     <div class="step-body">
       <div class="step-title">Open Klartion and complete setup</div>
       <div class="step-desc">
-        <p>Enter your server address below to open the Klartion setup wizard. It will guide you through entering your license key, connecting your Notion API, uploading your Enable Banking key, configuring notifications, and authorising your bank.</p>
+        <p>Enter your server address below to open the Klartion setup wizard. It will guide you through entering your license key, connecting your Notion API, configuring notifications, and connecting your bank &mdash; either by uploading your Enable Banking <code>.pem</code> for EU banks, or by pasting your SimpleFIN setup token for US/Canadian banks.</p>
         <div class="done-card">
           <label>Your server address</label>
           <div class="url-row">
