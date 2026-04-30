@@ -67,7 +67,7 @@
       <p><strong>1. Check if your bank session is still active.</strong> Go to the Status page and look for an expiry warning. If expired, click "Re-authorise bank".</p>
       <p><strong>2. Some banks have a delay.</strong> Open banking transactions can take 1-2 days to appear, even if they show in your bank's app. Try again tomorrow.</p>
       <p><strong>3. Check the sync log.</strong> Go to the Status page and look at the sync log. If it says "success" with 0 transactions, your bank returned no new transactions for that period.</p>
-      <p><strong>4. Download your logs</strong> from the Status page and send them to <a href="mailto:support@klartion.com">support@klartion.com</a> if the issue persists.</p>
+      <p><strong>4. Download your logs</strong> from the Status page and send them to <a href="mailto:support@david-alves.com">support@david-alves.com</a> if the issue persists.</p>
     </div>
   </div>
 
@@ -101,9 +101,57 @@
   <div class="faq-item">
     <div class="faq-q" onclick="toggle(this)">My bank isn't listed</div>
     <div class="faq-a">
-      <p>Klartion supports 2,500+ European banks through Enable Banking. If your bank isn't showing up, make sure you've selected the correct country when connecting.</p>
-      <p>Some banks are only available as "personal" or "business" accounts — try switching the account type.</p>
-      <p>If your bank still doesn't appear, it may not be supported by Enable Banking yet. You can check their <a href="https://enablebanking.com/coverage" target="_blank">coverage page</a>.</p>
+      <p><strong>EU banks (Enable Banking):</strong> Klartion supports 2,500+ European banks. If your bank isn't showing up, make sure you've selected the correct country when connecting. Some banks are only available as "personal" or "business" accounts — try switching the account type. If it still doesn't appear, check the <a href="https://enablebanking.com/coverage" target="_blank">Enable Banking coverage page</a>.</p>
+      <p><strong>US/Canadian banks (SimpleFIN):</strong> Klartion uses SimpleFIN Bridge for North American banks. Bank support is decided inside SimpleFIN's signup flow at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a> — you'll find out before paying whether yours is supported. If it isn't, contact SimpleFIN directly.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">How do I get a SimpleFIN setup token?</div>
+    <div class="faq-a">
+      <p>SimpleFIN Bridge is the bank-data provider Klartion uses for US and Canadian banks. The setup token is a one-time code you generate inside SimpleFIN and paste into Klartion.</p>
+      <p><strong>1.</strong> Sign up at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a>. SimpleFIN charges $15/year for the bridge — paid to SimpleFIN, not to Klartion.</p>
+      <p><strong>2.</strong> Inside SimpleFIN, link the banks you want to sync. Their interface tells you which institutions are supported before you commit.</p>
+      <p><strong>3.</strong> Once linked, click <strong>Setup Token</strong>. SimpleFIN displays a one-time code.</p>
+      <p><strong>4.</strong> In Klartion, go to the <strong>Bank</strong> tab, switch the toggle to <strong>US/Canadian banks (via SimpleFIN)</strong>, and paste the code into the setup-token field. Klartion will list the accounts you linked &mdash; pick the ones you want to sync.</p>
+      <p>Setup tokens are one-shot. If a token is rejected as already used, generate a new one in SimpleFIN.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">Why does SimpleFIN only sync once a day?</div>
+    <div class="faq-a">
+      <p>SimpleFIN's API caps each user's bridge at 24 requests per day on the accounts endpoint. To stay safely within that budget for ongoing operation, Klartion locks the cadence to once daily for any install with SimpleFIN accounts connected, regardless of the frequency setting.</p>
+      <p>Manual <strong>Sync now</strong> still works on mixed installs (EU + US/Canada), but uses one of your daily SimpleFIN API calls. On SimpleFIN-only installs, the manual sync button is hidden to protect the budget.</p>
+    </div>
+  </div>
+
+  <div class="faq-item" id="simplefin-quirks">
+    <div class="faq-q" onclick="toggle(this)">My SimpleFIN bank has known quirks &mdash; will it still work?</div>
+    <div class="faq-a">
+      <p>SimpleFIN's connections are powered by an upstream aggregator (MX), and a handful of US/Canadian institutions misbehave there in ways neither Klartion nor SimpleFIN can fully fix. The most common ones we see in the wild:</p>
+      <p><strong>Apple Card &mdash; not recommended.</strong> Apple Card prompts for two-factor authentication daily. Each prompt arrives on your iPhone in the early hours and there's no way to feed the resulting code back into SimpleFIN. Connections work for one day at a time and then fall over until you reauthorise. Most users give up.</p>
+      <p><strong>Capital One &mdash; no pending transactions.</strong> Capital One does not expose pending transactions to SimpleFIN at all. You'll only see transactions after they post (usually 1&ndash;2 business days). Klartion's pending-transaction tracking still works for Capital One's posted activity, but you won't see anything labelled <em>Pending</em>.</p>
+      <p><strong>Chase &mdash; authorised users and replaced cards.</strong> Chase only exposes the primary account holder's view to SimpleFIN, so transactions made by authorised users on the account may not appear. Replacing a stolen or expired card sometimes severs the SimpleFIN connection entirely; if your sync goes quiet after a card swap, regenerate a setup token at bridge.simplefin.org and reconnect.</p>
+      <p><strong>Mercury Bank &mdash; phantom mirror transactions.</strong> Mercury exposes internal transfers as separate transactions in every linked account (checking, savings, credit). Each gets a unique SimpleFIN ID so duplicates can't be deduped automatically. You'll need to manually delete the mirrors in your Notion database, or only link one Mercury account.</p>
+      <p><strong>Wells Fargo &mdash; intermittent.</strong> Wells Fargo connections are flaky on SimpleFIN's side; some users see "all accounts already connected" but zero accounts surface. Try generating a fresh setup token; if that fails, this is on SimpleFIN to fix.</p>
+      <p>If your bank isn't listed above, the safest check is to verify it on SimpleFIN's <a href="https://beta-bridge.simplefin.org/info/institutions" target="_blank">supported institutions list</a> before paying SimpleFIN's $15/year.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">My SimpleFIN subscription lapsed &mdash; what happens?</div>
+    <div class="faq-a">
+      <p>SimpleFIN does not give a grace period: the moment their billing fails (lapsed annual plan, expired card on file, declined renewal), the bridge stops returning data and Klartion will surface a <em>"Your SimpleFIN Bridge subscription is not active"</em> banner on the Bank and Status pages. Your saved transactions in Notion are untouched.</p>
+      <p>To resume syncing: log in at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a>, update your payment, and trigger the next sync from Klartion's Status page.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">SimpleFIN says my access was revoked. What do I do?</div>
+    <div class="faq-a">
+      <p>Access can be revoked from SimpleFIN's side (you removed Klartion's access in their UI), or because the bank-side session needs reauthorisation. Klartion will badge the affected account on the Bank page with a "regenerate setup token" link.</p>
+      <p>To recover: go to <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a>, click <strong>Setup Token</strong> for a fresh code, then in Klartion's <strong>Bank</strong> tab, paste it into the SimpleFIN setup-token field. Pick the same accounts you had before. Klartion picks up where it left off without losing any transactions already in Notion.</p>
     </div>
   </div>
 
@@ -168,7 +216,7 @@
   </div>
 
   <div class="contact">
-    <p>Still stuck? Send your logs and a description of the issue to<br><a href="mailto:support@klartion.com">support@klartion.com</a></p>
+    <p>Still stuck? Send your logs and a description of the issue to<br><a href="mailto:support@david-alves.com">support@david-alves.com</a></p>
     <p style="margin-top:8px;font-size:12px;color:#9ca3af;">You can download your logs from the Status page inside Klartion.</p>
   </div>
 
