@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Klartion — Your bank transactions, inside Notion</title>
-  <meta name="description" content="Klartion connects to your EU bank via open banking and syncs transactions into a Notion database every day. Self-hosted. Your data stays on your machine.">
+  <meta name="description" content="Klartion connects to your bank (EU via Enable Banking, US/Canada via SimpleFIN) and syncs transactions into a Notion database every day. Self-hosted. Your data stays on your machine.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -963,7 +963,7 @@
         <div class="hero-text fade-up">
           <div class="hero-label">Open source &middot; &euro;45 one-time &middot; Self-hosted</div>
           <h1>Your bank transactions, inside <em>Notion.</em></h1>
-          <p class="hero-desc">Connect your EU bank and sync every transaction into a Notion database. Once a day, automatically. Private, yours.</p>
+          <p class="hero-desc">Connect your bank &mdash; 2,500+ EU banks via Enable Banking, plus most major US and Canadian banks via SimpleFIN &mdash; and sync every transaction into a Notion database. Once a day, automatically. Private, yours.</p>
           <div class="hero-cta-row">
             <a href="https://buy.stripe.com/3cI8wI3gieLR56f185cMM02" class="btn-dark btn-press">Get Klartion &mdash; &euro;45</a>
           </div>
@@ -980,7 +980,7 @@
           </div>
           <div class="hero-trust">
             <span>&#128274; Read-only</span>
-            <span>&#127466;&#127482; 2,500+ banks</span>
+            <span>&#127466;&#127482; 2,500+ EU banks &middot; &#127482;&#127480;&#127464;&#127462; major US/CA banks</span>
             <span>&#128200; eToro &amp; Binance portfolio tracking</span>
             <span>&#11088; Open source</span>
           </div>
@@ -1329,7 +1329,8 @@
             <div class="price-label">One-time payment</div>
             <ul class="pricing-features">
               <li>7-day free trial, no credit card</li>
-              <li>2,500+ European banks</li>
+              <li>2,500+ European banks (via Enable Banking)</li>
+              <li>Major US &amp; Canadian banks (via SimpleFIN, $15/year separate)</li>
               <li>eToro &amp; Binance portfolio tracking</li>
               <li>Lifetime updates included</li>
               <li>Up to 2 machine activations</li>
@@ -1361,7 +1362,7 @@
       <div class="faq">
         <div class="faq-item fade-up">
           <div class="faq-q" onclick="toggleFaq(this)">Which banks are supported?</div>
-          <div class="faq-a">Any of the 2,500+ banks across 29 European countries supported by Enable Banking, including Revolut, N26, Monzo, Wise, Millennium BCP, Santander, ING, BNP Paribas, and many more. Plus portfolio tracking for eToro and Binance. Personal accounts only.</div>
+          <div class="faq-a">For EU banks: any of the 2,500+ supported by Enable Banking across 29 countries &mdash; Revolut, N26, Monzo, Wise, Millennium BCP, Santander, ING, BNP Paribas, and more. For US and Canadian banks: most major institutions are supported via SimpleFIN Bridge ($15/year separate from Klartion) &mdash; Chase, Bank of America, Wells Fargo, Capital One, RBC, TD, BMO, Scotiabank, and others. <strong>Verify your specific bank is on SimpleFIN's <a href="https://beta-bridge.simplefin.org/info/institutions" target="_blank" style="color:#1a1a1a; text-decoration:underline;">supported list</a> before paying their $15/year fee.</strong> A handful of US institutions misbehave on SimpleFIN's side (Apple Card, Capital One pending, Mercury) — see our <a href="/help.html#simplefin-quirks" style="color:#1a1a1a; text-decoration:underline;">help page</a> for details. You can mix providers freely on the same install. Plus portfolio tracking for eToro and Binance. Personal accounts only.</div>
         </div>
         <div class="faq-item fade-up">
           <div class="faq-q" onclick="toggleFaq(this)">Do I need to know how to code?</div>
@@ -1369,11 +1370,11 @@
         </div>
         <div class="faq-item fade-up">
           <div class="faq-q" onclick="toggleFaq(this)">Is my bank data safe?</div>
-          <div class="faq-a">Yes. Klartion uses read-only access via Enable Banking's regulated open banking API &mdash; it cannot move money or make any changes to your account. Your data goes directly to your machine and never passes through our servers.</div>
+          <div class="faq-a">Yes. Klartion uses read-only access via Enable Banking (EU) or SimpleFIN Bridge (US/Canada). Neither provider has authority to move money or modify your account. Your data goes directly from your provider to your machine and never passes through our servers.</div>
         </div>
         <div class="faq-item fade-up">
           <div class="faq-q" onclick="toggleFaq(this)">What do I need to run Klartion?</div>
-          <div class="faq-a">A machine that can run Docker (Mac, Linux, Raspberry Pi, NAS, or a small VPS), a free <a href="https://enablebanking.com" target="_blank">Enable Banking</a> account, and a Notion account with a database to sync into.</div>
+          <div class="faq-a">A machine that can run Docker (Mac, Linux, Raspberry Pi, NAS, or a small VPS), a Notion account with a database to sync into, and one bank-data provider depending on where your bank is: a free <a href="https://enablebanking.com" target="_blank">Enable Banking</a> account for EU banks, or a <a href="https://bridge.simplefin.org" target="_blank">SimpleFIN Bridge</a> account ($15/year, paid to SimpleFIN) for US/Canadian banks. You can use both on the same install.</div>
         </div>
         <div class="faq-item fade-up">
           <div class="faq-q" onclick="toggleFaq(this)">Can I use it on more than one machine?</div>
