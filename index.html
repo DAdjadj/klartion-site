@@ -34,6 +34,9 @@
        LAYOUT
        ═══════════════════════════════════════════════ */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    @media (max-width: 600px) {
+      .container { padding: 0 1.25rem; }
+    }
 
     /* ═══════════════════════════════════════════════
        ANIMATIONS
@@ -102,6 +105,13 @@
     @media (max-width: 700px) {
       .nav-links { gap: 1rem; }
       .nav-links a { font-size: 14px; }
+    }
+    @media (max-width: 560px) {
+      .site-nav { padding: 1.1rem 0; }
+      .logo-name { font-size: 18px; }
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 13px; }
+      .nav-links a.nav-hide-mobile { display: none; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -221,6 +231,17 @@
       .hero-desc { max-width: 100%; }
       .hero-visual { order: 2; }
       .hero-trial-form { flex-direction: column; max-width: 100%; }
+    }
+    @media (max-width: 560px) {
+      .hero { padding: 2rem 0 1.5rem; }
+      .hero-text h1 { font-size: 30px; }
+      .hero-label { font-size: 13px; margin-bottom: 1rem; }
+      .hero-desc { font-size: 16px; line-height: 1.6; margin-bottom: 1.75rem; }
+      .hero-cta-row .btn-dark { width: 100%; padding: 14px 24px; }
+      .hero-trial-form input[type="email"],
+      .hero-trial-form button { font-size: 15px; }
+      .hero-trust { font-size: 14px; gap: 0.4rem 1rem; }
+      .hero-trust span { white-space: normal; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -434,10 +455,11 @@
     .search-notion-section { padding: 6rem 0; }
     .search-notion-grid {
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
       gap: 4rem;
       align-items: start;
     }
+    .search-notion-grid > * { min-width: 0; }
     .search-notion-grid h2 {
       font-size: 32px;
       font-weight: 700;
@@ -554,9 +576,12 @@
     .notion-pill-pending { background: #fdecc8; color: #7c5c20; }
 
     @media (max-width: 900px) {
-      .search-notion-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .notion-table-wrap { overflow-x: auto; }
-      .notion-tbl { min-width: 600px; }
+      .search-notion-section { padding: 4rem 0; }
+      .search-notion-grid { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+      .notion-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .notion-tbl { min-width: 540px; }
+      .notion-tbl th, .notion-tbl td { padding: 10px 14px; font-size: 14px; }
+      .notion-tbl .col-amount { font-size: 14px; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -720,7 +745,18 @@
     #wl-msg { margin-top: 10px; font-size: 16px; display: none; }
 
     @media (max-width: 900px) {
+      .setup-pricing-section { padding: 4rem 0; }
       .setup-pricing-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 560px) {
+      .setup-pricing-grid h2 { font-size: 26px; }
+      .pricing-card { padding: 2rem 1.5rem; }
+      .price { font-size: 52px; }
+      .price-label, .pricing-features li, .setup-step p, .already-customer a, .already-customer p { font-size: 16px; }
+      .setup-step h3 { font-size: 18px; }
+      .faq-section { padding: 4rem 0; }
+      .faq-section h2 { font-size: 26px; margin-bottom: 1.5rem; }
+      .faq-q, .faq-a { font-size: 16px; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -821,6 +857,13 @@
     footer {
       border-top: 1px solid #e5e4e0;
       padding: 32px 48px;
+    }
+    @media (max-width: 600px) {
+      footer { padding: 24px 1.25rem; }
+      .footer-main { flex-direction: column; align-items: flex-start; text-align: left; }
+      footer .right { flex-wrap: wrap; gap: 14px 18px; }
+      .pikapods-row { flex-direction: column; max-width: 320px; }
+      .pikapods-row button { width: 100%; }
     }
     .footer-main {
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
@@ -945,11 +988,11 @@
         <span class="logo-name">Klartion</span>
       </a>
       <div class="nav-links">
-        <a href="#how-it-works">How it works</a>
-        <a href="#faq">FAQ</a>
+        <a href="#how-it-works" class="nav-hide-mobile">How it works</a>
+        <a href="#faq" class="nav-hide-mobile">FAQ</a>
         <a href="/getting-started.html" style="font-weight:600;color:#1a1a1a;">Get started</a>
-        <a href="/help">Help</a>
-        <a href="https://github.com/DAdjadj/klartion" target="_blank">GitHub</a>
+        <a href="/help" class="nav-hide-mobile">Help</a>
+        <a href="https://github.com/DAdjadj/klartion" class="nav-hide-mobile" target="_blank">GitHub</a>
       </div>
     </nav>
   </div>
