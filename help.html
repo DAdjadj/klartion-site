@@ -135,7 +135,7 @@
       <p><strong>Chase &mdash; authorised users and replaced cards.</strong> Chase only exposes the primary account holder's view to SimpleFIN, so transactions made by authorised users on the account may not appear. Replacing a stolen or expired card sometimes severs the SimpleFIN connection entirely; if your sync goes quiet after a card swap, regenerate a setup token at bridge.simplefin.org and reconnect.</p>
       <p><strong>Mercury Bank &mdash; phantom mirror transactions.</strong> Mercury exposes internal transfers as separate transactions in every linked account (checking, savings, credit). Each gets a unique SimpleFIN ID so duplicates can't be deduped automatically. You'll need to manually delete the mirrors in your Notion database, or only link one Mercury account.</p>
       <p><strong>Wells Fargo &mdash; intermittent.</strong> Wells Fargo connections are flaky on SimpleFIN's side; some users see "all accounts already connected" but zero accounts surface. Try generating a fresh setup token; if that fails, this is on SimpleFIN to fix.</p>
-      <p>If your bank isn't listed above, the safest check is to verify it on SimpleFIN's <a href="https://beta-bridge.simplefin.org/info/institutions" target="_blank">supported institutions list</a> before paying SimpleFIN's $15/year.</p>
+      <p>If your bank isn't listed above, the safest check is to verify it on SimpleFIN's <a href="https://beta-bridge.simplefin.org/search-institutions" target="_blank">supported institutions list</a> before paying SimpleFIN's $15/year.</p>
     </div>
   </div>
 
