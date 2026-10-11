@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Klartion · Your bank transactions, inside Notion</title>
 <meta name="description" content="Every transaction from your bank, in a Notion database, automatically. Europe, US and Canada. Free for 7 days, then €45 once. No subscription.">
-<meta property="og:title" content="Klartion · Your bank, in Notion">
+<meta property="og:title" content="Klartion · Your bank transactions, inside Notion">
 <meta property="og:description" content="Bank sync for Notion. 2,500+ European banks plus major US and Canadian banks. Runs on your machine. €45 once.">
 <meta property="og:image" content="https://klartion.com/media/hero-poster.jpg">
 <link rel="icon" href="/da.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
@@ -344,6 +344,49 @@
     .wl { flex-direction: column; }
     .nav-links { gap: 16px; }
   }
+
+  /* ===== Klartion's own look: warm paper, ink-black buttons, serif headings, green highlights ===== */
+  :root {
+    --bg: #fafaf8; --bg-soft: #f3f2ee; --card: #ffffff;
+    --line: #e5e4e0; --line-strong: #d1cfc8;
+    --text: #1a1a1a; --text-2: #444444; --muted: #6b6b6b;
+    --accent: #1a1a1a; --accent-hover: #333333; --accent-soft: #f0efe9; --on-accent: #ffffff;
+    --link: #2d7a4f; --link-hover: #1a5c2c;
+    --green: #2d7a4f; --green-soft: #e8f5ee; --green-text: #2d7a4f;
+    --header-bg: rgba(250,250,248,0.88); --chip: #f0efe9;
+    --shadow: 0 1px 2px rgba(26,26,26,0.04), 0 12px 40px -14px rgba(26,26,26,0.14);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #191918; --bg-soft: #1f1f1d; --card: #232321;
+      --line: #2f2e2b; --line-strong: #44433e;
+      --text: #ecebe7; --text-2: #c4c2bb; --muted: #9a988f;
+      --accent: #ecebe7; --accent-hover: #ffffff; --accent-soft: #2a2926; --on-accent: #191918;
+      --link: #6fcf97; --link-hover: #8fe0b0;
+      --green: #6fcf97; --green-soft: #1d2e24; --green-text: #6fcf97;
+      --header-bg: rgba(25,25,24,0.86); --chip: #2a2926;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 18px 50px -18px rgba(0,0,0,0.6);
+    }
+  }
+  a, .faq a { color: var(--link); }
+  a:hover { color: var(--link-hover); }
+  h1, h2, h3, .price, .promises b, .logo { font-family: 'Lora', Georgia, serif; }
+  h1 { font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; }
+  h1 em { font-style: italic; }
+  h2 { font-weight: 700; letter-spacing: -0.02em; }
+  .logo { font-size: 21px; letter-spacing: -0.3px; }
+  .logo img { width: 40px; }
+  .eyebrow { color: var(--green); }
+  .btn-primary, .btn-primary:hover, .nav-links .btn-primary { color: var(--on-accent); }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .trial-form input:focus, .search input:focus { border-color: var(--text); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .step-num { background: var(--accent-soft); color: var(--text); font-family: 'Lora', Georgia, serif; font-style: italic; }
+  .feature-icon { background: var(--green-soft); color: var(--green); }
+  .flow-node.me { border-color: var(--text); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .pricing { border: 1.5px solid var(--text); }
+  .price { font-weight: 700; }
+  .cc { color: var(--green); background: var(--green-soft); border-color: transparent; font-weight: 600; }
+  .window, .window video { background: var(--card); }
 </style>
 </head>
 <body>
@@ -357,7 +400,7 @@
       <a href="#pricing" class="hide-m">Pricing</a>
       <a href="#faq" class="hide-m">FAQ</a>
       <a href="/getting-started.html">Setup guide</a>
-      <a href="#pricing" class="btn btn-primary btn-sm" style="color:#fff;">Try free</a>
+      <a href="#pricing" class="btn btn-primary btn-sm">Try free</a>
     </nav>
   </div>
 </header>
@@ -368,7 +411,7 @@
 <div class="hero">
   <div class="container">
     <div class="pill"><span class="dot"></span>7 days free &middot; then <span data-usd="about {e:45}">&euro;45</span> once &middot; no subscription</div>
-    <h1>Your bank, in Notion. <span class="soft">Automatically.</span></h1>
+    <h1>Your bank transactions, inside <em>Notion.</em></h1>
     <p class="lead">Klartion brings every new transaction from your bank into a Notion database on its own. No CSV exports, no copy and paste, no monthly fee. It works with banks across Europe, the US and Canada.</p>
 
     <div class="trial-form">

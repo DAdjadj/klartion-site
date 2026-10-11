@@ -7,51 +7,139 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+  :root { --c-1a1a1a: #1a1a1a; --c-333: #333; --c-444: #444; --c-888: #888; --c-e8e6e0: #e8e6e0; --c-f0efe9: #f0efe9; --c-fafaf8: #fafaf8; --c-fff: #fff; }
+  /* Dark mode follows the device setting. */
+  @media (prefers-color-scheme: dark) { :root { color-scheme: dark; --c-1a1a1a: #ecebe7; --c-333: #dcdad4; --c-444: #c4c2bb; --c-888: #96948c; --c-e8e6e0: #34332f; --c-f0efe9: #2a2926; --c-fafaf8: #191918; --c-fff: #232321; } }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; }
-    body { background: #ffffff; color: #0f172a; font-family: 'Inter', sans-serif; line-height: 1.75; padding: 0 1.5rem; }
-    .page { max-width: 680px; margin: 0 auto; padding: 4rem 0 6rem; }
-    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e6e8ec; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0f172a; font-weight: 700; font-size: 17px; }
-    .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg, #2563eb, #2563eb); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-    .back { font-size: 13px; color: #5b6475; text-decoration: none; }
-    .back:hover { color: #0f172a; }
-    .meta { margin-bottom: 3rem; }
-    .meta h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; line-height: 1.2; }
-    .meta .date { font-size: 13px; color: #5b6475; }
-    .intro { background: #f6f7f9; border: 1px solid #e6e8ec; border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; font-size: 14px; color: #5b6475; line-height: 1.7; }
-    h2 { font-size: 1.05rem; font-weight: 700; margin: 2.5rem 0 0.75rem; color: #0f172a; }
-    p { font-size: 15px; color: #5b6475; margin-bottom: 0.875rem; }
-    ul { margin: 0.5rem 0 0.875rem 1.25rem; font-size: 15px; color: #5b6475; }
-    ul li { margin-bottom: 0.35rem; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    strong { color: #0f172a; font-weight: 600; }
-    .highlight { background: #f6f7f9; border-left: 3px solid #2563eb; padding: 0.875rem 1.25rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-size: 14px; color: #5b6475; }
-    footer { margin-top: 5rem; padding-top: 2rem; border-top: 1px solid #e6e8ec; display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    footer a { font-size: 13px; color: #64748b; text-decoration: none; }
-    footer a:hover { color: #0f172a; }
-  
-    @media (prefers-color-scheme: dark) {
-      :root { color-scheme: dark; }
-      body { background: #0b1020; color: #e6e9ef; }
-      header, footer { border-color: #1e293b; }
-      .logo, .back:hover, h1, h2, h3, strong, footer a:hover, .title, .url.big { color: #e6e9ef; }
-      .back, .meta .date, p, ul, li, footer a, .detail, .hint, .url-label { color: #a3adbf; }
-      .intro, .highlight, .url { background: #121a2e; border-color: #1e293b; color: #a3adbf; }
-      .highlight { border-left-color: #3b82f6; }
-      .url { color: #8ab4ff; }
-      .spinner { border-color: #1e293b; border-top-color: #3b82f6; }
-      a:not(.btn) { color: #8ab4ff; }
+    body {
+      background: var(--c-fafaf8);
+      color: var(--c-1a1a1a);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.75;
+      padding: 0 1.5rem;
     }
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 0 6rem;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--c-e8e6e0);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      background: var(--c-1a1a1a);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-fff);
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .logo-name {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--c-1a1a1a);
+    }
+    .back {
+      font-size: 13px;
+      color: var(--c-888);
+      text-decoration: none;
+    }
+    .back:hover { color: var(--c-1a1a1a); }
+    .meta {
+      margin-bottom: 3rem;
+    }
+    .meta h1 {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .meta .date {
+      font-size: 13px;
+      color: var(--c-888);
+    }
+    .intro {
+      background: var(--c-f0efe9);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+      font-size: 14px;
+      color: var(--c-444);
+      line-height: 1.7;
+    }
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--c-1a1a1a);
+    }
+    p {
+      font-size: 15px;
+      color: var(--c-444);
+      margin-bottom: 0.875rem;
+    }
+    ul {
+      margin: 0.5rem 0 0.875rem 1.25rem;
+      font-size: 15px;
+      color: var(--c-444);
+    }
+    ul li { margin-bottom: 0.35rem; }
+    a { color: var(--c-1a1a1a); }
+    a:hover { opacity: 0.7; }
+    .highlight {
+      background: var(--c-f0efe9);
+      border-left: 3px solid var(--c-1a1a1a);
+      padding: 0.875rem 1.25rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1.5rem 0;
+      font-size: 14px;
+      color: var(--c-333);
+    }
+    footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--c-e8e6e0);
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    footer a {
+      font-size: 13px;
+      color: var(--c-888);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--c-1a1a1a); }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
       <a class="logo" href="https://klartion.com">
-        <img src="/da.png" alt="" style="width:34px;height:auto;">
-        Klartion
+        <div class="logo-mark">K</div>
+        <span class="logo-name">Klartion</span>
       </a>
       <a class="back" href="https://klartion.com">← Back to klartion.com</a>
     </header>
