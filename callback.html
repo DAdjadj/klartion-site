@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <title>Klartion: Connecting</title>
   <style>
-    :root { --bg: #ffffff; --text: #0f172a; --line: #e6e8ec; --accent: #2563eb; }
-    @media (prefers-color-scheme: dark) { :root { color-scheme: dark; --bg: #0b1020; --text: #e6e9ef; --line: #1e293b; --accent: #3b82f6; } }
-    body { font-family: 'Inter', -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: var(--bg); color: var(--text); }
+  :root { --c-111: #111; --c-2d7a4f: #2d7a4f; --c-6b7280: #6b7280; --c-9ca3af: #9ca3af; --c-e5e4e0: #e5e4e0; --c-fff: #fff; }
+  /* Dark mode follows the device setting. */
+  @media (prefers-color-scheme: dark) { :root { color-scheme: dark; --c-111: #ecebe7; --c-2d7a4f: #6fcf97; --c-6b7280: #a3a199; --c-9ca3af: #8a887f; --c-e5e4e0: #34332f; --c-fff: #232321; } }
+
+    body { font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: var(--c-fff); color: var(--c-111); }
     .wrap { text-align: center; }
-    .spinner { width: 32px; height: 32px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
+    .spinner { width: 32px; height: 32px; border: 2px solid var(--c-e5e4e0); border-top-color: var(--c-111); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 1rem; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    p { font-size: 14px; color: #64748b; margin: 0; }
+    p { font-size: 14px; color: var(--c-6b7280); margin: 0; }
   </style>
 </head>
 <body>
@@ -43,7 +45,7 @@
         var hint = isHttp
           ? '<br><br><span style="font-size:13px;color:#dc2626;">⚠ Your browser may block this because the URL is HTTP.<br>In Safari, go to <b>Settings → Privacy</b> and uncheck <b>"Upgrade to HTTPS"</b>, then click the button above.</span>'
           : '';
-        document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:#111;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a>' + hint + '<br><br><span style="font-size:12px;color:#9ca3af;">Or paste this URL in a new tab:</span><br><code style="font-size:11px;color:#2d7a4f;word-break:break-all;cursor:pointer;" onclick="navigator.clipboard.writeText(\'' + callbackUrl + '\');this.style.color=\'#10b981\';this.textContent=\'Copied!\';setTimeout(function(){}.bind(this),1500)">' + callbackUrl + '</code>';
+        document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:var(--c-111);color:var(--c-fff);padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a>' + hint + '<br><br><span style="font-size:12px;color:var(--c-9ca3af);">Or paste this URL in a new tab:</span><br><code style="font-size:11px;color:var(--c-2d7a4f);word-break:break-all;cursor:pointer;" onclick="navigator.clipboard.writeText(\'' + callbackUrl + '\');this.style.color=\'#10b981\';this.textContent=\'Copied!\';setTimeout(function(){}.bind(this),1500)">' + callbackUrl + '</code>';
       }, 2000);
     } else {
       // Cancelled or error — redirect back to Klartion
@@ -52,7 +54,7 @@
         window.location.href = klUrl + '/connect?error=auth_cancelled';
       } else {
         document.querySelector('.spinner').style.display = 'none';
-        document.querySelector('p').innerHTML = 'Bank connection was cancelled or failed.<br><br><span style="font-size:13px;color:#6b7280;">Use your browser\'s back button or return to Klartion to try again.</span>';
+        document.querySelector('p').innerHTML = 'Bank connection was cancelled or failed.<br><br><span style="font-size:13px;color:var(--c-6b7280);">Use your browser\'s back button or return to Klartion to try again.</span>';
       }
     }
   </script>
