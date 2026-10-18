@@ -146,11 +146,11 @@
 
     <div class="meta">
       <h1>Privacy Policy</h1>
-      <p class="date">Last updated: March 2026</p>
+      <p class="date">Last updated: October 2026</p>
     </div>
 
     <div class="intro">
-      Klartion is a self-hosted application. Your bank transactions, Notion data, and credentials never leave your machine — they are never sent to or stored on our servers. The only data we handle is what is strictly necessary to operate the licence system. This policy explains what that is.
+      Klartion is a self-hosted application. Your bank transactions, Notion data, and credentials stay on your machine and are never stored on our servers. The only data we handle is what is strictly necessary to operate the licence system. This policy explains what that is.
     </div>
 
     <h2>Who we are</h2>
@@ -170,7 +170,7 @@
     <h2>What we do not collect</h2>
     <ul>
       <li>Bank transactions or account balances</li>
-      <li>Notion database content or API keys</li>
+      <li>Notion database content, or Notion API keys and access tokens (see Notion below)</li>
       <li>Enable Banking OAuth tokens or credentials</li>
       <li>SimpleFIN setup tokens or access URLs</li>
       <li>SMTP passwords or email content</li>
@@ -183,6 +183,7 @@
     <p><strong>Enable Banking</strong> (EU bank connections) — provides regulated open banking API access to your bank on your behalf. Their privacy policy governs how they handle your banking authorisation. Klartion stores the resulting access tokens locally on your machine only.</p>
     <p><strong>SimpleFIN Bridge</strong> (US/Canadian bank connections, optional) — if you use SimpleFIN, you sign up and pay them directly at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a>. Their privacy policy governs how they handle your bank credentials. Klartion stores the resulting access URL (encrypted) locally on your machine only.</p>
     <p><strong>Notion</strong> — Klartion writes transaction data to a Notion database you own. Notion's privacy policy governs how they handle that data.</p>
+    <p>If you connect Notion with <strong>Connect Notion</strong>, the sign-in passes through our licence server, because Notion requires a server-side secret to complete it. The server exchanges Notion's one-time code for your access token and passes it to your Klartion installation encrypted, so that only your installation can read it. The encrypted copy is deleted as soon as Klartion collects it, or within two hours if it never does. If Notion asks Klartion to renew the token, the renewal passes through the same server without being stored. If you connect with your own integration key instead, nothing passes through our servers.</p>
 
     <h2>How we use your data</h2>
     <p>Your email address is used solely to:</p>
