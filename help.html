@@ -162,22 +162,20 @@
   <div class="section-label">Notion</div>
 
   <div class="faq-item">
-    <div class="faq-q" onclick="toggle(this)">Klartion can't access my Notion database</div>
+    <div class="faq-q" onclick="toggle(this)">How do I connect Notion?</div>
     <div class="faq-a">
-      <p>Make sure your Notion integration is connected to the database:</p>
-      <p><strong>1.</strong> Open your Notion database page.</p>
-      <p><strong>2.</strong> Click the <strong>...</strong> menu in the top right, then <strong>Connections</strong>.</p>
-      <p><strong>3.</strong> Search for your integration name and click <strong>Connect</strong>.</p>
-      <p>Also check that the <strong>Database ID</strong> in your Klartion settings is correct. You can find it in your Notion database URL — it's the long string of characters after your workspace name.</p>
+      <p><strong>1.</strong> In Klartion's setup wizard, on the <strong>Notion</strong> step, click <strong>Connect Notion</strong>. Notion opens in a new tab.</p>
+      <p><strong>2.</strong> Sign in, keep <strong>Use a template provided by the developer</strong> selected and click <strong>Allow</strong>.</p>
+      <p><strong>3.</strong> Go back to Klartion. It creates a <strong>Klartion Transactions</strong> database with all its columns and moves on by itself.</p>
+      <p>Prefer your own integration? Expand <strong>Use an integration key instead</strong> on the same page: create an empty full-page database, create an integration at <a href="https://www.notion.so/profile/integrations" target="_blank">notion.so/profile/integrations</a>, connect it to the database (<strong>...</strong> &rarr; <strong>Connections</strong>), then paste the key and the database URL. Klartion adds the columns itself.</p>
     </div>
   </div>
 
   <div class="faq-item">
-    <div class="faq-q" onclick="toggle(this)">How do I create a Notion API key?</div>
+    <div class="faq-q" onclick="toggle(this)">Klartion can't access my Notion database</div>
     <div class="faq-a">
-      <p>Go to <a href="https://www.notion.so/my-integrations" target="_blank">notion.so/my-integrations</a> and click <strong>"New integration"</strong>. Give it a name (e.g. "Klartion"), select your workspace, and click <strong>Submit</strong>.</p>
-      <p>Copy the <strong>Internal Integration Secret</strong> — that's your API key. Paste it into Klartion's setup wizard.</p>
-      <p>Don't forget to also connect the integration to your database (see above).</p>
+      <p>Open Klartion's <strong>Notion</strong> page and click <strong>Reconnect Notion</strong>. In Notion, keep the Klartion template selected, or choose the page that holds your existing Klartion database, and click <strong>Allow</strong>.</p>
+      <p>If you set Klartion up with an integration key, open your database in Notion, click <strong>...</strong> &rarr; <strong>Connections</strong> and make sure your integration is listed. Also check that the database URL in Klartion points to that database.</p>
     </div>
   </div>
 
