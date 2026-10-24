@@ -373,7 +373,7 @@
 
   <div class="note" style="margin-bottom:24px;">
     <strong>Where is your bank?</strong>
-    <p style="margin-top:8px;">Steps 1&ndash;4 below set up <strong>Enable Banking</strong> for <strong>EU banks</strong>. If your bank is in the <strong>US or Canada</strong>, skip to the <a href="#simplefin">SimpleFIN setup section</a> below &mdash; it&rsquo;s shorter and replaces Steps 1&ndash;4. Steps 5 and 6 (install Klartion, run the setup wizard) are the same regardless of provider, and you can use both providers on the same install.</p>
+    <p style="margin-top:8px;">Steps 1&ndash;4 below set up <strong>Enable Banking</strong> for <strong>EU banks</strong>. If your bank is in the <strong>US or Canada</strong>, skip to the <a href="#simplefin">SimpleFIN setup section</a> below. It&rsquo;s shorter and replaces Steps 1&ndash;4. Steps 5 and 6 (install Klartion, run the setup wizard) are the same regardless of provider, and you can use both providers on the same install.</p>
   </div>
 
   <!-- STEP 1 -->
@@ -382,7 +382,7 @@
     <div class="step-body">
       <div class="step-title">Create a free Enable Banking account</div>
       <div class="step-desc">
-        <p>Enable Banking is the regulated open banking provider that Klartion uses to connect to your bank. You need a free developer account — no credit card required.</p>
+        <p>Enable Banking is the regulated open banking provider that Klartion uses to connect to your bank. You need a free developer account. No credit card required.</p>
         <p>Go to <a href="https://enablebanking.com" target="_blank">enablebanking.com</a> and sign up.</p>
       </div>
     </div>
@@ -402,7 +402,7 @@
           <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong>Email for data protection matters:</strong> your email address</div></div>
           <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong>Privacy URL:</strong> <code>https://klartion.com/privacy</code> <button class="copy-btn" onclick="copyText('https://klartion.com/privacy', this)">Copy</button></div></div>
           <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong>Terms URL:</strong> <code>https://klartion.com/terms</code> <button class="copy-btn" onclick="copyText('https://klartion.com/terms', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">7</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> key file will be downloaded automatically. The filename matches your Application ID. Keep it safe — you'll need it in the setup wizard.</div></div>
+          <div class="substep"><div class="substep-num">7</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> key file will be downloaded automatically. The filename matches your Application ID. Keep it safe: you'll need it in the setup wizard.</div></div>
         </div>
       </div>
     </div>
@@ -448,11 +448,11 @@
     <div class="step-body">
       <div class="step-title">For US/Canadian banks: set up SimpleFIN instead</div>
       <div class="step-desc">
-        <p>Skip Steps 1&ndash;4 above. SimpleFIN Bridge is the bank-data provider Klartion uses for North American banks. It&rsquo;s simpler than Enable Banking but charges <strong>$15/year</strong> for the bridge, paid to SimpleFIN directly &mdash; not to Klartion.</p>
+        <p>Skip Steps 1&ndash;4 above. SimpleFIN Bridge is the bank-data provider Klartion uses for North American banks. It&rsquo;s simpler than Enable Banking but charges <strong>$15/year</strong> for the bridge, paid to SimpleFIN directly, not to Klartion.</p>
         <div class="substeps">
           <div class="substep"><div class="substep-num">1</div><div class="substep-text">Sign up at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a> and pay the $15/year fee.</div></div>
           <div class="substep"><div class="substep-num">2</div><div class="substep-text">Inside SimpleFIN, link the banks you want to sync. Their flow tells you whether your specific bank is supported before you commit.</div></div>
-          <div class="substep"><div class="substep-num">3</div><div class="substep-text">Click <strong>Setup Token</strong>. SimpleFIN displays a one-time code &mdash; copy it.</div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text">Click <strong>Setup Token</strong>. SimpleFIN displays a one-time code. Copy it.</div></div>
           <div class="substep"><div class="substep-num">4</div><div class="substep-text">In Klartion (after Steps 5 and 6 below), open the <strong>Bank</strong> tab, switch the toggle to <strong>US/Canadian banks (via SimpleFIN)</strong>, and paste the code. Klartion lists your linked accounts so you can pick which to sync.</div></div>
         </div>
         <div class="note"><strong>Note:</strong> Setup tokens are one-shot. If a token is rejected as already used, just generate a new one in SimpleFIN.</div>
@@ -466,7 +466,7 @@
     <div class="step-body">
       <div class="step-title">Install Klartion</div>
       <div class="step-desc">
-        <p>You need <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a> installed. Klartion runs as a lightweight container — it works on a Mac, a Linux machine, a Raspberry Pi, a NAS, or any small home server.</p>
+        <p>You need <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a> installed. Klartion runs as a lightweight container. It works on a Mac, a Linux machine, a Raspberry Pi, a NAS, or any small home server.</p>
 
         <div class="os-tabs">
           <div class="os-tab active" onclick="switchOS('unix')">Linux / Mac</div>
@@ -521,7 +521,7 @@ curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.y
     <div class="step-body">
       <div class="step-title">Open Klartion and complete setup</div>
       <div class="step-desc">
-        <p>Enter your server address below to open the Klartion setup wizard. It will guide you through entering your license key, connecting Notion (click <strong>Connect Notion</strong>, sign in and click <strong>Allow</strong>; Klartion creates its database for you), configuring notifications, and connecting your bank &mdash; either by uploading your Enable Banking <code>.pem</code> for EU banks, or by pasting your SimpleFIN setup token for US/Canadian banks.</p>
+        <p>Enter your server address below to open the Klartion setup wizard. It will guide you through entering your license key, connecting Notion (click <strong>Connect Notion</strong>, sign in and click <strong>Allow</strong>; Klartion creates its database for you), configuring notifications, and connecting your bank (either by uploading your Enable Banking <code>.pem</code> for EU banks, or by pasting your SimpleFIN setup token for US/Canadian banks).</p>
         <div class="done-card">
           <label>Your server address</label>
           <div class="url-row">
@@ -570,7 +570,7 @@ function updatePort() {
   var cmd = document.getElementById('start-cmd');
   if (port && port !== '3001') {
     cmd.textContent = "sed -i 's/3001:3000/" + port + ":3000/' docker-compose.yml && docker compose up -d";
-    status.textContent = 'Port ' + port + ' — the command below will update your compose file automatically.';
+    status.textContent = 'Port ' + port + ': the command below will update your compose file automatically.';
   } else {
     cmd.textContent = 'docker compose up -d';
     status.textContent = '';
