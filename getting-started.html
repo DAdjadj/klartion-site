@@ -373,7 +373,7 @@
 
   <div class="note" style="margin-bottom:24px;">
     <strong>Where is your bank?</strong>
-    <p style="margin-top:8px;">Steps 1&ndash;4 below set up <strong>Enable Banking</strong> for <strong>EU banks</strong>. If your bank is in the <strong>US or Canada</strong>, skip to the <a href="#simplefin">SimpleFIN setup section</a> below. It&rsquo;s shorter and replaces Steps 1&ndash;4. Steps 5 and 6 (install Klartion, run the setup wizard) are the same regardless of provider, and you can use both providers on the same install.</p>
+    <p style="margin-top:8px;">Steps 1&ndash;3 below set up <strong>Enable Banking</strong> for <strong>EU banks</strong>. If your bank is in the <strong>US or Canada</strong>, skip to the <a href="#simplefin">SimpleFIN setup section</a> below. It&rsquo;s shorter and replaces Steps 1&ndash;3. Steps 4 and 5 (install Klartion, run the setup wizard) are the same regardless of provider, and you can use both providers on the same install.</p>
   </div>
 
   <!-- STEP 1 -->
@@ -396,14 +396,16 @@
       <div class="step-desc">
         <p>Once logged in, go to <strong>API applications</strong> and click <strong>Register new application</strong>. Fill in the form as follows:</p>
         <div class="substeps">
-          <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong>Application name:</strong> <code>Klartion</code> <button class="copy-btn" onclick="copyText('Klartion', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong>Allowed redirect URLs:</strong> <code>https://klartion.com/callback</code> <button class="copy-btn" onclick="copyText('https://klartion.com/callback', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong>Application description:</strong> <code>Connect Notion with my bank</code> <button class="copy-btn" onclick="copyText('Connect Notion with my bank', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong>Email for data protection matters:</strong> your email address</div></div>
-          <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong>Privacy URL:</strong> <code>https://klartion.com/privacy</code> <button class="copy-btn" onclick="copyText('https://klartion.com/privacy', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong>Terms URL:</strong> <code>https://klartion.com/terms</code> <button class="copy-btn" onclick="copyText('https://klartion.com/terms', this)">Copy</button></div></div>
-          <div class="substep"><div class="substep-num">7</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> key file will be downloaded automatically. The filename matches your Application ID. Keep it safe: you'll need it in the setup wizard.</div></div>
+          <div class="substep"><div class="substep-num">1</div><div class="substep-text"><strong>Mode:</strong> select <strong>Production</strong>, not <strong>Sandbox</strong></div></div>
+          <div class="substep"><div class="substep-num">2</div><div class="substep-text"><strong>Application name:</strong> <code>Klartion</code> <button class="copy-btn" onclick="copyText('Klartion', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">3</div><div class="substep-text"><strong>Allowed redirect URLs:</strong> <code>https://klartion.com/callback</code> <button class="copy-btn" onclick="copyText('https://klartion.com/callback', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">4</div><div class="substep-text"><strong>Application description:</strong> <code>Connect Notion with my bank</code> <button class="copy-btn" onclick="copyText('Connect Notion with my bank', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">5</div><div class="substep-text"><strong>Email for data protection matters:</strong> your email address</div></div>
+          <div class="substep"><div class="substep-num">6</div><div class="substep-text"><strong>Privacy URL:</strong> <code>https://klartion.com/privacy</code> <button class="copy-btn" onclick="copyText('https://klartion.com/privacy', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">7</div><div class="substep-text"><strong>Terms URL:</strong> <code>https://klartion.com/terms</code> <button class="copy-btn" onclick="copyText('https://klartion.com/terms', this)">Copy</button></div></div>
+          <div class="substep"><div class="substep-num">8</div><div class="substep-text">Click <strong>Register</strong>. A <code>.pem</code> key file will be downloaded automatically. The filename matches your Application ID. Keep it safe: you'll need it in the setup wizard.</div></div>
         </div>
+        <div class="note"><strong>Choose the mode before you register.</strong> Enable Banking asks for it at the top of the form, and the choice is permanent: applications cannot be moved between Sandbox and Production afterwards. A Sandbox application only returns simulated test data, so it will never connect to your real bank. If you already registered one in Sandbox by mistake, just register a second application in Production and use that one.</div>
       </div>
     </div>
   </div>
@@ -412,32 +414,15 @@
   <div class="step">
     <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
     <div class="step-body">
-      <div class="step-title">Set your application to Production</div>
-      <div class="step-desc">
-        <p>After registering, your application starts in <strong>Sandbox</strong> mode. You need to switch it to <strong>Production</strong> before connecting a real bank account.</p>
-        <div class="substeps">
-          <div class="substep"><div class="substep-num">1</div><div class="substep-text">Open your application in the Enable Banking dashboard</div></div>
-          <div class="substep"><div class="substep-num">2</div><div class="substep-text">Find the <strong>Environment</strong> toggle and switch from <strong>Sandbox</strong> to <strong>Production</strong></div></div>
-          <div class="substep"><div class="substep-num">3</div><div class="substep-text">Confirm the switch when prompted</div></div>
-        </div>
-        <div class="note"><strong>Note:</strong> You must be in Production mode for Klartion to access real bank data. Sandbox mode is only for testing with mock data.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- STEP 4 -->
-  <div class="step">
-    <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-    <div class="step-body">
       <div class="step-title">Activate by linking your bank account</div>
       <div class="step-desc">
-        <p>After switching to Production, click <strong>Activate by linking accounts</strong> on your application page. This is a one-time requirement to activate your Enable Banking app.</p>
+        <p>Click <strong>Activate by linking accounts</strong> on your application page. This is a one-time requirement to activate your Enable Banking app.</p>
         <div class="substeps">
           <div class="substep"><div class="substep-num">1</div><div class="substep-text">Select your country and bank from the dropdowns</div></div>
           <div class="substep"><div class="substep-num">2</div><div class="substep-text">Click <strong>Link</strong></div></div>
           <div class="substep"><div class="substep-num">3</div><div class="substep-text">Follow the steps to log in to your bank and approve read-only access</div></div>
         </div>
-        <div class="note"><strong>Important:</strong> You must add your banks here first, before connecting them inside Klartion. This activates your Enable Banking app, while Klartion handles the ongoing daily sync.</div>
+        <div class="note"><strong>Important:</strong> You must add your banks here first, before connecting them inside Klartion. This activates your Enable Banking app, while Klartion handles the ongoing sync, on the schedule you pick.</div>
       </div>
     </div>
   </div>
@@ -448,21 +433,21 @@
     <div class="step-body">
       <div class="step-title">For US/Canadian banks: set up SimpleFIN instead</div>
       <div class="step-desc">
-        <p>Skip Steps 1&ndash;4 above. SimpleFIN Bridge is the bank-data provider Klartion uses for North American banks. It&rsquo;s simpler than Enable Banking but charges <strong>$15/year</strong> for the bridge, paid to SimpleFIN directly, not to Klartion.</p>
+        <p>Skip Steps 1&ndash;3 above. SimpleFIN Bridge is the bank-data provider Klartion uses for North American banks. It&rsquo;s simpler than Enable Banking but charges <strong>$15/year</strong> for the bridge, paid to SimpleFIN directly, not to Klartion.</p>
         <div class="substeps">
           <div class="substep"><div class="substep-num">1</div><div class="substep-text">Sign up at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a> and pay the $15/year fee.</div></div>
           <div class="substep"><div class="substep-num">2</div><div class="substep-text">Inside SimpleFIN, link the banks you want to sync. Their flow tells you whether your specific bank is supported before you commit.</div></div>
           <div class="substep"><div class="substep-num">3</div><div class="substep-text">Click <strong>Setup Token</strong>. SimpleFIN displays a one-time code. Copy it.</div></div>
-          <div class="substep"><div class="substep-num">4</div><div class="substep-text">In Klartion (after Steps 5 and 6 below), open the <strong>Bank</strong> tab, switch the toggle to <strong>US/Canadian banks (via SimpleFIN)</strong>, and paste the code. Klartion lists your linked accounts so you can pick which to sync.</div></div>
+          <div class="substep"><div class="substep-num">4</div><div class="substep-text">In Klartion (after Steps 4 and 5 below), open the <strong>Bank</strong> tab, switch the toggle to <strong>US/Canadian banks (via SimpleFIN)</strong>, and paste the code. Klartion lists your linked accounts so you can pick which to sync.</div></div>
         </div>
         <div class="note"><strong>Note:</strong> Setup tokens are one-shot. If a token is rejected as already used, just generate a new one in SimpleFIN.</div>
       </div>
     </div>
   </div>
 
-  <!-- STEP 5 -->
+  <!-- STEP 4 -->
   <div class="step">
-    <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
+    <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
     <div class="step-body">
       <div class="step-title">Install Klartion</div>
       <div class="step-desc">
@@ -515,9 +500,9 @@ curl -O https://raw.githubusercontent.com/DAdjadj/klartion/main/docker-compose.y
     </div>
   </div>
 
-  <!-- STEP 6 -->
+  <!-- STEP 5 -->
   <div class="step">
-    <div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div>
+    <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
     <div class="step-body">
       <div class="step-title">Open Klartion and complete setup</div>
       <div class="step-desc">
