@@ -34,7 +34,7 @@
     }
 
     if (code && state && !error) {
-      // Success — redirect to Klartion's /callback
+      // Success: redirect to Klartion's /callback
       const klartion_url = getKlartionUrl() || 'http://localhost:3001';
       const callbackUrl = klartion_url + '/callback?' + window.location.search.slice(1);
       window.location.href = callbackUrl;
@@ -48,7 +48,7 @@
         document.querySelector('p').innerHTML = 'Click below to complete the connection:<br><br><a href="' + callbackUrl + '" style="background:var(--c-111);color:var(--c-fff);padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Complete connection →</a>' + hint + '<br><br><span style="font-size:12px;color:var(--c-9ca3af);">Or paste this URL in a new tab:</span><br><code style="font-size:11px;color:var(--c-2d7a4f);word-break:break-all;cursor:pointer;" onclick="navigator.clipboard.writeText(\'' + callbackUrl + '\');this.style.color=\'#10b981\';this.textContent=\'Copied!\';setTimeout(function(){}.bind(this),1500)">' + callbackUrl + '</code>';
       }, 2000);
     } else {
-      // Cancelled or error — redirect back to Klartion
+      // Cancelled or error: redirect back to Klartion
       var klUrl = getKlartionUrl();
       if (klUrl) {
         window.location.href = klUrl + '/connect?error=auth_cancelled';
