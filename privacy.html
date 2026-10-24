@@ -159,8 +159,8 @@
     <h2>What data we collect</h2>
     <p>We collect only the minimum necessary to operate the licence system:</p>
     <ul>
-      <li><strong>Your email address</strong> — collected by Stripe when you purchase a licence, and stored on our licence server to deliver your licence key and provide support.</li>
-      <li><strong>Licence activation records</strong> — when you activate your licence key, we store an anonymised machine fingerprint (a hash of your hostname) and the number of active activations. We do not store device names, IP addresses, or any personally identifiable hardware information.</li>
+      <li><strong>Your email address</strong>: collected by Stripe when you purchase a licence, and stored on our licence server to deliver your licence key and provide support.</li>
+      <li><strong>Licence activation records</strong>: when you activate your licence key, we store an anonymised machine fingerprint (a hash of your hostname) and the number of active activations. We do not store device names, IP addresses, or any personally identifiable hardware information.</li>
     </ul>
 
     <div class="highlight">
@@ -179,10 +179,10 @@
     </ul>
 
     <h2>Third-party services</h2>
-    <p><strong>Stripe</strong> — processes payments. When you purchase Klartion, Stripe collects your email and payment information. Their privacy policy is available at <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a>.</p>
-    <p><strong>Enable Banking</strong> (EU bank connections) — provides regulated open banking API access to your bank on your behalf. Their privacy policy governs how they handle your banking authorisation. Klartion stores the resulting access tokens locally on your machine only.</p>
-    <p><strong>SimpleFIN Bridge</strong> (US/Canadian bank connections, optional) — if you use SimpleFIN, you sign up and pay them directly at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a>. Their privacy policy governs how they handle your bank credentials. Klartion stores the resulting access URL (encrypted) locally on your machine only.</p>
-    <p><strong>Notion</strong> — Klartion writes transaction data to a Notion database you own. Notion's privacy policy governs how they handle that data.</p>
+    <p><strong>Stripe</strong>: processes payments. When you purchase Klartion, Stripe collects your email and payment information. Their privacy policy is available at <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a>.</p>
+    <p><strong>Enable Banking</strong> (EU bank connections): provides regulated open banking API access to your bank on your behalf. Their privacy policy governs how they handle your banking authorisation. Klartion stores the resulting access tokens locally on your machine only.</p>
+    <p><strong>SimpleFIN Bridge</strong> (US/Canadian bank connections, optional): if you use SimpleFIN, you sign up and pay them directly at <a href="https://bridge.simplefin.org" target="_blank">bridge.simplefin.org</a>. Their privacy policy governs how they handle your bank credentials. Klartion stores the resulting access URL (encrypted) locally on your machine only.</p>
+    <p><strong>Notion</strong>: Klartion writes transaction data to a Notion database you own. Notion's privacy policy governs how they handle that data.</p>
     <p>If you connect Notion with <strong>Connect Notion</strong>, the sign-in passes through our licence server, because Notion requires a server-side secret to complete it. The server exchanges Notion's one-time code for your access token and passes it to your Klartion installation encrypted, so that only your installation can read it. The encrypted copy is deleted as soon as Klartion collects it, or within two hours if it never does. If Notion asks Klartion to renew the token, the renewal passes through the same server without being stored. If you connect with your own integration key instead, nothing passes through our servers.</p>
 
     <h2>How we use your data</h2>
