@@ -274,6 +274,7 @@
 </style>
 </head>
 <body>
+<!--email_off-->
 
 <header id="site-header">
   <div class="container nav">
@@ -283,7 +284,7 @@
       <a href="#banks" class="hide-m">Banks</a>
       <a href="#pricing" class="hide-m">Pricing</a>
       <a href="#faq" class="hide-m">FAQ</a>
-      <a href="/getting-started.html">Setup guide</a>
+      <a href="/getting-started">Setup guide</a>
       <a href="#pricing" class="btn btn-primary btn-sm">Try free</a>
     </nav>
   </div>
@@ -366,7 +367,7 @@
 <section id="how">
   <div class="page">
     <h2 class="h reveal">How it works</h2>
-    <p class="p reveal">About 15 minutes from start to syncing, with a <a href="/getting-started.html">step-by-step guide</a> the whole way.</p>
+    <p class="p reveal">About 15 minutes from start to syncing, with a <a href="/getting-started">step-by-step guide</a> the whole way.</p>
     <ol class="numbered reveal">
       <li><span><b>Start it.</b> One command starts Klartion on your computer, NAS or server.</span></li>
       <li><span><b>Set it up.</b> A short wizard asks for your key. Sign in to Notion and Klartion creates its database for you.</span></li>
@@ -457,14 +458,14 @@
     <h2 class="h">Questions</h2>
     <div class="faq">
       <details class="toggle"><summary>Is it really a one-time payment?</summary><div class="answer"><p>Yes. &euro;45 once, no subscription and nothing to renew. Updates are included.</p></div></details>
-      <details class="toggle"><summary>Will it work with my setup?</summary><div class="answer"><p>Klartion runs as a small Docker container on a Mac, a Linux box, a Raspberry Pi, a NAS or a small server, and writes into a Notion database you choose. The <a href="/getting-started.html">setup guide</a> walks you through it.</p><p>The bank connection goes through <a href="https://enablebanking.com" target="_blank" rel="noopener">Enable Banking</a> for European banks, which is free, or <a href="https://bridge.simplefin.org" target="_blank" rel="noopener">SimpleFIN Bridge</a> for US and Canadian banks, which costs $15 a year, paid to SimpleFIN. The 7-day trial is the easiest way to find out.</p></div></details>
+      <details class="toggle"><summary>Will it work with my setup?</summary><div class="answer"><p>Klartion runs as a small Docker container on a Mac, a Linux box, a Raspberry Pi, a NAS or a small server, and writes into a Notion database you choose. The <a href="/getting-started">setup guide</a> walks you through it.</p><p>The bank connection goes through <a href="https://enablebanking.com" target="_blank" rel="noopener">Enable Banking</a> for European banks, which is free, or <a href="https://bridge.simplefin.org" target="_blank" rel="noopener">SimpleFIN Bridge</a> for US and Canadian banks, which costs $15 a year, paid to SimpleFIN. The 7-day trial is the easiest way to find out.</p></div></details>
       <details class="toggle"><summary>Is it safe to connect my bank?</summary><div class="answer"><p>Access is read-only and goes through Enable Banking or SimpleFIN, regulated bank-data providers. Klartion never sees your bank password and can't make payments.</p><p>Klartion runs on your machine and sends transactions straight to your Notion. The code is <a href="https://github.com/DAdjadj/klartion" target="_blank" rel="noopener">open source</a>.</p></div></details>
       <details class="toggle"><summary>Which banks work?</summary><div class="answer"><p>Over 2,500 banks across 29 European countries, plus most major US and Canadian banks such as Chase, Bank of America, Wells Fargo, RBC and TD. <a href="#banks">Search for yours</a> above. For a US or Canadian bank, also check it's on <a href="https://beta-bridge.simplefin.org/search-institutions" target="_blank" rel="noopener">SimpleFIN's list</a>.</p></div></details>
       <details class="toggle"><summary>What happens when the trial ends?</summary><div class="answer"><p>Nothing is deleted, and your Notion database stays exactly as it is. Syncing pauses until you add a license: buy one for &euro;45, enter the key on the License page, and it starts again.</p></div></details>
       <details class="toggle"><summary>Do I have to log in to my bank again?</summary><div class="answer"><p>European banks ask you to renew open banking access every 90 to 180 days. Klartion emails you before it expires, and renewing takes one click and your bank login.</p></div></details>
       <details class="toggle"><summary>Can I connect more than one bank?</summary><div class="answer"><p>Yes. Two bank accounts are included, and you can mix European and North American banks on the same install. Extra slots are &euro;10 each from inside the app.</p></div></details>
       <details class="toggle"><summary>I use Actual Budget, not Notion.</summary><div class="answer"><p>Then you want <a href="https://bridgebank.app" target="_blank" rel="noopener">Bridge Bank</a>, Klartion's sibling from the same maker. It brings your European bank into Actual Budget the same way.</p></div></details>
-      <details class="toggle"><summary>I don't have Docker. Can you host it?</summary><div class="answer"><p>Not right now. Klartion runs in Docker, which is free and installs in a few minutes on a Mac, a Windows PC, a NAS or a Raspberry Pi, and the <a href="/getting-started.html">setup guide</a> walks you through every step. Stuck? Email <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p></div></details>
+      <details class="toggle"><summary>I don't have Docker. Can you host it?</summary><div class="answer"><p>Not right now. Klartion runs in Docker, which is free and installs in a few minutes on a Mac, a Windows PC, a NAS or a Raspberry Pi, and the <a href="/getting-started">setup guide</a> walks you through every step. Stuck? Email <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p></div></details>
     </div>
     <p class="p" style="margin-top:18px;font-size:15px;">More in <a href="/help">Help</a>, or email <a href="mailto:support@david-alves.com">support@david-alves.com</a>.</p>
   </div>
@@ -477,7 +478,7 @@
       <div>
         <p style="font-family:'Lora',Georgia,serif;font-size:22px;font-weight:700;letter-spacing:-0.02em;">Try it free for 7 days.</p>
         <p class="p">If you keep it, it's <span data-usd="about {e:45}">&euro;45</span> once. No subscription, ever.</p>
-        <p style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;"><a href="#top" class="btn btn-primary" onclick="focusTrial(event)">Start free trial</a><a href="/getting-started.html" class="btn btn-outline">Read the setup guide</a></p>
+        <p style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;"><a href="#top" class="btn btn-primary" onclick="focusTrial(event)">Start free trial</a><a href="/getting-started" class="btn btn-outline">Read the setup guide</a></p>
       </div>
     </div>
   </div>
@@ -492,7 +493,7 @@
     <div class="success-check"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
     <h2>Payment confirmed</h2>
     <p>Your license key is on its way to your email. The setup guide gets Klartion running step by step.</p>
-    <a href="/getting-started.html" class="btn btn-primary">Open the setup guide &rarr;</a>
+    <a href="/getting-started" class="btn btn-primary">Open the setup guide &rarr;</a>
   </div>
 </div>
 
@@ -500,7 +501,7 @@
   <div class="container foot">
     <div class="foot-left"><a href="https://david-alves.com" target="_blank" rel="noopener" aria-label="David Alves"><img src="/da.png" alt=""></a><span>&copy; 2026 Klartion &middot; Made by <a href="https://david-alves.com" target="_blank" rel="noopener" class="maker">David Alves</a></span></div>
     <div class="foot-links">
-      <a href="/getting-started.html">Setup guide</a>
+      <a href="/getting-started">Setup guide</a>
       <a href="/help">Help</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
@@ -714,5 +715,6 @@
 </script>
 
 <script src="/fx.js" defer></script>
+<!--/email_off-->
 </body>
 </html>
