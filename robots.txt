@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /callback
+
+Sitemap: https://klartion.com/sitemap.xml
