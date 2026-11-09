@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guides · Klartion</title>
+<meta name="description" content="Step-by-step guides for getting your bank transactions into Notion, with the free ways first.">
+<link rel="canonical" href="https://klartion.com/guides/">
+<meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191918" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/da.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Klartion's look (from index.html): warm paper, ink-black buttons, Lora headings, green links. */
+  :root {
+    --bg: #fafaf8; --bg-soft: #f3f2ee; --card: #ffffff; --hover: rgba(55, 53, 47, 0.06);
+    --line: #e9e8e3; --line-strong: #d6d4cc;
+    --text: #1a1a1a; --text-2: #4a4a47; --muted: #75746f;
+    --ink: #1a1a1a; --on-ink: #ffffff;
+    --link: #2d7a4f; --link-hover: #1a5c2c;
+    --green: #2d7a4f; --green-soft: #e3f2e8;
+    --callout: #f1f1ef;
+    --chip: #f0efe9;
+    --header-bg: rgba(250, 250, 248, 0.86);
+    --shadow: 0 1px 2px rgba(26, 26, 26, 0.04), 0 24px 60px -30px rgba(26, 26, 26, 0.26);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #191918; --bg-soft: #1f1f1d; --card: #232321; --hover: rgba(255, 255, 255, 0.06);
+      --line: #2f2e2b; --line-strong: #44433e;
+      --text: #ecebe7; --text-2: #c4c2bb; --muted: #9a988f;
+      --ink: #ecebe7; --on-ink: #191918;
+      --link: #6fcf97; --link-hover: #8fe0b0;
+      --green: #6fcf97; --green-soft: #1d2e24;
+      --callout: #252523;
+      --chip: #2a2926;
+      --header-bg: rgba(25, 25, 24, 0.84);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 30px 70px -30px rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 16.5px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: var(--link); text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent); text-underline-offset: 3px; }
+  a:hover { color: var(--link-hover); }
+  h1, h2, h3 { font-family: 'Lora', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  header { position: sticky; top: 0; z-index: 50; background: var(--header-bg); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: 'Lora', Georgia, serif; font-weight: 700; font-size: 21px; color: var(--text); text-decoration: none; letter-spacing: -0.3px; }
+  .logo:hover { color: var(--text); }
+  .logo img { width: 40px; height: auto; }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a { color: var(--text-2); font-size: 14.5px; font-weight: 500; text-decoration: none; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.btn-primary, .nav-links a.btn-primary:hover { color: var(--on-ink); }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: inherit; font-weight: 600; font-size: 15px; padding: 11px 18px; border-radius: 8px; border: 1px solid transparent; cursor: pointer; white-space: nowrap; text-decoration: none; transition: background 0.15s, border-color 0.15s, transform 0.1s; }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary, .btn-primary:hover { background: var(--ink); color: var(--on-ink); }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-outline { background: var(--card); color: var(--text); border-color: var(--line-strong); }
+  .btn-outline:hover { border-color: var(--text-2); color: var(--text); }
+  .btn-sm { padding: 7px 13px; font-size: 14px; }
+
+  article { max-width: 824px; margin: 0 auto; padding: 56px 32px 80px; }
+  .eyebrow { font-size: 14px; font-weight: 600; color: var(--green); margin-bottom: 14px; }
+  h1 { font-size: clamp(34px, 5.2vw, 52px); line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 20px; }
+  .lead { font-size: 18.5px; color: var(--text-2); }
+  h2 { font-size: clamp(25px, 3.2vw, 32px); line-height: 1.2; margin: 56px 0 14px; scroll-margin-top: 80px; }
+  h3 { font-family: 'Inter', system-ui, sans-serif; font-size: 17px; letter-spacing: -0.01em; margin: 26px 0 6px; }
+  p { margin: 0 0 14px; color: var(--text-2); }
+  article ul, article ol { margin: 0 0 16px; padding-left: 22px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; color: var(--text-2); }
+  article li { min-width: 0; }
+  article li::marker { color: var(--muted); }
+  strong, b { color: var(--text); }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.86em; background: var(--chip); padding: 1px 6px; border-radius: 4px; word-break: break-word; }
+
+  .callout { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; padding: 16px 18px; border-radius: 8px; background: var(--callout); margin: 28px 0 0; }
+  .callout .ci { width: 22px; height: 22px; margin-top: 2px; color: var(--green); fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .callout p { font-size: 15.5px; }
+  .callout p:last-child { margin-bottom: 0; }
+  .answer { border: 1px solid var(--line-strong); background: var(--card); box-shadow: var(--shadow); border-radius: 10px; padding: 20px 22px; margin: 24px 0 0; }
+  .answer h2 { margin: 0 0 10px; font-size: 21px; }
+  .answer ul { margin: 0; }
+  .toc { margin: 28px 0 0; font-size: 15px; }
+  .toc ol { margin: 6px 0 0; }
+
+  .steps { list-style: none; padding: 0 !important; counter-reset: s; display: grid; gap: 18px; margin: 18px 0 20px; }
+  .steps > li { counter-increment: s; position: relative; padding-left: 44px; }
+  .steps > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 8px; background: var(--ink); color: var(--on-ink); font-weight: 700; font-size: 15px; display: grid; place-items: center; }
+  .steps h3 { margin: 2px 0 6px; }
+  .steps p:last-child { margin-bottom: 0; }
+
+  .table-wrap { overflow-x: auto; margin: 16px 0 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  table.wide { min-width: 560px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--text-2); }
+  thead th { background: var(--bg-soft); font-size: 13px; font-weight: 500; color: var(--muted); }
+  tbody th { font-weight: 600; color: var(--text); }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: none; }
+  td.yes { color: var(--green); font-weight: 600; }
+  .fine { font-size: 14px; color: var(--muted); }
+
+  .faq { border-top: 1px solid var(--line); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 22px 1fr; align-items: baseline; padding: 12px 6px; font-weight: 600; }
+  .faq summary:hover { background: var(--hover); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::before { content: "\25B8"; color: var(--muted); transition: transform 0.2s; display: inline-block; }
+  .faq details[open] summary::before { transform: rotate(90deg); }
+  .faq .a { padding: 0 6px 14px 28px; }
+  .faq .a p:last-child { margin-bottom: 0; }
+
+  .cta { margin-top: 56px; padding: 24px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--card); box-shadow: var(--shadow); }
+  .cta h2 { margin: 0 0 8px; font-size: 24px; }
+  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0; font-size: 14.5px; color: var(--muted); }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .foot-left { display: flex; align-items: center; gap: 10px; }
+  .foot-left img { width: 26px; height: auto; }
+  .foot-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    .nav-links .hide-m { display: none; }
+    .container { padding: 0 20px; }
+    article { padding: 40px 20px 64px; }
+    .steps > li { padding-left: 40px; }
+  }
+  @media (max-width: 400px) {
+    .container { padding: 0 16px; }
+    article { padding: 36px 16px 56px; }
+  }
+</style>
+</head>
+<body>
+<!--email_off-->
+
+<header>
+  <div class="container nav">
+    <a href="/" class="logo"><img src="/da.png" alt="">Klartion</a>
+    <nav class="nav-links">
+      <a href="/guides/" class="hide-m">Guides</a>
+      <a href="/getting-started">Setup guide</a>
+      <a href="/#pricing" class="btn btn-primary btn-sm">Try free</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article>
+  <div class="eyebrow">Guides</div>
+  <h1>Your bank, in Notion</h1>
+  <p class="lead">Step-by-step guides for getting your bank transactions into Notion. Each one says what's free, what isn't, and what to watch for.</p>
+  <h2><a href="/guides/bank-transactions-into-notion">How to get your bank transactions into Notion automatically</a></h2>
+  <p>Notion's free CSV import step by step, automation services for the banks that have them, and a sync that runs on its own for Europe, the US and Canada.</p>
+</article>
+</main>
+
+<footer>
+  <div class="container foot">
+    <div class="foot-left"><a href="https://david-alves.com" target="_blank" rel="noopener" aria-label="David Alves"><img src="/da.png" alt=""></a><span>&copy; 2026 Klartion &middot; Written by <a href="https://david-alves.com/building/" target="_blank" rel="noopener">David Alves</a></span></div>
+    <div class="foot-links">
+      <a href="/guides/">Guides</a>
+      <a href="/getting-started">Setup guide</a>
+      <a href="/help">Help</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="https://github.com/DAdjadj/klartion" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:support@david-alves.com">Support</a>
+    </div>
+  </div>
+  <div class="container" style="margin-top:12px;font-size:12px;color:var(--muted);">Notion is a trademark of Notion Labs, Inc. Klartion is not affiliated with or endorsed by Notion.</div>
+</footer>
+
+<!--/email_off-->
+</body>
+</html>
